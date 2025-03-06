@@ -1,0 +1,111 @@
+/* Header container */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Left section - Green background */
+.header-left {
+  display: flex;
+  align-items: center;
+  background-color: #6a9135;
+  color: white;
+  padding: 20px 15px;
+  width: 60%;
+  justify-content: space-between;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+.header-left .title {
+  font-size: 20px;
+}
+
+/* Ensure icons move to the right */
+.header-icons {
+  display: flex;
+  margin-left: auto;
+  /* Pushes icons to the right */
+  align-items: center;
+}
+
+/* Barcode icon */
+#barcode-icon {
+  padding: auto;
+  width: 45px;
+  height: 45px;
+}
+
+#menu-icon {
+  margin-right: 30px;
+  margin-left: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 2px solid #6a9135;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 10px;
+  width: 200px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.search-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.header-left .icon {
+  width: 25px;
+  height: 25px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+.icon {
+  filter: invert(1);
+}
+
+/* Right section - White background */
+.header-right {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: black;
+  padding: 33px 15px;
+  width: 40%;
+  justify-content: space-between;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.receipt-text {
+  margin-right: auto;
+  padding-left: 15px;
+}
+
+.date-text {
+  font-weight: bold;
+  padding-right: 15px;
+}
