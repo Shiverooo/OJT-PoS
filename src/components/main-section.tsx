@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "./sidebar.tsx";
+import Sidebar from "./Sidebar.tsx";
 import menuIcon from "../assets/images/menu-icon.svg";
 import barcodeIcon from "../assets/images/barcode-icon.svg";
 import searchIcon from "../assets/images/search-icon.svg";
@@ -8,30 +8,30 @@ import '../styles/cashier/main-section.css'
 function MainSection() {
    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+   const toggleSidebar = () => {
+      setIsSidebarOpen(!isSidebarOpen);
+   };
 
-  const [query, setQuery] = useState("");
+   const [query, setQuery] = useState("");
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-    console.log("Searching for:", event.target.value); // Debugging
-  };
+   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setQuery(event.target.value);
+      console.log("Searching for:", event.target.value); // Debugging
+   };
 
-  const products = new Array(12).fill({
-          name: "Computer Set",
-          image: require("../assets/images/computer.jpg"),
-      });
-  
+   const products = new Array(12).fill({
+      name: "Computer Set",
+      image: require("../assets/images/computer.jpg"),
+   });
+
    const [active, setActive] = useState(0);
    const navItems = [
-         "Laptops and Desktops",
-         "Printers and Ink",
-         "Monitors",
-         "Storage",
-         "Other Accessories",
-         "Gaming Devices"
+      "Laptops and Desktops",
+      "Printers and Ink",
+      "Monitors",
+      "Storage",
+      "Other Accessories",
+      "Gaming Devices"
    ];
 
    return (
@@ -41,7 +41,7 @@ function MainSection() {
             <img
                src={menuIcon}
                alt="Menu"
-               className="icon"
+               className={`icon ${isSidebarOpen ? "menu-icon-open" : "menu-icon-closed"}`}
                id="menu-icon"
                onClick={toggleSidebar}
             />
@@ -67,14 +67,14 @@ function MainSection() {
                </div>
             </div>
          </div>
-         
+
          <div className="cashier-container">
             <div className="product-container">
                <div className="products-grid">
                   {products.map((product, index) => (
-                        <div className="product-card" key={index}>
-                           <img src={product.image} alt={product.name} />
-                        </div>
+                     <div className="product-card" key={index}>
+                        <img src={product.image} alt={product.name} />
+                     </div>
                   ))}
                </div>
 
@@ -92,11 +92,11 @@ function MainSection() {
                         ))}
                      </ul>
                   </nav>
-               </div>    
+               </div>
             </div>
          </div>
-      </div>  
-  );
+      </div>
+   );
 }
 
 export default MainSection;
