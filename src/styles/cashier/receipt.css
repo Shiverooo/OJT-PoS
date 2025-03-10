@@ -1,41 +1,4 @@
 .receipt{
-<<<<<<< HEAD
-    
-    width: 35%;
-}
-
-.header-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    color: black;
-    padding: 33px 15px;
-    justify-content: space-between;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
-  
-  .receipt-text {
-    margin-right: auto;
-    padding-left: 15px;
-  }
-  
-  .date-text {
-    font-weight: bold;
-    padding-right: 15px;
-  }
-
-  .receipt-section {
-    background-color: white;
-    width: 42%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow-y: hidden; /* Allows scrolling for long receipts */
-=======
   display: flex;
   flex-direction: column;
   width: 35vw;
@@ -72,42 +35,11 @@
   box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow-y: hidden; /* Allows scrolling for long receipts */
->>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
+
 }
 
 /* Fix overlapping watermark */
 .receipt-section::before {
-<<<<<<< HEAD
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('../../assets/images/infinitum-logo.png') no-repeat center;
-    background-size: contain;
-    opacity: 0.4; /* Reduced opacity for better readability */
-    z-index: 1;
-}
-
-.table-section{
-    padding-bottom: 45%;
-    display: flex;
-}
-
-.receipt-header {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    font-size: 18px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #ddd;
-}
-
-.receipt-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-=======
   content: "";
   position: absolute;
   left: 0;
@@ -137,27 +69,10 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
->>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
 }
 
 .receipt-table th,
 .receipt-table td {
-<<<<<<< HEAD
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-.receipt-total {
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.receipt-total strong:last-child {
-    margin-left: auto;
-=======
   border-bottom: 1px solid #ddd;
   padding: 10px;
   text-align: left;
@@ -171,44 +86,17 @@
 
 .receipt-total strong:last-child {
   margin-left: auto;
->>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
 }
 
 /* Buttons */
 .receipt-actions {
-<<<<<<< HEAD
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-=======
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
->>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
 }
 
 .edit-btn,
 .pay-btn {
-<<<<<<< HEAD
-    width: 45%;
-    padding: 15px;
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    z-index: 5;
-}
-
-.edit-btn {
-    background-color: #6a9135;
-    color: white;
-}
-
-.pay-btn {
-    background-color: #6a9135;
-    color: white;
-=======
   width: 45%;
   padding: 15px;
   border: none;
@@ -227,14 +115,9 @@
 .pay-btn {
   background-color: #6a9135;
   color: white;
->>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
 }
 
 .edit-btn:hover,
 .pay-btn:hover {
-<<<<<<< HEAD
-    background-color: #56792a;
-=======
   background-color: #56792a;
->>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
 }

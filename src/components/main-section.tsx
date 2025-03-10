@@ -1,33 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react'
-import menuIcon from "../assets/images/menu-icon.svg";
-import barcodeIcon from "../assets/images/barcode-icon.svg";
-import searchIcon from "../assets/images/search-icon.svg";
-import Sidebar from "./sidebar.tsx";
-import '../styles/cashier/main-section.css';
-
-function MainSection() {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
-    };
-    
-    const [query, setQuery] = useState("");
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(event.target.value);
-        console.log("Searching for:", event.target.value); // Debugging
-    };
-
-    const products = new Array(12).fill({
-            name: "Computer Set",
-            image: require("../assets/images/computer.jpg"),
-    });
-    
-    const [active, setActive] = useState(0);
-    const navItems = [
-=======
 import React, { useState } from "react";
-import Sidebar from "./Sidebar.tsx";
+import Sidebar from "./sidebar.tsx";
 import menuIcon from "../assets/images/menu-icon.svg";
 import barcodeIcon from "../assets/images/barcode-icon.svg";
 import searchIcon from "../assets/images/search-icon.svg";
@@ -54,83 +26,12 @@ function MainSection() {
 
    const [active, setActive] = useState(0);
    const navItems = [
->>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
       "Laptops and Desktops",
       "Printers and Ink",
       "Monitors",
       "Storage",
       "Other Accessories",
       "Gaming Devices"
-<<<<<<< HEAD
-    ];
-
-    return (
-    <div className="main-section">
-      <div className="header-left">
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <img
-          src={menuIcon}
-          alt="Menu"
-          className="icon"
-          id="menu-icon"
-          onClick={toggleSidebar}
-        />
-        <span className="title">Products</span>
-
-        <div className="header-icons">
-          <img
-            src={barcodeIcon}
-            alt="Barcode"
-            className="icon"
-            id="barcode-icon"
-          />
-
-          {/* Search Bar */}
-          <div className="search-container">
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search"
-              value={query}
-              onChange={handleSearch}
-            />
-            <img src={searchIcon} alt="Search" className="search-icon" />
-          </div>
-        </div>
-      </div>
-      <div className="cashier-container">
-        <div className="product-container">
-          <div className="products-grid">
-            {products.map((product, index) => (
-                <div className="product-card" key={index}>
-                    <img src={product.image} alt={product.name} />
-                </div>
-            ))}
-          </div>
-
-          <div className="nav-category">
-            <nav className="navbar">
-              <ul className="nav-list">
-                {navItems.map((item, index) => (
-                  <li
-                      key={index}
-                      className={`nav-item ${active === index ? "active" : ""}`}
-                      onClick={() => setActive(index)}
-                  >
-                      {item}
-                  </li>
-                  ))}
-              </ul>
-            </nav>
-          </div>    
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default MainSection
-=======
    ];
 
    return (
@@ -199,4 +100,3 @@ export default MainSection
 }
 
 export default MainSection;
->>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
