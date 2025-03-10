@@ -5,6 +5,7 @@ body {
     padding: 0;
 }
 
+<<<<<<< HEAD
 
 
 /* Receipt Section */
@@ -102,6 +103,11 @@ body {
 .edit-btn:hover,
 .pay-btn:hover {
     background-color: #56792a;
+=======
+/* Main Layout */
+.cashier-container {
+    display: flex;
+>>>>>>> bbacb8a65815d6492efe089bf474774e9b3e1c52
 }
 
 /* 📱 Responsive Design */
@@ -109,6 +115,11 @@ body {
     .cashier-container {
         flex-direction: column;
         height: auto;
+        width: 100vw;
+    }
+
+    .header-left{
+        width: 100vw;
     }
 
     .products-grid {

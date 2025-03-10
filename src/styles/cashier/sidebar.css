@@ -1,40 +1,73 @@
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Initially hidden */
-    width: 250px;
-    height: 100%;
-    background: #2c3e50;
-    color: white;
-    transition: left 0.3s ease-in-out;
-    padding: 20px;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
-  }
-  
-  .sidebar.open {
-    left: 0; /* Slide in */
-  }
-  
-  /* .close-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    display: block;
-    margin-bottom: 20px;
-    font-size: 16px;
-  } */
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 65px 0;
-  }
-  
-  .sidebar ul li {
-    padding: 10px;
-    border-top: 1px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
-    cursor: pointer;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: white;
+  transition: left 0.3s ease-in-out;
+  padding: 20px 0;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 75px 0;
+  margin: 0;
+}
+
+/* Style for all li */
+.sidebar ul li {
+  padding: 15px 20px;
+  color: #7DA84A;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Hover effect */
+.sidebar ul li:hover {
+  background-color: #7DA84A;
+  color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar ul li:first-child {
+  position: relative;
+  margin-top: 0;
+  padding: 15px 20px;
+}
+
+.sidebar ul li:first-child::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 110%;
+  height: 1px;
+  background-color: #D9D9D9;
+}
+
+/* Menu Icon Color Change */
+#menu-icon.menu-icon-open {
+  filter: invert(41%) sepia(92%) saturate(633%) hue-rotate(58deg) brightness(92%) contrast(88%);
+}
+
+#menu-icon.menu-icon-closed {
+  filter: invert(1);
+}
+
+.sidebar ul li:not(:last-child) {
+  margin-bottom: 5px;
+}
