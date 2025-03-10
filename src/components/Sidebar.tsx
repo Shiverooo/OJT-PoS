@@ -9,7 +9,6 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
-      {/* <button className="close-btn" onClick={toggleSidebar}>X</button> */}
       <ul>
         <li>Sales Screen</li>
         <li>Sales History</li>
