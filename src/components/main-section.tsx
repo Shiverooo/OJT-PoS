@@ -16,7 +16,7 @@ function MainSection() {
 
    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuery(event.target.value);
-      console.log("Searching for:", event.target.value); // Debugging
+      console.log("Searching for:", event.target.value);
    };
 
    const products = new Array(12).fill({
@@ -74,9 +74,11 @@ function MainSection() {
                   {products.map((product, index) => (
                      <div className="product-card" key={index}>
                         <img src={product.image} alt={product.name} />
+                        <div className="product-name">{product.name}</div> {/* Product name overlay */}
                      </div>
                   ))}
                </div>
+
 
                <div className="nav-category">
                   <nav className="navbar">
@@ -95,7 +97,7 @@ function MainSection() {
                </div>
             </div>
          </div>
-      </div>
+      </div >
    );
 }
 

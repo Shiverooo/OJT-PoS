@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   width: 35vw;
-  height: 100vh; /* Ensure receipt takes up full vertical space */
+  height: 100vh;
+  /* Ensure receipt takes up full vertical space */
 }
 
 /* Header */
@@ -14,7 +15,7 @@
   align-items: center;
   background-color: white;
   color: black;
-  padding: 33px 15px;
+  padding: 33.5px 15px;
   justify-content: space-between;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
   z-index: 1;
@@ -39,8 +40,8 @@
   flex-direction: column;
   box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.2);
   position: relative;
-  overflow-y: auto;
-  flex-grow: 1; /* Ensures the section takes up remaining space */
+  overflow-y: hidden;
+  flex-grow: 1;
 }
 
 /* Fix overlapping watermark */
@@ -48,19 +49,22 @@
   content: "";
   position: absolute;
   left: 0;
+  bottom: 50px;
   width: 100%;
   height: 100%;
   background: url('../../assets/images/infinitum-logo.png') no-repeat center;
   background-size: contain;
   opacity: 0.4;
-  z-index: 1;
+  z-index: 0;
 }
 
 /* Receipt Table */
 .receipt-table {
   width: 100%;
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
   margin-top: 10px;
+  position: relative;
+  z-index: 2;
 }
 
 .receipt-table th,
@@ -70,23 +74,35 @@
   text-align: left;
 }
 
+/* Receipt Total */
 .receipt-total {
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
 .receipt-total strong:last-child {
   margin-left: auto;
+  margin-right: 20px;
 }
 
-/* Buttons */
+/* Buttons Container */
 .receipt-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: auto;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
 }
 
+/* Buttons */
 .edit-btn,
 .pay-btn {
   width: 45%;
