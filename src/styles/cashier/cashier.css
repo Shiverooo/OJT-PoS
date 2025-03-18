@@ -1,13 +1,14 @@
 /* Disable vertical scrolling */
 body {
-    overflow-y: hidden;
     margin: 0;
     padding: 0;
 }
+
 .cashier-container{
     display: flex;
     flex-direction: row;
-    min-height: 93vh;
+    overflow-y: hidden;
+    width: 100%;
 }
 
 /* 📱 Responsive Design */
