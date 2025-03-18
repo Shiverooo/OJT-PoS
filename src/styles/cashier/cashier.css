@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: row;
     overflow-y: hidden;
-    width: 100%;
+    width: 100%;    
 }
 
 /* 📱 Responsive Design */
