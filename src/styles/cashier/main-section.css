@@ -1,9 +1,13 @@
 /* Main Section Adjustments */
 .main-section {
-  width: 65vw;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+
+.main-section.less-view{
+  width: 65vw;
 }
 
 .header-left {

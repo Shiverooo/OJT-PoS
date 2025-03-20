@@ -8,10 +8,10 @@ import signOutIcon from "../assets/images/sign-out.svg";
 
 interface SidebarProps {
   isOpen: boolean;
-  toggleSidebar: () => void;
+  toggleSidebar: () => void; 
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar, MainSection }) => {
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       {/* Sidebar menu */}
@@ -28,17 +28,21 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           Sales History
         </li>
         </Link>
+        <Link to="/cashier/inventory">
         <li>
           <img src={boxIcon} alt="Box Icon" />
           Inventory
         </li>
+        </Link>
       </ul>
 
       {/* Sign Out Button */}
+      <Link to="/">
       <button className="sign-out">
         <img src={signOutIcon} alt="Sign Out Icon" />
         Sign Out
       </button>
+      </Link>
     </div>
   );
 };

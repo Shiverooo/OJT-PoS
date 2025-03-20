@@ -4,10 +4,11 @@ import menuIcon from "../../assets/images/menu-icon.svg";
 import barcodeIcon from "../../assets/images/barcode-icon.svg";
 import searchIcon from "../../assets/images/search-icon.svg";
 import '../../styles/cashier/main-section.css'
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
-
-function CashierDashboard() {
+function MainSection() {
+   const location = useLocation();
+   const isReceiptPage = location.pathname ==="/cashier";
    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
    const toggleSidebar = () => {
@@ -20,9 +21,9 @@ function CashierDashboard() {
       setQuery(event.target.value);
       console.log("Searching for:", event.target.value);
    };
-   
+   const mainSectionClass = `main-section ${isReceiptPage ? "less-view" : ""}`
    return (
-      <div className="main-section">
+      <div className={mainSectionClass}>
          <div className="header-left">
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             <img
@@ -59,4 +60,4 @@ function CashierDashboard() {
    );
 }
 
-export default CashierDashboard;
+export default MainSection;

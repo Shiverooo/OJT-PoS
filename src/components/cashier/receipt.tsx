@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import '../../styles/cashier/receipt.css'
+import { useLocation } from "react-router-dom";
 
 function Receipt() {
+  const location = useLocation();
+  const isReceiptPage = location.pathname === "/cashier";
   const today = new Date().toLocaleDateString("en-US");
   const [receiptItems] = useState([
     { name: "Red Dragon Mouse", quantity: 1, price: 100 },
@@ -33,7 +36,9 @@ function Receipt() {
     setCashReceived(0);
     setChange(0);
   };
-
+  if (!isReceiptPage) {
+    return null; // Return null to hide the Receipt component if the URL doesn't match
+  }
   return (
     <div className="receipt">
       <div className="header-right">
