@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import '../../styles/cashier/receipt.css'
+import "../../styles/cashier/receipt.css";
+import CashIcon from "../../assets/images/cash.svg";
 
 function Receipt() {
   const today = new Date().toLocaleDateString("en-US");
@@ -32,6 +33,14 @@ function Receipt() {
     setShowPopup(false);
     setCashReceived(0);
     setChange(0);
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+
+    if (value === "" || !isNaN(value)) {
+      setCashReceived(value === "" ? 0 : Number(value));
+    }
   };
 
   return (
@@ -129,27 +138,29 @@ function Receipt() {
 
                 <div className="cash-input-container">
                   <p>Cash Received</p>
-                  {/* <div className="cash-row">
+                  <div className="cash-row">
                     <div className="cash-box">
                       <img
                         src={CashIcon}
                         alt="Cash Icon"
                         className="cash-icon"
                       />
-                      <span>₱</span>
+                      <span className="currency-symbol">₱</span>
                       <input
                         type="text"
                         value={cashReceived}
-                        readOnly
+                        onChange={handleInputChange}
+                        readOnly={false}
                         className="cash-received-input"
                       />
-                    </div> */}
-                    {/* <button onClick={handleClosePopup} className="pay-button">
+                    </div>
+                    <button onClick={handleClosePopup} className="pay-button">
                       Pay
-                    </button> */}
-                  {/* </div> */}
+                    </button>
+                    <div class="underline"></div>
+                  </div>
 
-                  {/* <div className="number-buttons-grid">
+                  <div className="number-buttons-grid">
                     {[1, 5, 10, 20, 50, 100, 500, 1000].map((num) => (
                       <button
                         key={num}
@@ -159,7 +170,7 @@ function Receipt() {
                         ₱{num}
                       </button>
                     ))}
-                  </div> */}
+                  </div>
                 </div>
 
                 {/* <div className="change-section">

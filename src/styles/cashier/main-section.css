@@ -134,7 +134,7 @@
   padding: 10px;
   font-size: 20px;
   font-weight: bold;
-  color: black;
+  color: #292929;
 }
 
 /* Navigation List */
@@ -162,7 +162,7 @@
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  color: #000000;
+  color: #292929;
   text-align: center;
   padding: 10px 15px;
 }
