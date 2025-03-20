@@ -13,7 +13,7 @@
   font-weight: bold;
   align-items: center;
   background-color: white;
-  color: black;
+  color: #292929;
   padding: 33.5px 15px;
   justify-content: space-between;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
@@ -68,6 +68,7 @@
   border-bottom: 1px solid #ddd;
   padding: 10px;
   text-align: left;
+  color: #292929;
 }
 
 .receipt-total {
@@ -77,6 +78,7 @@
   font-weight: bold;
   padding: 10px;
   margin-bottom: 15px;
+  color: #292929;
 }
 
 .receipt-total strong:last-child {
@@ -209,6 +211,7 @@
   padding-bottom: 30px;
   text-align: center;
   width: 25%;
+  color: #292929;
 }
 
 .popup-receipt-table td {
@@ -216,6 +219,7 @@
   padding-bottom: 15px;
   border-bottom: 1px solid #ddd;
   font-size: 13px;
+  color: #292929;
 }
 
 .popup-receipt-table td.item-name {
@@ -232,6 +236,7 @@
   margin-top: 15px;
   font-size: 18px;
   font-weight: bold;
+  color: #292929;
 }
 
 .popup-total strong {
@@ -262,44 +267,80 @@
 }
 
 .cash-input-container p {
-  color: #7DA84A;
-  margin-bottom: 8px;
+  text-align: left;
+  color: #7da84a;
+  margin: 70px 0 0 20px;
+}
+
+.cash-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .cash-box {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-bottom: 2px solid black;
-  margin-bottom: 10px;
+  /* border-bottom: 2px solid #292929; */
+  margin-left: 20px;
+  /* width: 100%;
+  max-width: 600px; */
+}
+
+.underline {
+  position: absolute;
+  width: 20%;
+  height: 2px; 
+  background-color: #292929;  
+  margin-top: 30px;
+  margin-left: 22px; 
+}
+
+.cash-box img {
+  width: 25px;
+  height: 25px;
+  display: block;
+  margin-top: -5px;
+}
+
+.currency-symbol {
   font-size: 20px;
+  font-weight: 600;
+  color: #292929;
+  margin: -5px 0 0 5px;
 }
 
 .cash-received-input {
   border: none;
   outline: none;
-  width: 100px;
+  padding: 5px;
+  width: 40%;
   font-size: 20px;
-  text-align: center;
   background-color: transparent;
+  margin-top: 5px;
+  margin-right: 20px;
 }
 
 .pay-button {
-  margin-top: 10px;
-  padding: 8px 20px;
-  background-color: #7da341;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 10px 25px;
+  margin-top: -10px;
+  margin-right: 25px;
+  color: #292929;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
   cursor: pointer;
   transition: 0.3s ease;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .pay-button:hover {
   background-color: #6b922c;
+  color: white;
 }
 
-.number-buttons {
+/* .number-buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -318,7 +359,7 @@
 
 .number-buttons button:hover {
   background-color: #ddd;
-}
+} */
 
 .change-section {
   margin-top: 30px;
@@ -336,9 +377,4 @@
 
 .cash-input {
   display: none;
-}
-
-.cash-box img {
-  width: 25px;
-  height: 25px;
 }
