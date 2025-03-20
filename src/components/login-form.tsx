@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { NavLink } from "react-router-dom";
 import '../styles/login/loginForm.css';
 import logo from "../assets/images/logo.jpg";
 import eyeOpen from "../assets/images/eye-icon-open.png";
@@ -53,8 +54,9 @@ function LoginForm() {
               </label>
               <span className="keep">Keep me logged in</span>
           </div>
-
-          <button type="submit" className="login-button">LOG IN</button>
+        <NavLink to="/cashier">
+            <button type="submit" className="login-button">LOG IN</button>
+        </NavLink>
       </form>
     </div>
   ) ;

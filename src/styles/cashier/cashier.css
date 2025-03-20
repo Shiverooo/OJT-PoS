@@ -1,13 +1,14 @@
 /* Disable vertical scrolling */
 body {
-    overflow-y: hidden;
     margin: 0;
     padding: 0;
 }
 
-/* Main Layout */
-.cashier-container {
+.cashier-container{
     display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    width: 100%;    
 }
 
 /* 📱 Responsive Design */
@@ -15,11 +16,6 @@ body {
     .cashier-container {
         flex-direction: column;
         height: auto;
-        width: 100vw;
-    }
-
-    .header-left{
-        width: 100vw;
     }
 
     .products-grid {

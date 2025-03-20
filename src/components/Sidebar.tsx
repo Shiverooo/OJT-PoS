@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/cashier/sidebar.css"; // Import styles
 import cartIcon from "../assets/images/cart.svg";
 import receiptIcon from "../assets/images/receipt.svg";
@@ -15,14 +16,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       {/* Sidebar menu */}
       <ul>
+        <Link to="/cashier">
         <li>
           <img src={cartIcon} alt="Cart Icon" />
           Sales Screen
         </li>
+        </Link>
+        <Link to="/cashier/sales-history">
         <li>
           <img src={receiptIcon} alt="Receipt Icon" />
           Sales History
         </li>
+        </Link>
         <li>
           <img src={boxIcon} alt="Box Icon" />
           Inventory

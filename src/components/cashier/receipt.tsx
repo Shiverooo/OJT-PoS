@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import "../styles/cashier/receipt.css";
-import CashIcon from "../assets/images/cash.svg";
+import '../../styles/cashier/receipt.css'
 
 function Receipt() {
   const today = new Date().toLocaleDateString("en-US");
