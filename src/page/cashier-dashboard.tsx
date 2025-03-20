@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../styles/cashier/cashier.css';
-import MainSection from '../components/main-section.tsx';
-import Receipt from '../components/receipt.tsx';
+import MainSection from '../components/cashier/main-section.tsx';
+import Receipt from '../components/cashier/receipt.tsx';
 
-function Cashier() {
+function CashierDashboard() {
     
     return (
         <div className="cashier-container">
@@ -12,4 +12,4 @@ function Cashier() {
         </div>
     );
 }
-export default Cashier;
+export default CashierDashboard;
