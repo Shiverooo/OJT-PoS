@@ -1,19 +1,10 @@
 import React from "react";
-<<<<<<< HEAD:src/components/cashier/sidebar.tsx
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../../styles/cashier/sidebar.css"; // Import styles
 import cartIcon from "../../assets/images/cart.svg";
 import receiptIcon from "../../assets/images/receipt.svg";
 import boxIcon from "../../assets/images/box.svg";
 import signOutIcon from "../../assets/images/sign-out.svg";
-=======
-import { Link, useLocation } from "react-router-dom";
-import "../styles/cashier/sidebar.css"; 
-import cartIcon from "../assets/images/cart.svg";
-import receiptIcon from "../assets/images/receipt.svg";
-import boxIcon from "../assets/images/box.svg";
-import signOutIcon from "../assets/images/sign-out.svg";
->>>>>>> 6b8fa20809891d0c6a2acc8de2f9f315c43bfa8c:src/components/Sidebar.tsx
 
 interface SidebarProps {
   isOpen: boolean;
