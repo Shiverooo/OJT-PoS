@@ -8,7 +8,7 @@ import signOutIcon from "../../assets/images/sign-out.svg";
 
 interface SidebarProps {
   isOpen: boolean;
-  toggleSidebar: () => void; 
+  toggleSidebar: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
