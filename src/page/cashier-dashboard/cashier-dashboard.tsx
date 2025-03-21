@@ -9,6 +9,9 @@ import '../../styles/cashier/main-section.css'
 import '../../styles/cashier/cashier.css';
 
 function CashierDashboard() {
+    useEffect(() => {
+        document.title = "Infinitum PoS | Cashier";
+    }, []);
     const location = useLocation();
     const isReceiptPage = location.pathname ==="/cashier";
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
