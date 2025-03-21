@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import '../../styles/cashier/main-section.css'
+import '../../../styles/cashier/main-section.css'
 
 function SalesScreen() {
     const products = new Array(12).fill({
         name: "Computer Set",
-        image: require("../../assets/images/computer.jpg"),
+        image: require("../../../assets/images/computer.jpg"),
     });
 
     const navItems = [

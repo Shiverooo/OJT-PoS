@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/cashier/sidebar.css"; // Import styles
-import cartIcon from "../assets/images/cart.svg";
-import receiptIcon from "../assets/images/receipt.svg";
-import boxIcon from "../assets/images/box.svg";
-import signOutIcon from "../assets/images/sign-out.svg";
+import "../../styles/cashier/sidebar.css"; // Import styles
+import cartIcon from "../../assets/images/cart.svg";
+import receiptIcon from "../../assets/images/receipt.svg";
+import boxIcon from "../../assets/images/box.svg";
+import signOutIcon from "../../assets/images/sign-out.svg";
 
 interface SidebarProps {
   isOpen: boolean;

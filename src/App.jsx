@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./page/login.tsx"; // Import your login component
-import CashierDashboard from "./page/cashier-dashboard.tsx";
-import SalesScreen from "./components/cashier/sales-screen.tsx";
-import SalesHistory from "./components/cashier/sales-history.tsx";
-import Inventory from "./components/cashier/inventory.tsx";
+import CashierDashboard from "./page/cashier-dashboard/cashier-dashboard.tsx";
+import SalesScreen from "./page/cashier-dashboard/dashboard/sales-screen.tsx";
+import SalesHistory from "./page/cashier-dashboard/dashboard/sales-history.tsx";
+import Inventory from "./page/cashier-dashboard/dashboard/inventory.tsx";
 import NoPage from "./page/no-page.tsx";
 import "./App.css"
 
