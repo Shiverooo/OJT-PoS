@@ -31,7 +31,7 @@ body {
     background-color: #6a9135;
     color: white;
     padding: 20px 15px;
-    justify-content: space-between;
+    height: 85px;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.8);
     z-index: 1;
     flex-shrink: 0;
@@ -98,7 +98,6 @@ body {
     flex-direction: column;
     flex-grow: 1;
     padding: 0;
-    width: inherit;
   }
   
   /* Products Grid */
@@ -194,7 +193,8 @@ body {
   /* Hover Effect */
   .nav-item:hover {
     color: #56792a;
-  }  
+  }
+  
 
 /* 📱 Responsive Design */
 @media (max-width: 1024px) {

@@ -29,8 +29,7 @@ function SalesScreen() {
                     </div>
                 ))}
             </div>
-
-
+            
             <div className="nav-category">
             <nav className="navbar">
                 <ul className="nav-list">
