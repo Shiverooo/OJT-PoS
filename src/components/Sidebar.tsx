@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "../styles/cashier/sidebar.css"; // Import styles
+import { Link, useLocation } from "react-router-dom";
+import "../styles/cashier/sidebar.css"; 
 import cartIcon from "../assets/images/cart.svg";
 import receiptIcon from "../assets/images/receipt.svg";
 import boxIcon from "../assets/images/box.svg";
@@ -11,37 +11,37 @@ interface SidebarProps {
   toggleSidebar: () => void; 
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar, MainSection }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
+  const location = useLocation();
+
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
-      {/* Sidebar menu */}
       <ul>
         <Link to="/cashier">
-        <li>
-          <img src={cartIcon} alt="Cart Icon" />
-          Sales Screen
-        </li>
+          <li className={location.pathname === "/cashier" ? "active" : ""}>
+            <img src={cartIcon} alt="Cart Icon" />
+            Sales Screen
+          </li>
         </Link>
         <Link to="/cashier/sales-history">
-        <li>
-          <img src={receiptIcon} alt="Receipt Icon" />
-          Sales History
-        </li>
+          <li className={location.pathname === "/cashier/sales-history" ? "active" : ""}>
+            <img src={receiptIcon} alt="Receipt Icon" />
+            Sales History
+          </li>
         </Link>
         <Link to="/cashier/inventory">
-        <li>
-          <img src={boxIcon} alt="Box Icon" />
-          Inventory
-        </li>
+          <li className={location.pathname === "/cashier/inventory" ? "active" : ""}>
+            <img src={boxIcon} alt="Box Icon" />
+            Inventory
+          </li>
         </Link>
       </ul>
 
-      {/* Sign Out Button */}
       <Link to="/">
-      <button className="sign-out">
-        <img src={signOutIcon} alt="Sign Out Icon" />
-        Sign Out
-      </button>
+        <button className="sign-out">
+          <img src={signOutIcon} alt="Sign Out Icon" />
+          Sign Out
+        </button>
       </Link>
     </div>
   );

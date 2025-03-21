@@ -39,7 +39,7 @@ function Receipt() {
     setChange(0);
   };
   if (!isReceiptPage) {
-    return null; // Return null to hide the Receipt component if the URL doesn't match
+    return null; 
   }
 
   const handleInputChange = (e) => {
@@ -180,10 +180,10 @@ function Receipt() {
                   </div>
                 </div>
 
-                {/* <div className="change-section">
+                <div className="change-section">
                   <p>Change</p>
                   <h2>₱{change}</h2>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
