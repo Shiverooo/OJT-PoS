@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from '../../components/cashier/sidebar.tsx'
-import Receipt from '../../components/cashier/receipt.tsx';
 import menuIcon from "../../assets/images/menu-icon.svg";
 import barcodeIcon from "../../assets/images/barcode-icon.svg";
 import searchIcon from "../../assets/images/search-icon.svg";
-import '../../styles/cashier/main-section.css'
-import '../../styles/cashier/cashier.css';
+import Receipt from '../../components/cashier/receipt.tsx';
+import '../../styles/cashier/cashier-dashboard.css';
 
 function CashierDashboard() {
     useEffect(() => {
@@ -26,10 +25,10 @@ function CashierDashboard() {
         setQuery(event.target.value);
         console.log("Searching for:", event.target.value);
     };
-    const mainSectionClass = `main-section ${isReceiptPage ? "less-view" : ""}`
+    const cashierDashboardClass = `main-section ${isReceiptPage ? "less-view" : ""}`
     return (
         <div className="cashier-container">
-                <div className={mainSectionClass}>
+        <div className={cashierDashboardClass}>
             <div className="header-left">
                 <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
                 <img
@@ -63,7 +62,7 @@ function CashierDashboard() {
             </div>
             <Outlet/>
         </div>
-            <Receipt/>
+        <Receipt/>
         </div>
     );
 }
