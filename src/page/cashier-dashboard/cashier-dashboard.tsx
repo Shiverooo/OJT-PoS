@@ -8,10 +8,6 @@ import searchIcon from "../../assets/images/search-icon.svg";
 import '../../styles/cashier/cashier-dashboard.css';
 
 function CashierDashboard() {
-    useEffect(() => {
-        document.title = "Infinitum PoS | Cashier";
-    }, []);
-
     const location = useLocation();
     const isSalesHistoryPage = location.pathname === "/cashier/sales-history";
     const isInventoryPage = location.pathname === "/cashier/inventory";
@@ -60,7 +56,7 @@ function CashierDashboard() {
                         onClick={toggleSidebar}
                     />
                     <span className="title">
-                        {isSalesHistoryPage ? "History" : isInventoryPage ? "Inventory" : "Products"}
+                        {isSalesHistoryPage ? "Sale History" : isInventoryPage ? "Inventory" : "Products"}
                     </span>
 
                     {!(isSalesHistoryPage || isInventoryPage) && (

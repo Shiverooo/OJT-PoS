@@ -193,4 +193,4 @@ function Receipt() {
   );
 }
 
-export default Receipt;
+export default Receipt; 

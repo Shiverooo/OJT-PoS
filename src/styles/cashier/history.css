@@ -1,11 +1,19 @@
+.history-receipt-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 100vh; 
+}
+
 .history-container {
-    border: 1px solid #dcdcdc;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.08); 
-    height: 100%;
-    width: 30%;
-    position: relative;
-  }
-  
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  width: 35%; 
+  position: relative;
+  overflow: auto;
+}
+
 .search-date-container {
   display: flex;
   flex-direction: column;
@@ -50,7 +58,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px; 
+  padding: 20px 30px;
   border-bottom: 1px solid #dcdcdc;
 }
 
@@ -80,4 +88,87 @@
 .order-number strong {
   font-weight: bold;
   color: #7d7d7d;
+}
+
+/* Receipt box */
+.receipt-box {
+  color: #292929;
+  border: 1px solid #dcdcdc;
+  border-radius: 1px;
+  width: 580px;
+  height: 507px; 
+  margin: 50px;
+  padding: 50px 25px;
+  background-color: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.receipt-total-amount h1 {
+  margin: 0;
+  font-size: 40px;
+  text-align: center;
+  color: #292929;
+}
+
+.receipt-total-amount p {
+  text-align: center;
+  margin-top: 4px;
+  color: #7d7d7d;
+  font-size: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.receipt-items-list {
+  margin-top: 25px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.item-row strong {
+  font-size: 18px;
+  color: #292929;
+}
+
+.item-qty {
+  font-size: 14px;
+  color: #a0a0a0;
+}
+
+.price {
+  color: #292929;
+  font-size: 18px;
+}
+
+.receipt-summary-total {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #dcdcdc;
+  padding-top: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.receipt-payment-type {
+  text-align: left;
+  font-size: 16px;
+  color: #4b4b4b;
+  margin-top: 5px;
+  padding-bottom: 10px;
+  width: 100%;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+
+.receipt-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 16px;
+  color: #888;
 }

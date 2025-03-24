@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import '../../../styles/cashier/cashier-dashboard.css'
+import React, { useState, useEffect } from 'react';
+import '../../../styles/cashier/cashier-dashboard.css';
 
 function SalesScreen() {
     const products = new Array(12).fill({
@@ -14,41 +14,45 @@ function SalesScreen() {
         "Storage",
         "Other Accessories",
         "Gaming Devices"
-        ];
+    ];
 
     const [active, setActive] = useState(0);
+
+    // Set the document title when the component is mounted
+    useEffect(() => {
+        document.title = "Infinitum PoS | Sale Screen";
+    }, []);
 
     return (
         <div className="cashier-container">
             <div className="product-container">
-            <div className="products-grid">
-                {products.map((product, index) => (
-                    <div className="product-card" key={index}>
-                    <img src={product.image} alt={product.name} />
-                    <div className="product-name">{product.name}</div> {/* Product name overlay */}
-                    </div>
-                ))}
-            </div>
+                <div className="products-grid">
+                    {products.map((product, index) => (
+                        <div className="product-card" key={index}>
+                            <img src={product.image} alt={product.name} />
+                            <div className="product-name">{product.name}</div> {/* Product name overlay */}
+                        </div>
+                    ))}
+                </div>
             
-            <div className="nav-category">
-            <nav className="navbar">
-                <ul className="nav-list">
-                {navItems.map((item, index) => (
-                    <li
-                        key={index}
-                        className={`nav-item ${active === index ? "active" : ""}`}
-                        onClick={() => setActive(index)}
-                    >
-                        {item}
-                    </li>
-                ))}
-                </ul>
-            </nav>
-            </div>
+                <div className="nav-category">
+                    <nav className="navbar">
+                        <ul className="nav-list">
+                            {navItems.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className={`nav-item ${active === index ? "active" : ""}`}
+                                    onClick={() => setActive(index)}
+                                >
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
-
-  )
+    );
 }
 
 export default SalesScreen;
