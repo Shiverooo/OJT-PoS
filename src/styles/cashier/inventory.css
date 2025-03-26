@@ -83,19 +83,45 @@
   padding: 12px 0;
   border-bottom: 1px solid #e0e0e0;
   background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+.table-row:hover {
+  background-color: #A1D998;
+  cursor: pointer;
 }
 
 .table-row:nth-child(even) {
   background-color: #eeeeee;
 }
 
+.table-row:nth-child(even):hover {
+  background-color: #A1D998;
+}
+
 .row-item {
   text-align: center;
   font-size: 14px;
-  color: #333;
+  color: #333333;
 }
 
 .status-low {
-  color: #ff1919;
+  color: #ffa500;
+  font-weight: bold;
+}
+
+.status-in-stock {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.status-backordered {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.status-out-of-stock {
+  color: #ff0000;
   font-weight: bold;
 }
