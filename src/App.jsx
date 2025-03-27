@@ -20,7 +20,6 @@ function App() {
                     {/* <Route path="/cash-register" element={<CashRegister/>}/> */}
                     {/* <Route path="/inventory-analytics" element={<InventoryAnalytics/>}/> */}
                 </Route>
-                {/* <Route path="*" element ={<NoPage/>} /> */}
                 <Route path="*" element={<NoPage/>}/>
             </Routes>
         </Router>
