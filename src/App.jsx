@@ -8,9 +8,11 @@ import SalesHistory from "./page/cashier-dashboard/dashboard/sales-history.tsx";
 import Inventory from "./page/cashier-dashboard/dashboard/inventory.tsx";
 
 import AdminDashboard from "./page/admin-dashboard/admin-dashboard.tsx";
+import AdminMainDashboard from "./page/admin-dashboard/dashboard/admin-main-dashboard.tsx"
 import ProductManagement from "./page/admin-dashboard/dashboard/product-management.tsx"
 import UserManagement from "./page/admin-dashboard/dashboard/user-management.tsx"
-import SalesReport from "./page/admin-dashboard/dashboard/sales-report.tsx"
+import SalesReport from "./page/admin-dashboard/dashboard/sales-reports.tsx"
+
 import NoPage from "./page/no-page.tsx";
 import "./App.css"
 
@@ -27,7 +29,8 @@ function App() {
                     <Route path="inventory" element={<Inventory/>}/>
                 </Route>
                 <Route path="admin" element={<AdminDashboard/>}>
-                    <Route index element={<ProductManagement/>}/>
+                    <Route index element={<AdminMainDashboard/>}/>
+                    <Route path="product-management" element={<ProductManagement/>}/>
                     <Route path="user-management" element={<UserManagement/>}/>
                     <Route path="sales-reports" element={<SalesReport/>}/>
                 </Route>

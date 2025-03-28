@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import "../../styles/admin/admin-dashboard.css";
 import logo from "../../assets/images/infinitum.png";
@@ -6,47 +6,95 @@ import dashboardIcon from "../../assets/images/dashboard-icon.svg";
 import productIcon from "../../assets/images/barcode_icon.svg";
 import userIcon from "../../assets/images/user-management-icon.svg";
 import salesIcon from "../../assets/images/sale-reports-icon.svg";
+import menuIcon from "../../assets/images/menu-icon.svg"; 
 
 function AdminDashboard() {
   const location = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Determine the header title based on the current route
+  let headerTitle = "Dashboard"; // Default title
+
+  if (location.pathname === "/admin") {
+    headerTitle = "Dashboard";
+  } else if (location.pathname === "/admin/product-management") {
+    headerTitle = "Product Management";
+  } else if (location.pathname === "/admin/user-management") {
+    headerTitle = "User Management";
+  } else if (location.pathname === "/admin/sales-reports") {
+    headerTitle = "Sale Reports";
+  }
+
+  // Set the document title based on the header title
+  useEffect(() => {
+    document.title = `Infinitum Admin | ${headerTitle}`;
+  }, [headerTitle]);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen); // Toggle the sidebar visibility
+  };
 
   return (
     <div className="admin-dashboard">
       {/* Sidebar */}
-      <div className="admin-sidebar">
+      <div className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} alt="Infinitum Technologies" className="logo" />
         </div>
         <nav className="nav-links">
           <ul>
             <Link to="/admin">
-            <li className={`nav-item ${location.pathname === "/admin/dashboard" ? "active" : ""}`}>
-              <img src={dashboardIcon} alt="Dashboard Icon" className="nav-icon" />
+              <li
+                className={`admin-item ${location.pathname === "/admin" ? "active" : ""}`}
+              >
+                <img
+                  src={dashboardIcon}
+                  alt="Dashboard Icon"
+                  className="nav-icon"
+                />
                 Dashboard
-            </li>
+              </li>
             </Link>
-            <Link to="/admin">
-            <li className={`nav-item ${location.pathname === "/admin/product-management" ? "active" : ""}`}>
-                <img src={productIcon} alt="Product Management Icon" className="nav-icon" />
+            <Link to="/admin/product-management">
+              <li
+                className={`admin-item ${location.pathname === "/admin/product-management" ? "active" : ""}`}
+              >
+                <img
+                  src={productIcon}
+                  alt="Product Management Icon"
+                  className="nav-icon"
+                />
                 Product Management
-            </li>
+              </li>
             </Link>
             <Link to="/admin/user-management">
-            <li className={`nav-item ${location.pathname === "/admin/user-management" ? "active" : ""}`}>
-                <img src={userIcon} alt="User Management Icon" className="nav-icon" />
+              <li
+                className={`admin-item ${location.pathname === "/admin/user-management" ? "active" : ""}`}
+              >
+                <img
+                  src={userIcon}
+                  alt="User Management Icon"
+                  className="nav-icon"
+                />
                 User Management
-            </li>
+              </li>
             </Link>
             <Link to="/admin/sales-reports">
-            <li className={`nav-item ${location.pathname === "/admin/sale-reports" ? "active" : ""}`}>
-                <img src={salesIcon} alt="Sale Reports Icon" className="nav-icon" />
+              <li
+                className={`admin-item ${location.pathname === "/admin/sales-reports" ? "active" : ""}`}
+              >
+                <img
+                  src={salesIcon}
+                  alt="Sale Reports Icon"
+                  className="nav-icon"
+                />
                 Sale Reports
-            </li>
+              </li>
             </Link>
           </ul>
         </nav>
         <footer className="sidebar-footer">
-          <p className="sidebar-footer">
+          <p>
             Copyright © 2023 Infinitum
             <br />
             Technologies, Inc. All
@@ -55,7 +103,22 @@ function AdminDashboard() {
           </p>
         </footer>
       </div>
-      <Outlet />
+
+      {/* Header */}
+      <div className={`admin-content ${sidebarOpen ? "sidebar-open" : ""}`}>
+        <div className="header">
+          <img
+            src={menuIcon}
+            alt="Menu Icon"
+            className="menu-icon"
+            onClick={toggleSidebar} // Toggle sidebar on click
+          />
+          <div className="header-title">
+            <h1>{headerTitle}</h1>
+          </div>
+        </div>
+        <Outlet />
+      </div>
     </div>
   );
 }

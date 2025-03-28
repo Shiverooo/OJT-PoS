@@ -44,7 +44,7 @@
 .table-header {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  background-color: #7da84a;
+  background-color: var(--primary-color);
   padding: 12px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin-top: 20px;
