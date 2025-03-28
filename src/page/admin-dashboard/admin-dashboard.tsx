@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import "../../styles/admin/admin-dashboard.css";
 import logo from "../../assets/images/infinitum.png";
 import dashboardIcon from "../../assets/images/dashboard-icon.svg";
@@ -19,30 +19,30 @@ function AdminDashboard() {
         </div>
         <nav className="nav-links">
           <ul>
+            <Link to="/admin">
             <li className={`nav-item ${location.pathname === "/admin/dashboard" ? "active" : ""}`}>
-              <a href="/admin/dashboard">
-                <img src={dashboardIcon} alt="Dashboard Icon" className="nav-icon" />
+              <img src={dashboardIcon} alt="Dashboard Icon" className="nav-icon" />
                 Dashboard
-              </a>
             </li>
+            </Link>
+            <Link to="/admin">
             <li className={`nav-item ${location.pathname === "/admin/product-management" ? "active" : ""}`}>
-              <a href="/admin/product-management">
                 <img src={productIcon} alt="Product Management Icon" className="nav-icon" />
                 Product Management
-              </a>
             </li>
+            </Link>
+            <Link to="/admin/user-management">
             <li className={`nav-item ${location.pathname === "/admin/user-management" ? "active" : ""}`}>
-              <a href="/admin/user-management">
                 <img src={userIcon} alt="User Management Icon" className="nav-icon" />
                 User Management
-              </a>
             </li>
+            </Link>
+            <Link to="/admin/sales-reports">
             <li className={`nav-item ${location.pathname === "/admin/sale-reports" ? "active" : ""}`}>
-              <a href="/admin/sale-reports">
                 <img src={salesIcon} alt="Sale Reports Icon" className="nav-icon" />
                 Sale Reports
-              </a>
             </li>
+            </Link>
           </ul>
         </nav>
         <footer className="sidebar-footer">
