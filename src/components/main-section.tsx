@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "./Sidebar.tsx";
+import Sidebar from "../components/cashier/sidebar.tsx";
 import menuIcon from "../assets/images/menu-icon.svg";
 import barcodeIcon from "../assets/images/barcode-icon.svg";
 import searchIcon from "../assets/images/search-icon.svg";
