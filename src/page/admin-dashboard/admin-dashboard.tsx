@@ -6,14 +6,16 @@ import dashboardIcon from "../../assets/images/dashboard-icon.svg";
 import productIcon from "../../assets/images/barcode_icon.svg";
 import userIcon from "../../assets/images/user-management-icon.svg";
 import salesIcon from "../../assets/images/sale-reports-icon.svg";
-import menuIcon from "../../assets/images/menu-icon.svg"; 
+import menuIcon from "../../assets/images/menu-icon.svg";
 
 function AdminDashboard() {
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(
+    localStorage.getItem("sidebarOpen") === "true" 
+  );
 
   // Determine the header title based on the current route
-  let headerTitle = "Dashboard"; // Default title
+  let headerTitle = "Dashboard";
 
   if (location.pathname === "/admin") {
     headerTitle = "Dashboard";
@@ -30,8 +32,13 @@ function AdminDashboard() {
     document.title = `Infinitum Admin | ${headerTitle}`;
   }, [headerTitle]);
 
+  // Update localStorage whenever sidebar state changes
+  useEffect(() => {
+    localStorage.setItem("sidebarOpen", sidebarOpen);
+  }, [sidebarOpen]);
+
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen); // Toggle the sidebar visibility
+    setSidebarOpen((prev) => !prev);
   };
 
   return (
@@ -44,50 +51,26 @@ function AdminDashboard() {
         <nav className="nav-links">
           <ul>
             <Link to="/admin">
-              <li
-                className={`admin-item ${location.pathname === "/admin" ? "active" : ""}`}
-              >
-                <img
-                  src={dashboardIcon}
-                  alt="Dashboard Icon"
-                  className="nav-icon"
-                />
+              <li className={`admin-item ${location.pathname === "/admin" ? "active" : ""}`}>
+                <img src={dashboardIcon} alt="Dashboard Icon" className="nav-icon" />
                 Dashboard
               </li>
             </Link>
             <Link to="/admin/product-management">
-              <li
-                className={`admin-item ${location.pathname === "/admin/product-management" ? "active" : ""}`}
-              >
-                <img
-                  src={productIcon}
-                  alt="Product Management Icon"
-                  className="nav-icon"
-                />
+              <li className={`admin-item ${location.pathname === "/admin/product-management" ? "active" : ""}`}>
+                <img src={productIcon} alt="Product Management Icon" className="nav-icon" />
                 Product Management
               </li>
             </Link>
             <Link to="/admin/user-management">
-              <li
-                className={`admin-item ${location.pathname === "/admin/user-management" ? "active" : ""}`}
-              >
-                <img
-                  src={userIcon}
-                  alt="User Management Icon"
-                  className="nav-icon"
-                />
+              <li className={`admin-item ${location.pathname === "/admin/user-management" ? "active" : ""}`}>
+                <img src={userIcon} alt="User Management Icon" className="nav-icon" />
                 User Management
               </li>
             </Link>
             <Link to="/admin/sales-reports">
-              <li
-                className={`admin-item ${location.pathname === "/admin/sales-reports" ? "active" : ""}`}
-              >
-                <img
-                  src={salesIcon}
-                  alt="Sale Reports Icon"
-                  className="nav-icon"
-                />
+              <li className={`admin-item ${location.pathname === "/admin/sales-reports" ? "active" : ""}`}>
+                <img src={salesIcon} alt="Sale Reports Icon" className="nav-icon" />
                 Sale Reports
               </li>
             </Link>
@@ -111,7 +94,7 @@ function AdminDashboard() {
             src={menuIcon}
             alt="Menu Icon"
             className="menu-icon"
-            onClick={toggleSidebar} // Toggle sidebar on click
+            onClick={toggleSidebar}
           />
           <div className="header-title">
             <h1>{headerTitle}</h1>

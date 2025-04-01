@@ -1,0 +1,111 @@
+/* Main Dashboard Layout */
+.admin-main-dashboard {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: #f5f5f5;
+  }
+  
+  /* Top Selling Products & Low Stock Styling */
+  .top-selling, .low-stock {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+  }
+  
+  .top-selling {
+    width: 65%;
+  }
+  
+  .low-stock {
+    width: 35%;
+  }
+  
+  /* Header Styling */
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .main-header h2 {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .main-header a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    /* background: #f0f0f0; */
+    font-weight: bold;
+  }
+  
+  tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+  
+  /* Low Stock Section */
+  .low-stock-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .low-stock-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .low-stock-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .main-header {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .remaining {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  /* Low Tag */
+  .low-tag {
+    background: #ff4d4d;
+    color: white;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    position: absolute;
+    right: 10px;
+  }
+  
