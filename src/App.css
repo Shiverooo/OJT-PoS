@@ -1,7 +1,8 @@
 :root{
-  --primary-color: #2f4f2f;
+  --primary-color: #41ab5d;
   --secondary-color: #ffffff;
 }
+
 
 * {
     margin: 0;

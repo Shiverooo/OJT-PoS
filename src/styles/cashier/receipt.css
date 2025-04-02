@@ -111,18 +111,18 @@
 }
 
 .edit-btn {
-  background-color: #6a9135;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .pay-btn {
-  background-color: #6a9135;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .edit-btn:hover,
 .pay-btn:hover {
-  background-color: #56792a;
+  background-color: #6a9135;
 }
 
 /* POP-UP PAY BUTTON */
@@ -169,7 +169,7 @@
   align-items: center;
   width: 55%;
   height: 46px;
-  background-color: #7da341;
+  background-color: var(--primary-color);
 }
 
 .popup-right .close-button {
@@ -254,6 +254,7 @@
 .payment-section h1 {
   font-size: 50px;
   margin-bottom: 5px;
+  color: #2f4f2f;
 }
 
 .payment-section p {
