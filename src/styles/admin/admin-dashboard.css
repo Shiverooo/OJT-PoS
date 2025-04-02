@@ -1,0 +1,176 @@
+.admin-dashboard {
+  display: flex;
+  position: relative;
+}
+
+.admin-sidebar {
+  width: 310px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  left: -310px; 
+  top: 0;
+  transition: left 0.3s ease; 
+}
+
+.admin-sidebar.open {
+  left: 0;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 250px;
+  height: auto;
+}
+
+.nav-links {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.admin-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #292929;
+  font-size: 19px;
+  width: 100%;
+  height: 60px;
+  justify-content: flex-start;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.admin-item:hover {
+  background-color: #41AB5D;
+  color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-item.active {
+  background-color: #ddd;
+  /* font-weight: bold; */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.admin-item.active:hover {
+  background-color: #ddd; 
+  color: inherit; 
+}
+
+/* Prevent icon color change on active items */
+.admin-item:not(.active):hover .nav-icon {
+  filter: invert(100%) brightness(100%) contrast(100%);
+}
+
+.nav-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+  vertical-align: middle;
+  transition: filter 0.3s ease;
+}
+
+.sidebar-footer {
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+  margin-top: auto;
+}
+
+.admin-sign-out {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  width: calc(100% - 20px);
+  padding: 15px 70px;
+  background-color: #e74c3c;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.admin-sign-out:hover {
+  transform: scale(1.03); 
+  color: black; 
+}
+
+.admin-sign-out img {
+    width: 20px; 
+    height: 20px;
+    margin-right: 10px;
+    filter: invert(1) sepia(0) saturate(0) hue-rotate(0deg) brightness(100%)
+    contrast(100%);
+}
+
+.admin-sign-out:hover img {
+  filter: invert(0) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.6)
+    contrast(100%);
+}
+
+/* Content area */
+.admin-content {
+  flex-grow: 1;
+  margin-left: 0;
+  transition: margin-left 0.3s ease; 
+}
+
+.admin-content.sidebar-open {
+  margin-left: 310px; 
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #3f5e3e;
+  max-height: 100%;
+  padding: 15px;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+}
+
+.header-title h1 {
+  text-align: left;
+  color: #ffffff;
+  font-size: 35px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Menu Icon */
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 20px;
+  display: inline-block;
+  filter: invert(100%) brightness(100%) contrast(100%);
+}
