@@ -1,8 +1,21 @@
 import React from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import "../../../styles/admin/admin-main-dashboard.css";
 import mouseImage from "../../../assets/images/mouse.png";
 import keyboardImage from "../../../assets/images/keyboard.png";
+import boxIcon from "../../../assets/images/box-box.svg";
+import locationIcon from "../../../assets/images/location.svg";
+import suppliersIcon from "../../../assets/images/suppliers.svg";
+import categoriesIcon from "../../../assets/images/categories.svg";
+import calendarIcon from "../../../assets/images/calendar.svg";
 
 function AdminMainDashboard() {
   const topSellingProducts = [
@@ -16,125 +29,134 @@ function AdminMainDashboard() {
   ];
 
   const salesPurchaseData = [
-    { month: "Jan", purchase: 55000, sales: 45000 },
-    { month: "Feb", purchase: 60000, sales: 50000 },
-    { month: "Mar", purchase: 48000, sales: 52000 },
-    { month: "Apr", purchase: 42000, sales: 45000 },
-    { month: "May", purchase: 38000, sales: 48000 },
-    { month: "Jun", purchase: 30000, sales: 50000 },
-    { month: "Jul", purchase: 57000, sales: 46000 },
-    { month: "Aug", purchase: 43000, sales: 44000 },
+    { month: "Jan", purchase: 1000, sales: 2000 },
+    { month: "Feb", purchase: 2000, sales: 3000 },
+    { month: "Mar", purchase: 3000, sales: 1000 },
+    { month: "Apr", purchase: 4000, sales: 5000 },
+    { month: "May", purchase: 5000, sales: 4000 },
   ];
 
-  const inventorySummary = {
-    quantityInHand: 868,
-    toBeReceived: 200,
-  };
-
-  const productSummary = {
-    suppliers: 31,
-    categories: 21,
-  };
+  const inventorySummary = { quantityInHand: 868, toBeReceived: 200 };
+  const productSummary = { suppliers: 31, categories: 21 };
 
   return (
-    <div className="admin-main-dashboard">
-      {/* Top Selling Products */}
-      <div className="top-selling">
-        <div className="main-header">
-          <h2>Top Selling Product</h2>
-          <a href="#">See All</a>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Sold Quantity</th>
-              <th>Remaining Quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topSellingProducts.map((product, index) => (
-              <tr key={index}>
-                <td>{product.name}</td>
-                <td>{product.sold}</td>
-                <td>{product.remaining}</td>
-                <td>{product.price}</td>
+    <div className="admin-main-dashboard-wrapper">
+      <div className="admin-main-dashboard">
+        {/* Top Selling & Low Stock */}
+        <div className="top-selling">
+          <div className="main-header">
+            <h2>Top Selling Product</h2>
+            <a href="#">See All</a>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sold Quantity</th>
+                <th>Remaining Quantity</th>
+                <th>Price</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Low Quantity Stock */}
-      <div className="low-stock">
-        <div className="main-header">
-          <h2>Low Quantity Stock</h2>
-          <a href="#">See All</a>
+            </thead>
+            <tbody>
+              {topSellingProducts.map((product, index) => (
+                <tr key={index}>
+                  <td>{product.name}</td>
+                  <td>{product.sold}</td>
+                  <td>{product.remaining}</td>
+                  <td>{product.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div>
-          {lowStockItems.map((item, index) => (
-            <div key={index} className="low-stock-item">
-              <div className="low-stock-info">
-                <img src={item.image} alt={item.name} />
-                <div>
-                  <p className="main-product-name">{item.name}</p>
-                  <p className="remaining">
-                    Remaining Quantity: {item.remaining}
-                  </p>
+
+        <div className="low-stock">
+          <div className="main-header">
+            <h2>Low Quantity Stock</h2>
+            <a href="#">See All</a>
+          </div>
+          <div>
+            {lowStockItems.map((item, index) => (
+              <div key={index} className="low-stock-item">
+                <div className="low-stock-info">
+                  <img src={item.image} alt={item.name} />
+                  <div>
+                    <p className="main-product-name">{item.name}</p>
+                    <p className="remaining">
+                      Remaining Quantity: {item.remaining}
+                    </p>
+                  </div>
                 </div>
+                <span className="low-tag">Low</span>
               </div>
-              <span className="low-tag">Low</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Sales & Purchase Chart */}
-      <div className="sales-purchase">
-        <div className="main-header">
-          <h2>Sales & Purchase</h2>
-          <button className="filter-btn">Weekly</button>
+        {/* Sales & Purchase */}
+        <div className="sales-purchase">
+          <div className="main-header">
+            <h2>Sales & Purchase</h2>
+            <button className="filter-btn">
+              <img
+                src={calendarIcon}
+                alt="Calendar Icon"
+                className="calendar-icon"
+              />
+              Weekly
+            </button>
+          </div>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={salesPurchaseData}>
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="purchase" fill="#6495ED" name="Purchase" />
+              <Bar dataKey="sales" fill="#32CD32" name="Sales" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
-        <BarChart width={600} height={300} data={salesPurchaseData}>
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="purchase" fill="#6495ED" name="Purchase" />
-          <Bar dataKey="sales" fill="#32CD32" name="Sales" />
-        </BarChart>
-      </div>
 
-      <div className="summary-container">
-        {/* Inventory Summary */}
-        <div className="summary-card">
+        {/* Summary Section */}
+        <div className="inventory-summary summary-card">
           <h3>Inventory Summary</h3>
           <div className="summary-content">
             <div className="summary-box">
-              <i className="icon-orange">📦</i>
+              <img src={boxIcon} alt="Box Icon" className="summary-icon" />
               <p>{inventorySummary.quantityInHand}</p>
               <span>Quantity in Hand</span>
             </div>
             <div className="summary-box">
-              <i className="icon-purple">📥</i>
+              <img
+                src={locationIcon}
+                alt="Location Icon"
+                className="summary-icon"
+              />
               <p>{inventorySummary.toBeReceived}</p>
               <span>To be received</span>
             </div>
           </div>
         </div>
 
-        {/* Product Summary */}
-        <div className="summary-card">
+        <div className="product-summary summary-card">
           <h3>Product Summary</h3>
           <div className="summary-content">
             <div className="summary-box">
-              <i className="icon-blue">👤</i>
+              <img
+                src={suppliersIcon}
+                alt="Suppliers Icon"
+                className="summary-icon"
+              />
               <p>{productSummary.suppliers}</p>
               <span>Number of Suppliers</span>
             </div>
             <div className="summary-box">
-              <i className="icon-pink">📄</i>
+              <img
+                src={categoriesIcon}
+                alt="Categories Icon"
+                className="summary-icon"
+              />
               <p>{productSummary.categories}</p>
               <span>Number of Categories</span>
             </div>

@@ -1,103 +1,136 @@
-/* Main Dashboard Layout with Scrollbar */
-.admin-main-dashboard {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  background: #f5f5f5;
-  height: 92vh;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #484848 #D0D0D0;
-  transition: all 0.3s ease-in-out;
+/* Add scrollbar to whole page */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-.admin-main-dashboard::-webkit-scrollbar {
+.admin-main-dashboard-wrapper {
+  height: 90vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Scrollbar Styling */
+.admin-main-dashboard-wrapper::-webkit-scrollbar {
   width: 8px;
 }
 
-/* Top Selling Products & Low Stock Styling */
-.top-selling,
-.low-stock {
-  background: white;
-  border-radius: 10px;
+.admin-main-dashboard-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.admin-main-dashboard-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.admin-main-dashboard-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* General Layout */
+.admin-main-dashboard {
+  display: grid;
+  grid-template-areas:
+    "top-selling low-stock"
+    "sales-purchase summary"
+    "sales-purchase summary";
+  grid-template-columns: 65% 35%;
+  margin-right: 20px;
+  gap: 20px;
   padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  flex: 1;
 }
 
+/* ----- Top Selling Product Table ----- */
 .top-selling {
-  width: 65%;
-  height: 545px;
+  grid-area: top-selling;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  height: 70vh;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d0d3d9;
 }
 
-.low-stock {
-  width: 35%;
-}
-
-/* Header Styling */
-.main-header {
+.top-selling .main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 }
 
-.main-header h2 {
-  font-weight: 600;
+.top-selling h2 {
   font-size: 20px;
   color: #2e2e2e;
+  font-weight: bold;
 }
 
-.main-header a {
+.top-selling a {
   text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-  color: #5a87c4;
+  color: #007bff;
+  font-size: 14px;
 }
 
-/* Table Styling */
-table {
+.top-selling table {
   width: 100%;
   border-collapse: collapse;
 }
 
-tr {
-  border-bottom: 1px solid #d9d9d9;
-}
-
-th,
-td {
+.top-selling th,
+.top-selling td {
   padding: 10px;
-  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
-th {
-  background: #f0f0f0;
-  color: #7b7b7b;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-td {
+.top-selling td {
   font-size: 12px;
   color: #6b6b6b;
 }
 
-tr:nth-child(even) {
-  background: #f9f9f9;
+.top-selling th {
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+  color: #7b7b7b;
+  font-weight: bold;
 }
 
-/* Low Stock Section */
+/* ----- Low Stock Items ----- */
+.low-stock {
+  grid-area: low-stock;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d0d3d9;
+}
+
+.low-stock .main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.low-stock h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2e2e2e;
+}
+
+.low-stock a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 14px;
+}
+
 .low-stock-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f9f9f9;
   padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  position: relative;
   border-bottom: 1px solid #ddd;
 }
 
@@ -106,16 +139,16 @@ tr:nth-child(even) {
   align-items: center;
 }
 
-.low-stock-item img {
+.low-stock img {
   width: 40px;
   height: 40px;
-  object-fit: cover;
   margin-right: 10px;
 }
 
-.main-header {
+.main-product-name {
+  font-size: 16px;
   font-weight: bold;
-  font-size: 14px;
+  color: #2e2e2e;
 }
 
 .remaining {
@@ -123,29 +156,22 @@ tr:nth-child(even) {
   color: #7b7b7b;
 }
 
-.main-product-name {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-/* Low Tag */
 .low-tag {
   background: #feeceb;
   color: #ab332b;
   font-size: 12px;
-  padding: 3px 8px;
+  padding: 5px 10px;
   border-radius: 5px;
-  position: absolute;
-  right: 10px;
 }
 
-/* Sales & Purchase Chart */
+/* ----- Sales & Purchase Chart ----- */
 .sales-purchase {
+  grid-area: sales-purchase;
   background: white;
-  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  width: 65%;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d0d3d9;
 }
 
 .sales-purchase .main-header {
@@ -157,151 +183,96 @@ tr:nth-child(even) {
 
 .sales-purchase h2 {
   font-size: 20px;
-  font-weight: 6git a00;
-  color: #383E49;
-}
-
-.filter-btn {
-  background: #f0f0f0;
-  border: 1px solid #D0D3D9;
-  padding: 8px 25px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #5D6679;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.filter-btn:hover {
-  background: #e0e0e0;
-}
-/* Chart Container */
-.sales-purchase .recharts-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin: 20px 100px;
-}
-
-/* Bar Chart Customizations */
-.sales-purchase .recharts-bar-chart {
-  width: 100%; /* Adjust width of chart */
-  max-width: 600px; /* Optional: Set max width to control size */
-  margin: 0 auto; /* Center the chart */
-}
-
-.sales-purchase .recharts-cartesian-axis {
-  font-size: 12px;
-  color: #6b6b6b;
-}
-
-.sales-purchase .recharts-tooltip-item {
-  font-size: 12px;
+  font-weight: bold;
   color: #2e2e2e;
 }
 
-/* Inventory & Product Summary Cards */
-.summary-container {
+.filter-btn {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 30%;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  padding: 8px 20px;
+  font-size: 14px;
+  border: 1px solid #d0d3d9;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #5d6679;
+  cursor: pointer;
 }
 
-/* Individual Summary Card */
-.summary-card {
+.calendar-icon {
+  width: 16px; /* Adjust size as needed */
+  height: 16px;
+}
+
+/* ----- Summary Cards (Inventory & Product Summary) ----- */
+.inventory-summary,
+.product-summary {
   background: white;
-  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d0d3d9;
 }
 
-/* Title Styling */
 .summary-card h3 {
   font-size: 18px;
-  font-weight: 600;
-  color: #2E2E2E;
   margin-bottom: 10px;
+  color: #2e2e2e;
 }
 
-/* Summary Content Grid */
 .summary-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-align: center;
 }
 
-/* Summary Box */
 .summary-box {
+  text-align: center;
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 5px;
   position: relative;
 }
 
-/* Icon Styling */
-.summary-box i {
-  font-size: 24px;
-  padding: 10px;
-  border-radius: 50%;
+.summary-box p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5d6679;
 }
 
-/* Specific Icon Colors */
-.icon-orange {
-  background: #FDE9D9;
-  color: #E67E22;
+.summary-box span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444444;
 }
 
-.icon-purple {
-  background: #E9E1FF;
-  color: #6B48FF;
+.summary-icon {
+  width: 30px; 
+  height: 30px;
+  margin-bottom: 10px;
 }
 
-.icon-blue {
-  background: #DFF4FF;
-  color: #0073E6;
-}
-
-.icon-pink {
-  background: #FFE6F0;
-  color: #D63384;
-}
-
-/* Vertical Divider */
 .summary-box:not(:last-child)::after {
   content: "";
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  height: 50%;
+  height: 100%;
   width: 1px;
-  background: #D9D9D9;
+  background: #5d6679;
 }
 
-/* Number Styling */
-.summary-box p {
-  font-size: 18px;
-  font-weight: 700;
-  color: #2E2E2E;
-  margin: 0;
+/* ----- Responsive Design ----- */
+@media screen and (max-width: 1024px) {
+  .admin-main-dashboard {
+    grid-template-areas:
+      "top-selling"
+      "low-stock"
+      "sales-purchase"
+      "summary";
+    grid-template-columns: 1fr;
+  }
 }
-
-/* Label Styling */
-.summary-box span {
-  font-size: 14px;
-  color: #6B6B6B;
-}
-
-
-/* Aligning the Chart & Summaries */
-/* .sales-purchase,
-.inventory-summary,
-.product-summary {
-  flex-grow: 1;
-} */

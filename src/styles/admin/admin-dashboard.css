@@ -98,9 +98,9 @@
 
 .admin-sign-out {
   margin-bottom: 20px;
-  margin-left: 20px;
-  width: calc(100% - 50px);
-  padding: 15px 55px;
+  margin-left: 10px;
+  width: calc(100% - 20px);
+  padding: 15px 70px;
   background-color: #e74c3c;
   color: white;
   font-size: 18px;
