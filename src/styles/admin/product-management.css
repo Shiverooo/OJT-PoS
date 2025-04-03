@@ -1,0 +1,38 @@
+.header-management {
+    display: flex;
+    padding: 20px;
+    background: linear-gradient(to bottom, #f5f5f5, #dcdcdc);
+}
+
+/* SEARCH BAR */
+.search-prod-management {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    position: sticky;
+    top: 0;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar-management {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 0 5px 0;
+    margin-left: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.prod-search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #292929;
+    background: transparent;
+    margin-top: 10px;
+    margin-left: -10px;
+}

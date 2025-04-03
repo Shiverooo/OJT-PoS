@@ -46,9 +46,9 @@
 .receipt-section::before {
   content: "";
   position: absolute;
-  left: 0;
+  left: 20px;
   bottom: 50px;
-  width: 100%;
+  width: 90%;
   height: 100%;
   background: url("../../assets/images/infinitum-logo.png") no-repeat center;
   background-size: contain;
@@ -73,7 +73,6 @@
 
 .receipt-total {
   display: flex;
-  justify-content: space-between;
   font-size: 18px;
   font-weight: bold;
   padding: 10px;
