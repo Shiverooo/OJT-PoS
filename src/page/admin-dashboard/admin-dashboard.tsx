@@ -27,7 +27,6 @@ function AdminDashboard() {
     headerTitle = "Sale Reports";
   }
 
-  // Set the document title based on the header title
   useEffect(() => {
     document.title = `Infinitum Admin | ${headerTitle}`;
   }, [headerTitle]);
