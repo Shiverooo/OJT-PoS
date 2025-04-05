@@ -60,14 +60,14 @@
 }
 
 .admin-item:hover {
-  background-color: #3f5e3e;
+  background-color: #41AB5D;
   color: white;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .admin-item.active {
   background-color: #ddd;
-  font-weight: bold;
+  /* font-weight: bold; */
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -94,6 +94,41 @@
   text-align: center;
   color: #666;
   margin-top: auto;
+}
+
+.admin-sign-out {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  width: calc(100% - 20px);
+  padding: 15px 70px;
+  background-color: #e74c3c;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.admin-sign-out:hover {
+  transform: scale(1.03); 
+  color: black; 
+}
+
+.admin-sign-out img {
+    width: 20px; 
+    height: 20px;
+    margin-right: 10px;
+    filter: invert(1) sepia(0) saturate(0) hue-rotate(0deg) brightness(100%)
+    contrast(100%);
+}
+
+.admin-sign-out:hover img {
+  filter: invert(0) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.6)
+    contrast(100%);
 }
 
 /* Content area */

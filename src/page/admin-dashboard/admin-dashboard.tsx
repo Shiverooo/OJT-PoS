@@ -7,11 +7,12 @@ import productIcon from "../../assets/images/barcode_icon.svg";
 import userIcon from "../../assets/images/user-management-icon.svg";
 import salesIcon from "../../assets/images/sale-reports-icon.svg";
 import menuIcon from "../../assets/images/menu-icon.svg";
+import signOutIcon from "../../assets/images/sign-out.svg";
 
 function AdminDashboard() {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(
-    localStorage.getItem("sidebarOpen") === "true" 
+    localStorage.getItem("sidebarOpen") === "true"
   );
 
   // Determine the header title based on the current route
@@ -50,32 +51,72 @@ function AdminDashboard() {
         <nav className="nav-links">
           <ul>
             <Link to="/admin">
-              <li className={`admin-item ${location.pathname === "/admin" ? "active" : ""}`}>
-                <img src={dashboardIcon} alt="Dashboard Icon" className="nav-icon" />
+              <li
+                className={`admin-item ${
+                  location.pathname === "/admin" ? "active" : ""
+                }`}
+              >
+                <img
+                  src={dashboardIcon}
+                  alt="Dashboard Icon"
+                  className="nav-icon"
+                />
                 Dashboard
               </li>
             </Link>
             <Link to="/admin/product-management">
-              <li className={`admin-item ${location.pathname === "/admin/product-management" ? "active" : ""}`}>
-                <img src={productIcon} alt="Product Management Icon" className="nav-icon" />
+              <li
+                className={`admin-item ${
+                  location.pathname === "/admin/product-management"
+                    ? "active"
+                    : ""
+                }`}
+              >
+                <img
+                  src={productIcon}
+                  alt="Product Management Icon"
+                  className="nav-icon"
+                />
                 Product Management
               </li>
             </Link>
             <Link to="/admin/user-management">
-              <li className={`admin-item ${location.pathname === "/admin/user-management" ? "active" : ""}`}>
-                <img src={userIcon} alt="User Management Icon" className="nav-icon" />
+              <li
+                className={`admin-item ${
+                  location.pathname === "/admin/user-management" ? "active" : ""
+                }`}
+              >
+                <img
+                  src={userIcon}
+                  alt="User Management Icon"
+                  className="nav-icon"
+                />
                 User Management
               </li>
             </Link>
             <Link to="/admin/sales-reports">
-              <li className={`admin-item ${location.pathname === "/admin/sales-reports" ? "active" : ""}`}>
-                <img src={salesIcon} alt="Sale Reports Icon" className="nav-icon" />
+              <li
+                className={`admin-item ${
+                  location.pathname === "/admin/sales-reports" ? "active" : ""
+                }`}
+              >
+                <img
+                  src={salesIcon}
+                  alt="Sale Reports Icon"
+                  className="nav-icon"
+                />
                 Sale Reports
               </li>
             </Link>
           </ul>
         </nav>
         <footer className="sidebar-footer">
+          <Link to="/">
+            <button className="admin-sign-out">
+              <img src={signOutIcon} alt="Sign Out Icon" />
+              Sign Out
+            </button>
+          </Link>
           <p>
             Copyright © 2023 Infinitum
             <br />
