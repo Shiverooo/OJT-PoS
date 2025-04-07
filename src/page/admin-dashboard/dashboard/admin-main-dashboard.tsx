@@ -37,7 +37,7 @@ function AdminMainDashboard() {
   ];
 
   const inventorySummary = { quantityInHand: 868, toBeReceived: 200 };
-  const productSummary = { suppliers: 31, categories: 21 };
+  const productSummary = { suppliers: 31, categories: 6 };
 
   return (
     <div className="admin-main-dashboard-wrapper">
