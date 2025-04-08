@@ -4,6 +4,7 @@ const sqlite = () =>{
     db.pragma('journal_mode = WAL');
 
     const stmt = db.prepare('select * from users');
+    
     const display = stmt.all();
     console.log(display);
 }
