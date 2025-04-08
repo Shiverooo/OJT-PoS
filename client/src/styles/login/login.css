@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  overflow: hidden; 
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Login Section */
+.login-section {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-color);
+}
+
+/* Background Section */
+.background-section {
+  width: 50%;
+  background: url("../../assets/images/Background-pic.png") no-repeat center center;
+  background-size: cover;
+  filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 1));
+  transform: translateX(100%);
+  opacity: 0;
+  animation: slideIn 1.5s ease forwards; 
+}
+
+/* Define the slide effect animation */
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%); 
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1; 
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .login-section,
+  .background-section {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .background-section {
+    padding: 40px;
+    font-size: 20px;
+  }
+}
+
+body.no-scroll {
+  overflow: auto; 
+}

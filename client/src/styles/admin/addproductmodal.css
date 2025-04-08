@@ -1,0 +1,91 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  width: 537px;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.image-upload {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.image-box {
+  border: 2px dashed #ccc;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.browse {
+  text-align: center;
+  color: #41ab5d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-form input {
+  padding: 8px;
+  border: 1px solid #d0d3d9;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.product-form select {
+  padding: 8px;
+  border: 1px solid #d0d3d9;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.add-product-btn {
+  background-color: #41ab5d;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.add-product-btn:hover {
+  background-color: #4caf50;
+}
