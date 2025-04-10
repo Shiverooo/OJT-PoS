@@ -1,6 +1,8 @@
+// src/pages/admin/product-management/ProductManagement.tsx
 import React, { useState } from "react";
-import "../../../styles/admin/product-management.css";
-import searchIcon from "../../../assets/images/search-icon.svg";
+import ProductSection from "../../../components/admin/product-management/product-section.tsx"; // Import the ProductSection component
+import "../../../styles/admin/product-management.css"; // Import CSS styles for this page
+import searchIcon from "../../../assets/images/search-icon.svg"; // Import the search icon image
 
 // Dummy product data (extend to test pagination)
 const productData = [
@@ -10,15 +12,13 @@ const productData = [
     price: "₱1,000.00",
     quantity: 12,
     date: "11/12/22",
-    status: "In-stock",
   },
   {
     barcode: "6 1234 5268 1",
     name: "RAPOO Keyboard",
     price: "₱1,500.00",
-    quantity: 10,
+    quantity: 0,
     date: "21/12/22",
-    status: "Out of stock",
   },
   {
     barcode: "6 1234 5268 2",
@@ -26,15 +26,13 @@ const productData = [
     price: "₱5,000.00",
     quantity: 8,
     date: "5/12/22",
-    status: "In-stock",
   },
   {
     barcode: "6 1234 5268 3",
     name: "IN PLAY Speaker Small",
     price: "₱500.00",
-    quantity: 10,
+    quantity: 0,
     date: "8/12/22",
-    status: "Out of stock",
   },
   {
     barcode: "6 1234 5268 4",
@@ -42,8 +40,8 @@ const productData = [
     price: "₱293.00",
     quantity: 10,
     date: "9/1/23",
-    status: "In-stock",
   },
+  // Add additional dummy product data
   ...Array.from({ length: 25 }, (_, i) => ({
     barcode: `6 1234 5268 ${i}`,
     name: `Sample Product ${i + 1}`,
@@ -55,34 +53,38 @@ const productData = [
 ];
 
 function ProductManagement() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 8;
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [currentPage, setCurrentPage] = useState(1); 
+  const productsPerPage = 8; 
 
+  // Function to handle changes in the search input
   const handleInputChange = (e) => {
-    setSearchQuery(e.target.value);
-    setCurrentPage(1);
+    setSearchQuery(e.target.value); 
+    setCurrentPage(1); 
   };
 
-  const getStatusClass = (status) => {
-    switch (status.toLowerCase()) {
-      case "in-stock":
-        return "status-in-stock";
-      case "out of stock":
-        return "status-out-of-stock";
-      case "low stock":
-        return "status-low-stock";
-      default:
-        return "";
+  // Function to determine the status class based on the product quantity
+  const getStatusClass = (quantity) => {
+    if (quantity === 0) {
+      return "status-out-of-stock"; // Out of stock
+    } else if (quantity < 5) {
+      return "status-low-stock"; // Low stock
+    } else {
+      return "status-in-stock"; // In stock
     }
   };
 
+  // Add Product button Modal state
+  const [showModal, setShowModal] = useState(false);
+
+  // Filter products based on the search query (name or barcode)
   const filteredProducts = productData.filter(
     (product) =>
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.barcode.includes(searchQuery)
   );
 
+  // Calculate pagination details
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -91,17 +93,16 @@ function ProductManagement() {
     indexOfLastProduct
   );
 
+  // Functions to navigate between pages
   const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1); 
   };
 
   const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1); 
   };
 
-  // Overall Inventory Details
-  const totalCategories = 6; // Assuming there are 6 categories
-  const totalProducts = productData.length;
+  // Count the number of products that are out of stock
   const outOfStockCount = productData.filter(
     (prod) => prod.status === "Out of stock"
   ).length;
@@ -109,6 +110,7 @@ function ProductManagement() {
   return (
     <div className="management-container">
       <div className="header-management">
+        {/* Search bar section */}
         <div className="search-prod-management">
           <div className="search-bar-management">
             <img src={searchIcon} alt="Search Icon" className="search-icon" />
@@ -116,97 +118,50 @@ function ProductManagement() {
               type="text"
               placeholder="Search barcode and products"
               className="prod-search-input"
-              value={searchQuery}
-              onChange={handleInputChange}
+              value={searchQuery} 
+              onChange={handleInputChange} 
             />
           </div>
         </div>
       </div>
 
-      <div class="prod-inventory-summary">
+      {/* Inventory summary section */}
+      <div className="prod-inventory-summary">
         <h3>Overall Inventory</h3>
-        <div class="inventory-grid">
-          <div class="inventory-box">
-            <p class="label">Categories</p>
-            <p class="value">6</p>
+        <div className="inventory-grid">
+          <div className="inventory-box">
+            <p className="label">Categories</p>
+            <p className="value">6</p> 
           </div>
-          <div class="inventory-box">
-            <p class="label">Total Products</p>
-            <p className="value">{totalProducts}</p>
+          <div className="inventory-box">
+            <p className="label">Total Products</p>
+            <p className="value">{productData.length}</p> 
           </div>
-          <div class="inventory-box">
-            <p class="label">Top Selling</p>
-            <p class="value">5</p>
+          <div className="inventory-box">
+            <p className="label">Top Selling</p>
+            <p className="value">5</p> 
           </div>
-          <div class="inventory-box">
-            <p class="label">Out of Stock Items</p>
-            <p className="value">{outOfStockCount}</p>
+          <div className="inventory-box">
+            <p className="label">Out of Stock Items</p>
+            <p className="value">{outOfStockCount}</p> 
           </div>
         </div>
       </div>
 
-      <div className="products-section">
-        <div className="products-header">
-          <h3>Products</h3>
-          <div>
-            <button className="btn-add">Add Product</button>
-            <button className="btn-filters">Filters</button>
-          </div>
-        </div>
-
-        <div className="table-wrapper">
-          <table className="product-table">
-            <thead>
-              <tr>
-                <th>Barcode</th>
-                <th>Products</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Date Added</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentProducts.map((prod, index) => (
-                <tr key={index}>
-                  <td>{prod.barcode}</td>
-                  <td>{prod.name}</td>
-                  <td>{prod.price}</td>
-                  <td>{prod.quantity}</td>
-                  <td>{prod.date}</td>
-                  <td>
-                    <span className={`status ${getStatusClass(prod.status)}`}>
-                      {prod.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-              {currentProducts.length === 0 && (
-                <tr>
-                  <td colSpan="6" style={{ textAlign: "center" }}>
-                    No products found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="pagination">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      {/* Pass the filtered products and other necessary props to ProductSection */}
+      <ProductSection
+        searchQuery={searchQuery} 
+        handleInputChange={handleInputChange} 
+        currentProducts={currentProducts} 
+        getStatusClass={getStatusClass} 
+        handlePrevPage={handlePrevPage} 
+        handleNextPage={handleNextPage} 
+        currentPage={currentPage} 
+        totalPages={totalPages} 
+        setShowModal={setShowModal}
+        showModal={showModal} 
+        outOfStockCount={outOfStockCount} 
+      />
     </div>
   );
 }

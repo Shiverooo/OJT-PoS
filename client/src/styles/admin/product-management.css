@@ -233,6 +233,26 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 1366px) {
+  .search-prod-management{
+    width: 270px;
+  }
+  .search-bar-management{
+    height: 40px;
+  }
+  
+  .prod-search-input{
+    font-size: 14px;
+  }
+
+  .products-section{
+    height: 49vh;  
+  }
+  
+  .table-wrapper{
+    overflow-y: scroll;
+  }
+}
 /* Table Wrapper */
 /* .table-wrapper {
     flex-grow: 1; 

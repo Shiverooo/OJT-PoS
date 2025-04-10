@@ -18,16 +18,19 @@ import categoriesIcon from "../../../assets/images/categories.svg";
 import calendarIcon from "../../../assets/images/calendar.svg";
 
 function AdminMainDashboard() {
+  // Sample data for top-selling products
   const topSellingProducts = [
     { name: "Red Dragon Mouse", sold: 40, remaining: 10, price: "$100" },
     { name: "RAPOO Keyboard", sold: 30, remaining: 12, price: "$150" },
   ];
 
+  // Sample data for low stock items (with images)
   const lowStockItems = [
     { name: "Red Dragon Mouse", remaining: 10, image: mouseImage },
     { name: "RAPOO Keyboard Mech.", remaining: 12, image: keyboardImage },
   ];
 
+  // Sample data for sales and purchase (monthly data)
   const salesPurchaseData = [
     { month: "Jan", purchase: 1000, sales: 2000 },
     { month: "Feb", purchase: 2000, sales: 3000 },
@@ -36,7 +39,10 @@ function AdminMainDashboard() {
     { month: "May", purchase: 5000, sales: 4000 },
   ];
 
+  // Inventory summary (quantity in hand and to be received)
   const inventorySummary = { quantityInHand: 868, toBeReceived: 200 };
+
+  // Product summary (number of suppliers and categories)
   const productSummary = { suppliers: 31, categories: 6 };
 
   return (
@@ -58,6 +64,7 @@ function AdminMainDashboard() {
               </tr>
             </thead>
             <tbody>
+              {/* Mapping through top-selling products and rendering them in rows */}
               {topSellingProducts.map((product, index) => (
                 <tr key={index}>
                   <td>{product.name}</td>
@@ -70,12 +77,14 @@ function AdminMainDashboard() {
           </table>
         </div>
 
+        {/* Low Stock Products Section */}
         <div className="low-stock">
           <div className="main-header">
             <h2>Low Quantity Stock</h2>
             <a href="#">See All</a>
           </div>
           <div>
+            {/* Mapping through low stock items and displaying product name, remaining quantity, and image */}
             {lowStockItems.map((item, index) => (
               <div key={index} className="low-stock-item">
                 <div className="low-stock-info">
@@ -93,10 +102,11 @@ function AdminMainDashboard() {
           </div>
         </div>
 
-        {/* Sales & Purchase */}
+        {/* Sales & Purchase Chart */}
         <div className="sales-purchase">
           <div className="main-header">
             <h2>Sales & Purchase</h2>
+            {/* Filter button for weekly sales/purchase data */}
             <button className="filter-btn">
               <img
                 src={calendarIcon}
@@ -106,22 +116,25 @@ function AdminMainDashboard() {
               Weekly
             </button>
           </div>
+          {/* Responsive container for the BarChart */}
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={salesPurchaseData}>
               <XAxis dataKey="month" />
               <YAxis />
               <Tooltip />
               <Legend />
+              {/* Bars for purchase and sales data */}
               <Bar dataKey="purchase" fill="#6495ED" name="Purchase" />
               <Bar dataKey="sales" fill="#32CD32" name="Sales" />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Summary Section */}
+        {/* Inventory Summary Section */}
         <div className="inventory-summary summary-card">
           <h3>Inventory Summary</h3>
           <div className="summary-content">
+            {/* Summary boxes for quantity in hand and to be received */}
             <div className="summary-box">
               <img src={boxIcon} alt="Box Icon" className="summary-icon" />
               <p>{inventorySummary.quantityInHand}</p>
@@ -139,9 +152,11 @@ function AdminMainDashboard() {
           </div>
         </div>
 
+        {/* Product Summary Section */}
         <div className="product-summary summary-card">
           <h3>Product Summary</h3>
           <div className="summary-content">
+            {/* Summary boxes for the number of suppliers and categories */}
             <div className="summary-box">
               <img
                 src={suppliersIcon}
