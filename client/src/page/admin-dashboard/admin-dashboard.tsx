@@ -22,6 +22,7 @@ function AdminDashboard() {
     headerTitle = "Dashboard";
   } else if (location.pathname === "/admin/product-management") {
     headerTitle = "Product Management";
+    
   } else if (location.pathname === "/admin/user-management") {
     headerTitle = "User Management";
   } else if (location.pathname === "/admin/sales-reports") {
