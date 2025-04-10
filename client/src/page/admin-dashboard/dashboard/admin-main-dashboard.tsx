@@ -6,7 +6,6 @@ import InventorySummary from "../../../components/admin/main-dashboard/inventory
 import ProductSummary from "../../../components/admin/main-dashboard/product-summary.tsx";
 import mouseImage from "../../../assets/images/mouse.png";
 import keyboardImage from "../../../assets/images/keyboard.png";
-
 import "../../../styles/admin/admin-main-dashboard.css";
 
 function AdminMainDashboard() {

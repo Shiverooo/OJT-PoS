@@ -46,25 +46,26 @@ const ProductSection = ({
             </tr>
           </thead>
           <tbody>
-            {currentProducts.map((prod, index) => (
-              <tr key={index}>
-                <td>{prod.barcode}</td>
-                <td>{prod.name}</td>
-                <td>{prod.price}</td>
-                <td>{prod.quantity}</td>
-                <td>{prod.date}</td>
-                <td>
-                  <span className={`status ${getStatusClass(prod.quantity)}`}>
-                    {prod.quantity === 0
-                      ? "Out of stock"
-                      : prod.quantity < 5
-                      ? "Low stock"
-                      : "In stock"}
-                  </span>
-                </td>
-              </tr>
-            ))}
-            {currentProducts.length === 0 && (
+            {currentProducts.length > 0 ? (
+              currentProducts.map((product) => (
+                <tr key={product.barcode}> {/* Use unique identifier like barcode */}
+                  <td>{product.barcode}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.quantity}</td>
+                  <td>{product.date}</td>
+                  <td>
+                    <span className={`status ${getStatusClass(product.quantity)}`}>
+                      {product.quantity === 0
+                        ? "Out of stock"
+                        : product.quantity < 5
+                        ? "Low stock"
+                        : "In stock"}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            ) : (
               <tr>
                 <td colSpan="6" style={{ textAlign: "center" }}>
                   No products found.

@@ -1,6 +1,12 @@
-import React from 'react'
+import React from "react";
 
 function TopSellingTable() {
+  const products = [
+    { name: "Product 1", sold: 120, remaining: 30, price: "$100" },
+    { name: "Product 2", sold: 90, remaining: 10, price: "$150" },
+    { name: "Product 3", sold: 70, remaining: 50, price: "$80" },
+  ];
+  
   return (
     <div className="top-selling">
       <div className="main-header">
@@ -28,7 +34,7 @@ function TopSellingTable() {
         </tbody>
       </table>
     </div>
-  )
-};
+  );
+}
 
 export default TopSellingTable;
