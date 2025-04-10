@@ -13,6 +13,7 @@ const ProductSection = ({
   setShowModal,
   showModal,
   outOfStockCount,
+  handleAddProduct,
 }) => {
   return (
     <div className="products-section">
@@ -26,9 +27,12 @@ const ProductSection = ({
         </div>
       </div>
 
-      <AddProductModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <AddProductModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onAddProduct={handleAddProduct}
+      />
 
-      {/* Table showing the list of products */}
       <div className="table-wrapper">
         <table className="product-table">
           <thead>
@@ -42,7 +46,6 @@ const ProductSection = ({
             </tr>
           </thead>
           <tbody>
-            {/* Display the filtered and paginated products */}
             {currentProducts.map((prod, index) => (
               <tr key={index}>
                 <td>{prod.barcode}</td>
@@ -61,7 +64,6 @@ const ProductSection = ({
                 </td>
               </tr>
             ))}
-            {/* If no products are found, display a message */}
             {currentProducts.length === 0 && (
               <tr>
                 <td colSpan="6" style={{ textAlign: "center" }}>
@@ -73,15 +75,18 @@ const ProductSection = ({
         </table>
       </div>
 
-      {/* Pagination controls */}
       <div className="pagination">
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
           Previous
         </button>
         <span>
-          Page {currentPage} of {totalPages}
+          Page {totalPages === 0 ? 1 : currentPage} of{" "}
+          {totalPages === 0 ? 1 : totalPages}
         </span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+        <button
+          onClick={handleNextPage}
+          disabled={totalPages <= 1 || currentPage >= totalPages}
+        >
           Next
         </button>
       </div>
