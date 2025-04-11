@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ProductSection from "../../../components/admin/product-management/product-section.tsx";
 import "../../../styles/admin/product-management.css";
+import ProductSection from "../../../components/admin/product-management/product-section.tsx";
 import SearchBar from "../../../components/admin/product-management/search-bar.tsx";
 import InventorySummary from "../../../components/admin/product-management/InventorySummary.tsx";
 

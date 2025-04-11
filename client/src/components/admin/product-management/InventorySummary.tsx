@@ -1,6 +1,10 @@
-import React from 'react';
+import React from "react";
 
-function InventorySummary({ totalProducts, outOfStockCount }) {
+interface InventorySummaryProps {
+  outOfStockCount: number;
+}
+
+const InventorySummary: React.FC<InventorySummaryProps> = ({ totalProducts, outOfStockCount }) => {
   return (
     <div className="prod-inventory-summary">
       <h3>Overall Inventory</h3>
@@ -18,9 +22,9 @@ function InventorySummary({ totalProducts, outOfStockCount }) {
           <p className="value">5</p>
         </div>
         <div className="inventory-box">
-          <p className="label">Out of Stock Items</p>
-          <p className="value">{outOfStockCount}</p>
-        </div>
+        <p className="label">Out of Stock Items</p>
+        <p className="value">{outOfStockCount}</p>
+      </div>
       </div>
     </div>
   );

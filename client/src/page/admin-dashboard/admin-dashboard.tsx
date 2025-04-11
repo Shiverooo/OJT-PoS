@@ -4,6 +4,7 @@ import "../../styles/admin/admin-dashboard.css";
 import logo from "../../assets/images/infinitum.png";
 import dashboardIcon from "../../assets/images/dashboard-icon.svg";
 import productIcon from "../../assets/images/barcode_icon.svg";
+import supplyIcon from "../../assets/images/admin-supplier.svg";
 import userIcon from "../../assets/images/user-management-icon.svg";
 import salesIcon from "../../assets/images/sale-reports-icon.svg";  
 import menuIcon from "../../assets/images/menu-icon.svg";
@@ -89,7 +90,7 @@ function AdminDashboard() {
                 }`}
               >
                 <img
-                  src={productIcon}
+                  src={supplyIcon}
                   alt="Supplier Icon"
                   className="nav-icon"
                 />

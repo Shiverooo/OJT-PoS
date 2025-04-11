@@ -2,9 +2,9 @@ import React from "react";
 
 function TopSellingTable() {
   const products = [
-    { name: "Product 1", sold: 120, remaining: 30, price: "$100" },
-    { name: "Product 2", sold: 90, remaining: 10, price: "$150" },
-    { name: "Product 3", sold: 70, remaining: 50, price: "$80" },
+    // { name: "Product 1", sold: 120, remaining: 30, price: "$100" },
+    // { name: "Product 2", sold: 90, remaining: 10, price: "$150" },
+    // { name: "Product 3", sold: 70, remaining: 50, price: "$80" },
   ];
   
   return (
@@ -25,10 +25,10 @@ function TopSellingTable() {
         <tbody>
           {products.map((product, index) => (
             <tr key={index}>
-              <td>{product.name}</td>
+              {/* <td>{product.name}</td>
               <td>{product.sold}</td>
               <td>{product.remaining}</td>
-              <td>{product.price}</td>
+              <td>{product.price}</td> */}
             </tr>
           ))}
         </tbody>

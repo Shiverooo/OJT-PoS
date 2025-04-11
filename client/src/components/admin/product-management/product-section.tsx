@@ -48,14 +48,18 @@ const ProductSection = ({
           <tbody>
             {currentProducts.length > 0 ? (
               currentProducts.map((product) => (
-                <tr key={product.barcode}> {/* Use unique identifier like barcode */}
+                <tr key={product.barcode}>
+                  {" "}
+                  {/* Use unique identifier like barcode */}
                   <td>{product.barcode}</td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
                   <td>{product.date}</td>
                   <td>
-                    <span className={`status ${getStatusClass(product.quantity)}`}>
+                    <span
+                      className={`status ${getStatusClass(product.quantity)}`}
+                    >
                       {product.quantity === 0
                         ? "Out of stock"
                         : product.quantity < 5
