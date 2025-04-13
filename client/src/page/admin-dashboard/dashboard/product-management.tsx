@@ -1,8 +1,8 @@
 // src/pages/admin/product-management/ProductManagement.tsx
 import React, { useState } from "react";
-import ProductSection from "../../../components/admin/product-management/product-section.tsx"; // Import the ProductSection component
-import "../../../styles/admin/product-management.css"; // Import CSS styles for this page
-import searchIcon from "../../../assets/images/search-icon.svg"; // Import the search icon image
+import ProductSection from "../../../components/admin/product-management/product-section.tsx"; 
+import "../../../styles/admin/product-management.css"; 
+import searchIcon from "../../../assets/images/search-icon.svg"; 
 
 // Dummy product data (extend to test pagination)
 const productData = [
