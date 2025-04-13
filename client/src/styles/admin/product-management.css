@@ -98,7 +98,7 @@
   border-radius: 8px;
   margin: -10px 20px 0 20px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  height: 465px;
+  height: 430px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -233,6 +233,26 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 1366px) {
+  .search-prod-management{
+    width: 270px;
+  }
+  .search-bar-management{
+    height: 40px;
+  }
+  
+  .prod-search-input{
+    font-size: 14px;
+  }
+
+  .products-section{
+    height: 55vh;  
+  }
+  
+  .table-wrapper{
+    overflow-y: scroll;
+  }
+}
 /* Table Wrapper */
 /* .table-wrapper {
     flex-grow: 1; 

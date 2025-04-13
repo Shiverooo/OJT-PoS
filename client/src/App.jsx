@@ -10,6 +10,7 @@ import Inventory from "./page/cashier-dashboard/dashboard/inventory.tsx";
 import AdminDashboard from "./page/admin-dashboard/admin-dashboard.tsx";
 import AdminMainDashboard from "./page/admin-dashboard/dashboard/admin-main-dashboard.tsx"
 import ProductManagement from "./page/admin-dashboard/dashboard/product-management.tsx"
+import Supplier from "./page/admin-dashboard/dashboard/supplier.tsx"
 import UserManagement from "./page/admin-dashboard/dashboard/user-management.tsx"
 import SalesReport from "./page/admin-dashboard/dashboard/sales-reports.tsx"
 
@@ -31,6 +32,7 @@ function App() {
                 <Route path="admin" element={<AdminDashboard/>}>
                     <Route index element={<AdminMainDashboard/>}/>
                     <Route path="product-management" element={<ProductManagement/>}/>
+                    <Route path="supplier" element={<Supplier/>}/>
                     <Route path="user-management" element={<UserManagement/>}/>
                     <Route path="sales-reports" element={<SalesReport/>}/>
                 </Route>

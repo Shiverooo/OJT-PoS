@@ -4,8 +4,9 @@ import "../../styles/admin/admin-dashboard.css";
 import logo from "../../assets/images/infinitum.png";
 import dashboardIcon from "../../assets/images/dashboard-icon.svg";
 import productIcon from "../../assets/images/barcode_icon.svg";
+import supplyIcon from "../../assets/images/admin-supplier.svg";
 import userIcon from "../../assets/images/user-management-icon.svg";
-import salesIcon from "../../assets/images/sale-reports-icon.svg";
+import salesIcon from "../../assets/images/sale-reports-icon.svg";  
 import menuIcon from "../../assets/images/menu-icon.svg";
 import signOutIcon from "../../assets/images/sign-out.svg";
 
@@ -78,6 +79,22 @@ function AdminDashboard() {
                   className="nav-icon"
                 />
                 Product Management
+              </li>
+            </Link>
+            <Link to="/admin/supplier">
+              <li
+                className={`admin-item ${
+                  location.pathname === "/admin/supplier"
+                    ? "active"
+                    : ""
+                }`}
+              >
+                <img
+                  src={supplyIcon}
+                  alt="Supplier Icon"
+                  className="nav-icon"
+                />
+                Supplier
               </li>
             </Link>
             <Link to="/admin/user-management">
