@@ -5,10 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client-install": "cd client && npm install",
-    "server-install":"cd server && npm install",
+    "server-install": "cd server && npm install",
     "install-packages": "npm install && npm run client-install && npm run server-install",
     "client-run": "cd client && npm start",
-    "server-run":"cd server && nodemon index.js",
+    "server-run": "cd server && nodemon index.js",
     "dev": "concurrently \"npm run server-run\" \"npm run client-run\""
   },
   "repository": {
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Shiverooo/OJT-PoS/issues"
   },
-  "homepage": "https://github.com/Shiverooo/OJT-PoS#readme"
+  "homepage": "https://github.com/Shiverooo/OJT-PoS#readme",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
 }

@@ -83,7 +83,22 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
       price,
       quantity: parseInt(quantity),
       date: dateAdded,
+      image, 
     });
+
+    // Save products to localStorage
+    const storedProducts = localStorage.getItem("products");
+    let products = storedProducts ? JSON.parse(storedProducts) : [];
+    products.push({
+      barcode,
+      name: productName,
+      price,
+      quantity: parseInt(quantity),
+      date: dateAdded,
+      image,
+    });
+    localStorage.setItem("products", JSON.stringify(products));
+
     resetForm(); 
     onClose(); 
   };
@@ -100,7 +115,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
       <div className="modal-content">
         {/* Close button to reset form and close the modal */}
         <button
-          className="close-button"
+          className="add-close-button"
           onClick={() => {
             resetForm(); 
             onClose(); 

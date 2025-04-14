@@ -1,5 +1,4 @@
 import React from "react";
-
 import boxIcon from "../../../assets/images/box-box.svg";
 import locationIcon from "../../../assets/images/location.svg";
 

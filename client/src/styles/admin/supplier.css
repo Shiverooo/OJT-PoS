@@ -1,0 +1,162 @@
+.supplier-page {
+  display: flex;
+  padding: 20px;
+}
+
+/* SEARCH BAR */
+.search-supplier {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  position: sticky;
+  top: 0;
+  border: 1px solid #d0d3d9;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar-supplier {
+  display: flex;
+  align-items: center;
+  padding: 0 5px 0;
+  margin-left: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.supplier-search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  color: #292929;
+  background: transparent;
+  margin-top: 10px;
+  margin-left: -10px;
+}
+
+/* SUPPLIER SECTION */
+.supplier-section {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #d0d3d9;
+  border-radius: 8px;
+  margin: -10px 20px 0 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  height: 573px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.supplier-table-wrapper {
+  flex: 1;
+}
+
+/* Header buttons */
+.supplier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.supplier-header h3 {
+  color: #292929;
+  font-size: 20px;
+}
+
+/* ADD SUPPLIER AND FILTERS */
+.supplier-header button {
+  margin-left: 10px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  line-height: 1;
+}
+
+.btn-add-supplier {
+  background: #41ab5d;
+  border: 1px solid #d0d3d9;
+  color: #fff;
+}
+
+.btn-add-supplier:hover {
+  background-color: #4caf50;
+}
+
+.btn-filters-supplier {
+  background: #fff;
+  border: 1px solid #d0d3d9;
+  color: #5d6679;
+}
+
+/* SUPPLIER TABLE */
+.supplier-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.supplier-table th {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #667085;
+}
+
+/* Pagination Button */
+.supplier-pagination {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+  background-color: #fff;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  z-index: 1;
+}
+
+.supplier-pagination button {
+  width: 100px;
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.supplier-pagination button:hover {
+  background-color: #41ab5d;
+}
+
+.supplier-pagination span {
+  font-size: 14px;
+  color: #292929;
+  align-self: center;
+  padding: 0 10px;
+}
+
+.supplier-pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.supplier-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #48505e;
+}
