@@ -25,7 +25,6 @@ const Supplier: React.FC = () => {
     setCurrentPage(1);
   };
 
-  // FILTER suppliers based on search query
   const filteredSuppliers = suppliers.filter((supplier) => {
     const query = searchQuery.toLowerCase();
     return (
@@ -39,14 +38,13 @@ const Supplier: React.FC = () => {
 
   return (
     <div>
-      {/* SupplierSearch component */}
       <SupplierSearch
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         setCurrentPage={setCurrentPage}
+        setShowModal={setShowModal} 
       />
 
-      {/* SupplierSection component */}
       <SupplierSection
         suppliers={suppliers}
         currentPage={currentPage}

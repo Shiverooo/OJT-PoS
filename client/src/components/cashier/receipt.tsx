@@ -105,7 +105,7 @@ function Receipt() {
             <div className="popup-header">
               <div className="popup-left">Receipt</div>
               <div className="popup-right">
-                <button className="close-button" onClick={handleClosePopup}>
+                <button className="receipt-close-button" onClick={handleClosePopup}>
                   Close
                 </button>
               </div>
