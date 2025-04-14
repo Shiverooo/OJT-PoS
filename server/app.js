@@ -2,6 +2,7 @@ const express = require('express');
 // const db = require('better-sqlite3')('./database/database.db', {verbose: console.log});
 const db = require('./database/init-sqlite.js');
 const app = express();
+
 const cors = require('cors');
 // const port = 5000;
 // const users = db.prepare('select * from users').all();
