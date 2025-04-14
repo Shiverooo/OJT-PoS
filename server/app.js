@@ -6,9 +6,12 @@ const cors = require('cors');
 // const port = 5000;
 // const users = db.prepare('select * from users').all();
 const corsOption = 'http://localhost:3000';
+const logger = require('morgan');
+
 
 app.use(cors(corsOption));
 app.use(express.json());
+app.use(logger("dev"));
 
 app.get('/', (req,res)=>{
     const users = db.prepare('select * from users').all();
