@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function TopSellingTable() {
   const products = [
@@ -11,7 +12,7 @@ function TopSellingTable() {
     <div className="top-selling">
       <div className="main-header">
         <h2>Top Selling Product</h2>
-        <a href="#">See All</a>
+        <Link to="/admin/sales-reports">See All</Link>
       </div>
       <table>
         <thead>

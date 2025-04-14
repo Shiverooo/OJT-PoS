@@ -1,100 +1,65 @@
 import React, { useState } from "react";
 import "../../../styles/admin/supplier.css";
-import searchIcon from "../../../assets/images/search-icon.svg";
+import SupplierSearch from "../../../components/admin/supplier/supplier-search.tsx";  
+import SupplierSection from "../../../components/admin/supplier/supplier-section.tsx";  
 
-function Supplier() {
-  const [suppliers, setSuppliers] = useState([]); // Example: fetch or define supplier data here
-  const [currentPage, setCurrentPage] = useState(1);
+const Supplier: React.FC = () => {
+  const [suppliers, setSuppliers] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
   const itemsPerPage = 5;
-
-  const totalPages = Math.ceil(suppliers.length / itemsPerPage);
 
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
   const handleNextPage = () => {
+    const totalPages = Math.ceil(filteredSuppliers.length / itemsPerPage);
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-  // Get paginated suppliers
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentSuppliers = suppliers.slice(startIndex, startIndex + itemsPerPage);
+  const handleAddSupplier = (newSupplier: any) => {
+    setSuppliers((prevSuppliers) => [newSupplier, ...prevSuppliers]);
+    setCurrentPage(1);
+  };
+
+  // FILTER suppliers based on search query
+  const filteredSuppliers = suppliers.filter((supplier) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      supplier.name.toLowerCase().includes(query) ||
+      supplier.location.toLowerCase().includes(query) ||
+      supplier.contactPerson.toLowerCase().includes(query) ||
+      supplier.contactNumber.toLowerCase().includes(query) ||
+      supplier.email.toLowerCase().includes(query)
+    );
+  });
 
   return (
     <div>
-      <div className="supplier-page">
-        <div className="search-supplier">
-          <div className="search-bar-supplier">
-            <img src={searchIcon} alt="Search Icon" className="search-icon" />
-            <input
-              type="text"
-              placeholder="Search supplier name"
-              className="supplier-search-input"
-            />
-          </div>
-        </div>
-      </div>
+      {/* SupplierSearch component */}
+      <SupplierSearch
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        setCurrentPage={setCurrentPage}
+      />
 
-      <div className="supplier-section">
-        <div className="supplier-header">
-          <h3>Supplier</h3>
-          <div>
-            <button className="btn-add-supplier">Add Supplier</button>
-            <button className="btn-filters-supplier">Filters</button>
-          </div>
-        </div>
-
-        <div className="supplier-table-wrapper">
-          <table className="supplier-table">
-            <thead>
-              <tr>
-                <th>Supplier Name</th>
-                <th>Products</th>
-                <th>Contact Number</th>
-                <th>Email Address</th>
-                <th>Date Added</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentSuppliers.length === 0 ? (
-                <tr>
-                  <td colSpan={5} style={{ textAlign: "center"}}>
-                    No suppliers found.
-                  </td>
-                </tr>
-              ) : (
-                currentSuppliers.map((supplier, index) => (
-                  <tr key={index}>
-                    <td>{supplier.name}</td>
-                    <td>{supplier.products}</td>
-                    <td>{supplier.contact}</td>
-                    <td>{supplier.email}</td>
-                    <td>{supplier.dateAdded}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="supplier-pagination">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>
-            Page {totalPages === 0 ? 1 : currentPage} of {totalPages === 0 ? 1 : totalPages}
-          </span>
-          <button
-            onClick={handleNextPage}
-            disabled={totalPages <= 1 || currentPage >= totalPages}
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      {/* SupplierSection component */}
+      <SupplierSection
+        suppliers={suppliers}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        filteredSuppliers={filteredSuppliers}
+        handlePrevPage={handlePrevPage}
+        handleNextPage={handleNextPage}
+        handleAddSupplier={handleAddSupplier}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
     </div>
   );
-}
+};
 
 export default Supplier;

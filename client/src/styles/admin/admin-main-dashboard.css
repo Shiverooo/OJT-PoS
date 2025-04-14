@@ -108,6 +108,22 @@ body {
   overflow-y: auto;
 }
 
+.low-stock::-webkit-scrollbar {
+  width: 8px;
+}
+
+.low-stock::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.low-stock::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.low-stock::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .low-stock .main-header {
   display: flex;
   justify-content: space-between;

@@ -71,10 +71,11 @@ function ProductManagement() {
 
   return (
     <div className="management-container">
-      {/* Search Bar Component */}
+      {/* Search Bar Component with setShowModal */}
       <SearchBar
         searchQuery={searchQuery}
         handleInputChange={handleInputChange}
+        setShowModal={setShowModal}
       />
 
       {/* Inventory Summary Component */}

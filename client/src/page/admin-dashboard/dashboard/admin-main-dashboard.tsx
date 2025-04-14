@@ -9,6 +9,7 @@ import "../../../styles/admin/admin-main-dashboard.css";
 function AdminMainDashboard() {
   // 🔹 States for low stock items from localStorage
   const [lowStockItems, setLowStockItems] = useState([]);
+  const [suppliers, setSuppliers] = useState([]); 
 
   // 🔹 Load low stock items from localStorage on mount
   useEffect(() => {
@@ -32,21 +33,20 @@ function AdminMainDashboard() {
   ];
 
   const inventorySummary = { quantityInHand: 868, toBeReceived: 200 };
-  const productSummary = { suppliers: 31, categories: 6 };
+  const productSummary = { suppliers: suppliers.length, categories: 6 };
 
   return (
     <div className="admin-main-dashboard-wrapper">
       <div className="admin-main-dashboard">
         <TopSellingTable products={topSellingProducts} />
-
-        {/* 🔸 This now reflects live localStorage low-stock items */}
         <LowStockList items={lowStockItems} />
-
         <SalesPurchaseChart data={salesPurchaseData} />
         <InventorySummary
           quantityInHand={inventorySummary.quantityInHand}
           toBeReceived={inventorySummary.toBeReceived}
         />
+
+        {/* Pass the number of suppliers to ProductSummary */}
         <ProductSummary
           suppliers={productSummary.suppliers}
           categories={productSummary.categories}

@@ -14,7 +14,7 @@ function SalesPurchaseChart ({ data }) {
   return (
   <div className="sales-purchase">
     <div className="main-header">
-      <h2>Sales & Purchase</h2>
+      <h2>Sales</h2>
       <button className="filter-btn">
         <img src={calendarIcon} alt="Calendar Icon" className="calendar-icon" />
         Weekly

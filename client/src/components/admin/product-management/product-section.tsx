@@ -19,12 +19,6 @@ const ProductSection = ({
     <div className="products-section">
       <div className="products-header">
         <h3>Products</h3>
-        <div>
-          <button className="btn-add" onClick={() => setShowModal(true)}>
-            Add Product
-          </button>
-          <button className="btn-filters">Filters</button>
-        </div>
       </div>
 
       <AddProductModal
@@ -49,8 +43,6 @@ const ProductSection = ({
             {currentProducts.length > 0 ? (
               currentProducts.map((product) => (
                 <tr key={product.barcode}>
-                  {" "}
-                  {/* Use unique identifier like barcode */}
                   <td>{product.barcode}</td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
