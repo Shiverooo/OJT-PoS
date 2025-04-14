@@ -8,6 +8,8 @@
 
 .header-management {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px;
 }
 
@@ -95,7 +97,7 @@
   padding: 20px;
   background: #fff;
   border: 1px solid #d0d3d9;
-  border-radius: 8px;
+  border-radius: 10px;
   margin: -10px 20px 0 20px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   height: 430px;
@@ -122,7 +124,7 @@
 }
 
 /* ADD PRODUCT AND FILTERS */
-.products-header button {
+.header-btn button {
   margin-left: 10px;
   padding: 10px 16px;
   border-radius: 6px;

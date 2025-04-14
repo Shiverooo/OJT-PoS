@@ -1,10 +1,7 @@
-import React from 'react';
+import React from "react";
 import searchIcon from "../../../assets/images/search-icon.svg";
 
-function SearchBar({
-  searchQuery,
-  handleInputChange
-}) {
+function SearchBar({ searchQuery, handleInputChange, setShowModal }) {
   return (
     <div className="header-management">
       <div className="search-prod-management">
@@ -19,6 +16,15 @@ function SearchBar({
           />
         </div>
       </div>
+      <div className="header-btn">
+      <div>
+        <button className="btn-add" onClick={() => setShowModal(true)}>
+          Add Product
+        </button>
+        <button className="btn-filters">Filters</button>
+      </div>
+      </div>
+      
     </div>
   );
 }

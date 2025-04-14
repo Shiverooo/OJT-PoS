@@ -34,6 +34,11 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.add-close-button:hover {
+  color: red;
 }
 
 .image-upload {

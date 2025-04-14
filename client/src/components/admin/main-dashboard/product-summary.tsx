@@ -20,7 +20,7 @@ function ProductSummary({ suppliers, categories }) {
           <img
             src={categoriesIcon}
             alt="Categories Icon"
-            className="summary-icon"
+            className="summary-icon"    
           />
           <p>{categories}</p>
           <span>Number of Categories</span>
