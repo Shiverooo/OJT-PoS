@@ -171,7 +171,7 @@
   background-color: var(--primary-color);
 }
 
-.popup-right .close-button {
+.popup-right .receipt-close-button {
   margin-right: 10px;
   padding: 5px 20px;
   background-color: #6a9135;
@@ -182,7 +182,7 @@
   cursor: pointer;
 }
 
-.popup-content .close-button:hover {
+.popup-content .receipt-close-button:hover {
   background-color: #56792a;
 }
 

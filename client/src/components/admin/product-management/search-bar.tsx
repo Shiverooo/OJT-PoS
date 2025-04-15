@@ -17,14 +17,13 @@ function SearchBar({ searchQuery, handleInputChange, setShowModal }) {
         </div>
       </div>
       <div className="header-btn">
-      <div>
-        <button className="btn-add" onClick={() => setShowModal(true)}>
-          Add Product
-        </button>
-        <button className="btn-filters">Filters</button>
+        <div>
+          <button className="btn-add" onClick={() => setShowModal(true)}>
+            Add Product
+          </button>
+          <button className="btn-filters">Filters</button>
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 }

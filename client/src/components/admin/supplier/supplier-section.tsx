@@ -34,15 +34,6 @@ const SupplierSection: React.FC<SupplierSectionProps> = ({
     <div className="supplier-section">
       <div className="supplier-header">
         <h3>Supplier</h3>
-        <div>
-          <button
-            className="btn-add-supplier"
-            onClick={() => setShowModal(true)}
-          >
-            Add Supplier
-          </button>
-          <button className="btn-filters-supplier">Filters</button>
-        </div>
       </div>
 
       <div className="supplier-table-wrapper">

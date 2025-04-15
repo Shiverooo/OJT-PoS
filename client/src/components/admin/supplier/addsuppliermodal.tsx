@@ -52,7 +52,14 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !location || !contactPerson || !contactNumber || !email || !dateAdded) {
+    if (
+      !name ||
+      !location ||
+      !contactPerson ||
+      !contactNumber ||
+      !email ||
+      !dateAdded
+    ) {
       return;
     }
 
@@ -66,7 +73,6 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
     };
 
     onAddSupplier(newSupplier);
-
     resetForm();
     onClose();
   };
@@ -88,9 +94,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
           ×
         </button>
         <h2>New Supplier</h2>
-
         <div className="between-line"></div>
-
         <form className="supplier-form" onSubmit={handleSubmit}>
           <div className="supplier-form-row">
             <label>Name:</label>
@@ -120,7 +124,12 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
               type="text"
               placeholder="Enter contact person"
               value={contactPerson}
-              onChange={(e) => setContactPerson(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^[a-zA-Z\s]*$/.test(value)) {
+                  setContactPerson(value);
+                }
+              }}
               required
             />
           </div>
@@ -128,10 +137,16 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
           <div className="supplier-form-row">
             <label>Contact Number:</label>
             <input
-              type="text"
+              type="tel"
               placeholder="Enter contact number"
               value={contactNumber}
-              onChange={(e) => setContactNumber(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^[\d+\-/\s]*$/.test(value)) {
+                  setContactNumber(value);
+                }
+              }}
+              maxLength={20}
               required
             />
           </div>
@@ -143,6 +158,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
               placeholder="Enter email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
               required
             />
           </div>

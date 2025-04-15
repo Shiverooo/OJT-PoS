@@ -1,0 +1,155 @@
+/* Main container */
+/* .user-management-container {
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+} */
+
+.user-management {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* SEARCH BAR */
+.search-user-management {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  position: sticky;
+  top: 0;
+  border: 1px solid #d0d3d9;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.user-search-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 5px 0;
+  margin-left: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.user-search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  color: #292929;
+  background: transparent;
+  margin-top: 10px;
+  margin-left: -10px;
+}
+
+/* ADD USERS AND FILTERS */
+.header-user-btn button {
+  margin-left: 10px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  line-height: 1;
+}
+
+.btn-add-user {
+  background: #41ab5d;
+  border: 1px solid #d0d3d9;
+  color: #fff;
+}
+
+.btn-add-user:hover {
+  background-color: #4caf50;
+}
+
+.btn-filters-user {
+  background: #fff;
+  border: 1px solid #d0d3d9;
+  color: #5d6679;
+}
+
+/* USER MANAGEMENT SECTION TABLE */
+.user-management-section {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #d0d3d9;
+  border-radius: 10px;
+  margin: -10px 20px 0 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  height: 573px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.user-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+.user-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #667085;
+  text-align: left;
+}
+
+.user-table td {
+  padding: 14px 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #48505e;
+  vertical-align: middle;
+}
+
+.user-table th:first-child {
+  width: 40px;
+}
+
+.user-table td:last-child {
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.user-table input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  display: block;
+  margin: 0 auto;
+}
+
+th button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.th-sort-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; 
+}
+
+.sort-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease-in-out;
+}

@@ -6,9 +6,15 @@ interface SupplierSearchProps {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SupplierSearch: React.FC<SupplierSearchProps> = ({ searchQuery, setSearchQuery, setCurrentPage }) => {
+const SupplierSearch: React.FC<SupplierSearchProps> = ({
+  searchQuery,
+  setSearchQuery,
+  setCurrentPage,
+  setShowModal,
+}) => {
   return (
     <div className="supplier-page">
       <div className="search-supplier">
@@ -21,10 +27,16 @@ const SupplierSearch: React.FC<SupplierSearchProps> = ({ searchQuery, setSearchQ
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setCurrentPage(1); 
+              setCurrentPage(1);
             }}
           />
         </div>
+      </div>
+      <div className="supplier-search-actions">
+        <button className="btn-add-supplier" onClick={() => setShowModal(true)}>
+          Add Supplier
+        </button>
+        <button className="btn-filters-supplier">Filters</button>
       </div>
     </div>
   );
