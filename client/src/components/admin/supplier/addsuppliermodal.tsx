@@ -52,7 +52,14 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !location || !contactPerson || !contactNumber || !email || !dateAdded) {
+    if (
+      !name ||
+      !location ||
+      !contactPerson ||
+      !contactNumber ||
+      !email ||
+      !dateAdded
+    ) {
       return;
     }
 
@@ -135,11 +142,11 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
               value={contactNumber}
               onChange={(e) => {
                 const value = e.target.value;
-                if (/^\d*$/.test(value)) {
+                if (/^[\d+\-/\s]*$/.test(value)) {
                   setContactNumber(value);
                 }
               }}
-              maxLength={15}
+              maxLength={20}
               required
             />
           </div>

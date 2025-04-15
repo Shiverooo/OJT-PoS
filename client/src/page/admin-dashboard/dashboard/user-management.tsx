@@ -1,41 +1,46 @@
 import React, { useState } from "react";
 import "../../../styles/admin/user-management.css";
 import searchIcon from "../../../assets/images/search-icon.svg";
+import ascendingIcon from "../../../assets/images/ascending-icon.svg";
+import descendingIcon from "../../../assets/images/descending-icon.svg";
 
 function UserManagement() {
-  const users = [
+  const initialUsers = [
     {
       fullName: "Jerson Mamangun",
-      age: 23,
-      contact: "0991650344",
       email: "jerson@gmail.com",
+      contact: "0991650344",
       dateAdded: "11/12/22",
     },
     {
       fullName: "Jeriel Falla",
-      age: 23,
-      contact: "09975509103",
       email: "jeriel@gmail.com",
-      dateAdded: "21/12/22",
+      contact: "09975509103",
+      dateAdded: "12/12/22",
     },
     {
       fullName: "John Philip Barnchia",
-      age: 23,
-      contact: "09935815603",
       email: "jeypee@gmail.com",
+      contact: "09935815603",
       dateAdded: "05/12/22",
     },
     {
       fullName: "Matthew Cabanban",
-      age: 23,
-      contact: "09152345766",
       email: "matthew@gmail.com",
+      contact: "09152345766",
       dateAdded: "08/12/22",
     },
   ];
 
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [users, setUsers] = useState(initialUsers);
+  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState(false);
+  const [sortOrderFullName, setSortOrderFullName] = useState<"asc" | "desc">(
+    "asc"
+  );
+  const [sortOrderEmail, setSortOrderEmail] = useState<"asc" | "desc">("asc");
+  const [sortOrderDate, setSortOrderDate] = useState<"asc" | "desc">("asc");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSelectAll = () => {
     if (selectAll) {
@@ -46,13 +51,58 @@ function UserManagement() {
     setSelectAll(!selectAll);
   };
 
-  const handleCheckboxChange = (index) => {
+  const handleCheckboxChange = (index: number) => {
     if (selectedUsers.includes(index)) {
       setSelectedUsers(selectedUsers.filter((i) => i !== index));
     } else {
       setSelectedUsers([...selectedUsers, index]);
     }
   };
+
+  const handleSortByFullName = () => {
+    const newOrder = sortOrderFullName === "asc" ? "desc" : "asc";
+    const sorted = [...users].sort((a, b) =>
+      newOrder === "asc"
+        ? a.fullName.localeCompare(b.fullName)
+        : b.fullName.localeCompare(a.fullName)
+    );
+    setUsers(sorted);
+    setSortOrderFullName(newOrder);
+  };
+
+  const handleSortByEmail = () => {
+    const newOrder = sortOrderEmail === "asc" ? "desc" : "asc";
+    const sorted = [...users].sort((a, b) =>
+      newOrder === "asc"
+        ? a.email.localeCompare(b.email)
+        : b.email.localeCompare(a.email)
+    );
+    setUsers(sorted);
+    setSortOrderEmail(newOrder);
+  };
+
+  const handleSortByDateAdded = () => {
+    const newOrder = sortOrderDate === "asc" ? "desc" : "asc";
+    const sorted = [...users].sort((a, b) => {
+      const [dayA, monthA, yearA] = a.dateAdded.split("/").map(Number);
+      const [dayB, monthB, yearB] = b.dateAdded.split("/").map(Number);
+
+      const dateA = new Date(2000 + yearA, monthA - 1, dayA);
+      const dateB = new Date(2000 + yearB, monthB - 1, dayB);
+
+      return newOrder === "asc"
+        ? dateA.getTime() - dateB.getTime()
+        : dateB.getTime() - dateA.getTime();
+    });
+    setUsers(sorted);
+    setSortOrderDate(newOrder);
+  };
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="user-management-container">
@@ -64,6 +114,8 @@ function UserManagement() {
               type="text"
               placeholder="Search user management"
               className="user-search-input"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
@@ -87,16 +139,79 @@ function UserManagement() {
                     onChange={handleSelectAll}
                   />
                 </th>
-                <th>Full Name</th>
-                <th>Age</th>
+                <th>
+                  <div className="th-sort-wrapper">
+                    Full Name
+                    <button
+                      onClick={handleSortByFullName}
+                      className="sort-button-name"
+                      title="Sort by Full Name"
+                    >
+                      <img
+                        src={
+                          sortOrderFullName === "asc"
+                            ? ascendingIcon
+                            : descendingIcon
+                        }
+                        alt={
+                          sortOrderFullName === "asc"
+                            ? "Ascending"
+                            : "Descending"
+                        }
+                        className="sort-icon"
+                      />
+                    </button>
+                  </div>
+                </th>
                 <th>Contact number</th>
-                <th>Email</th>
-                <th>Date Added</th>
-                <th></th>
+                <th>
+                  <div className="th-sort-wrapper">
+                    Email
+                    <button
+                      onClick={handleSortByEmail}
+                      className="sort-button-email"
+                      title="Sort by Email"
+                    >
+                      <img
+                        src={
+                          sortOrderEmail === "asc"
+                            ? ascendingIcon
+                            : descendingIcon
+                        }
+                        alt={
+                          sortOrderEmail === "asc" ? "Ascending" : "Descending"
+                        }
+                        className="sort-icon"
+                      />
+                    </button>
+                  </div>
+                </th>
+                <th>
+                  <div className="th-sort-wrapper">
+                    Date Added
+                    <button
+                      onClick={handleSortByDateAdded}
+                      className="sort-button-date"
+                      title="Sort by Date Added"
+                    >
+                      <img
+                        src={
+                          sortOrderDate === "asc"
+                            ? ascendingIcon
+                            : descendingIcon
+                        }
+                        alt={
+                          sortOrderDate === "asc" ? "Ascending" : "Descending"
+                        }
+                        className="sort-icon"
+                      />
+                    </button>
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
+              {filteredUsers.map((user, index) => (
                 <tr key={index}>
                   <td>
                     <input
@@ -106,7 +221,6 @@ function UserManagement() {
                     />
                   </td>
                   <td>{user.fullName}</td>
-                  <td>{user.age}</td>
                   <td>{user.contact}</td>
                   <td>{user.email}</td>
                   <td>{user.dateAdded}</td>

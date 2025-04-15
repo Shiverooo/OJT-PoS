@@ -134,3 +134,22 @@
   display: block;
   margin: 0 auto;
 }
+
+th button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.th-sort-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; 
+}
+
+.sort-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease-in-out;
+}
