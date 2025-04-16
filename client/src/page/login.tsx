@@ -4,10 +4,14 @@ import LoginForm from "../components/login-form.tsx";
 import axios  from "axios";
 
 const Login = () => {
-    // const fetchAPI = async () =>{
-    //     const response = await axios.get('http://localhost:5000/user');
-    //     console.log(response.data.users);
-    // }
+    // const fetchAPI = async () => {
+    //     try {
+    //         const response = await axios.get(/*http://localhost:5000*/'/getusers');
+    //         console.log(response.data.users);
+    //     } catch (error) {
+    //         console.error("Failed to fetch users:", error.message);
+    //     }
+    // };
 
     useEffect(() => {
         document.title = "Infinitum PoS | LogIn";

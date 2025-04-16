@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Shiverooo/OJT-PoS#readme",
   "dependencies": {
+    "concurrently": "^9.1.2",
     "cors": "^2.8.5"
   }
 }
