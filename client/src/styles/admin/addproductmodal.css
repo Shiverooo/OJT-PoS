@@ -107,6 +107,11 @@
   font-size: 14px;
 }
 
+.form-row input:focus, .form-row select:focus {
+  border-color: #28a745;
+  outline: none;
+}
+
 .add-product-btn {
   background-color: #41ab5d;
   color: white;

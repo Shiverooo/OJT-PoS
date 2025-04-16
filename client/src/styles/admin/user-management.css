@@ -1,11 +1,12 @@
-/* Main container */
-/* .user-management-container {
+/* ========== USER MANAGEMENT CONTAINER ========== */
+.user-management-container {
   height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-} */
+}
 
+/* ========== HEADER: SEARCH & BUTTONS ========== */
 .user-management {
   display: flex;
   align-items: center;
@@ -13,7 +14,7 @@
   padding: 20px;
 }
 
-/* SEARCH BAR */
+/* Search bar section */
 .search-user-management {
   display: flex;
   flex-direction: column;
@@ -26,6 +27,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Search bar input layout */
 .user-search-bar {
   display: flex;
   align-items: center;
@@ -46,7 +48,7 @@
   margin-left: -10px;
 }
 
-/* ADD USERS AND FILTERS */
+/* Buttons for add/filter */
 .header-user-btn button {
   margin-left: 10px;
   padding: 10px 16px;
@@ -61,6 +63,7 @@
   line-height: 1;
 }
 
+/* Add user button style */
 .btn-add-user {
   background: #41ab5d;
   border: 1px solid #d0d3d9;
@@ -71,13 +74,14 @@
   background-color: #4caf50;
 }
 
+/* Filter button style */
 .btn-filters-user {
   background: #fff;
   border: 1px solid #d0d3d9;
   color: #5d6679;
 }
 
-/* USER MANAGEMENT SECTION TABLE */
+/* ========== USER TABLE SECTION ========== */
 .user-management-section {
   padding: 20px;
   background: #fff;
@@ -94,7 +98,6 @@
 .user-table {
   width: 100%;
   border-radius: 8px;
-  overflow: auto;
 }
 
 .user-table table {
@@ -102,14 +105,42 @@
   border-collapse: collapse;
 }
 
+/* ========== TABLE HEADERS ========== */
 .user-table th {
-  padding: 10px;
+  padding: 5px;
   border-bottom: 1px solid #ddd;
   font-size: 14px;
   color: #667085;
   text-align: left;
+  z-index: 2;
 }
 
+.user-table th:first-child {
+  width: 40px;
+}
+
+/* Sort icon layout */
+.th-sort-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Sort button */
+th button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.sort-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* ========== TABLE BODY ========== */
 .user-table td {
   padding: 14px 10px;
   border-bottom: 1px solid #ddd;
@@ -118,16 +149,14 @@
   vertical-align: middle;
 }
 
-.user-table th:first-child {
-  width: 40px;
-}
-
+/* Center the last column */
 .user-table td:last-child {
   text-align: center;
   font-weight: bold;
   cursor: pointer;
 }
 
+/* Checkbox size */
 .user-table input[type="checkbox"] {
   width: 16px;
   height: 16px;
@@ -135,21 +164,158 @@
   margin: 0 auto;
 }
 
-th button {
+/* ========== DELETE BUTTON (Top Right) ========== */
+.delete-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Delete button styling */
+.delete-btn {
   background: none;
   border: none;
-  font-size: 1rem;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Disabled state for delete */
+.delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Hover effect if not disabled */
+.delete-btn:hover:not(:disabled) {
+  background-color: #ffeaea;
+}
+
+/* Icon size */
+.delete-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ========== MODAL STYLES ========== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-box h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #292929;
+}
+
+.modal-box p {
+  font-size: 16px;
+  color: #292929;
+}
+
+/* Action buttons inside modal */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Cancel and confirm delete buttons */
+.btn-cancel,
+.btn-confirm-delete {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: none;
   cursor: pointer;
 }
 
-.th-sort-wrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px; 
+.btn-cancel {
+  background-color: #e0e0e0;
+  color: #333;
+  transition: background-color 0.3s ease;
 }
 
-.sort-icon {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.2s ease-in-out;
+.btn-cancel:hover {
+  background-color: #d0d0d0;
+}
+
+.btn-confirm-delete {
+  background-color: #e74c3c;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-confirm-delete:hover {
+  background-color: #c0392b;
+}
+
+/* Pagination Button */
+.user-pagination {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+  background-color: #fff;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  z-index: 1;
+}
+
+.user-pagination button {
+  width: 100px;
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-pagination button:hover {
+  background-color: #41ab5d;
+}
+
+.user-pagination span {
+  font-size: 14px;
+  color: #292929;
+  align-self: center;
+  padding: 0 10px;
+}
+
+.user-pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.user-table .no-users-row td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #48505e;
+  font-weight: normal;
+  cursor: text;
 }
