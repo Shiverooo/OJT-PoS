@@ -13,7 +13,7 @@ app.use(express.json());
 app.use('/users', getUserDB)
 
 app.get('/', (req,res)=>{
-    res.redirect('/getusers')
+    res.redirect('/users')
 })
 
 module.exports = app;
