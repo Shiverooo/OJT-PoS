@@ -1,38 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../styles/admin/user-management.css";
 import searchIcon from "../../../assets/images/search-icon.svg";
 import ascendingIcon from "../../../assets/images/ascending-icon.svg";
 import descendingIcon from "../../../assets/images/descending-icon.svg";
+import axios from "axios";
 
 function UserManagement() {
-  const initialUsers = [
-    {
-      fullName: "Jerson Mamangun",
-      email: "jerson@gmail.com",
-      contact: "0991650344",
-      dateAdded: "11/12/22",
-    },
-    {
-      fullName: "Jeriel Falla",
-      email: "jeriel@gmail.com",
-      contact: "09975509103",
-      dateAdded: "12/12/22",
-    },
-    {
-      fullName: "John Philip Barnchia",
-      email: "jeypee@gmail.com",
-      contact: "09935815603",
-      dateAdded: "05/12/22",
-    },
-    {
-      fullName: "Matthew Cabanban",
-      email: "matthew@gmail.com",
-      contact: "09152345766",
-      dateAdded: "08/12/22",
-    },
-  ];
+  const [users, setUsers] = useState([]);
+  const getUserProfile = async() =>{
+    const resUser = await axios.get('/users/req-data');
+    setUsers(resUser.data.users);
+  }
+  useEffect(()=>{
+    getUserProfile();
+  },[])
+  // const initialUsers = [
+  //   {
+  //     fullName: "Jerson Mamangun",
+  //     email: "jerson@gmail.com",
+  //     contact: "0991650344",
+  //     dateAdded: "11/12/22",
+  //   },
+  //   {
+  //     fullName: "Jeriel Falla",
+  //     email: "jeriel@gmail.com",
+  //     contact: "09975509103",
+  //     dateAdded: "12/12/22",
+  //   },
+  //   {
+  //     fullName: "John Philip Barnchia",
+  //     email: "jeypee@gmail.com",
+  //     contact: "09935815603",
+  //     dateAdded: "05/12/22",
+  //   },
+  //   {
+  //     fullName: "Matthew Cabanban",
+  //     email: "matthew@gmail.com",
+  //     contact: "09152345766",
+  //     dateAdded: "08/12/22",
+  //   },
+  // ];
 
-  const [users, setUsers] = useState(initialUsers);
+  
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState(false);
   const [sortOrderFullName, setSortOrderFullName] = useState<"asc" | "desc">(

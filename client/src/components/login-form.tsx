@@ -20,18 +20,18 @@ function LoginForm() {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try{
-      const response = await axios.post('/users/auth/login',{
+      const res = await axios.post('/users/auth/login',{
         email,
         password,
       })
-      console.log("Login: success", response.data);
-      if(response.data.user.role === 'cashier'){
+      console.log("Login: success", res.data);
+      if(res.data.user.role === 'cashier'){
         nav('/cashier');
-      } else if(response.data.user.role === 'admin'){
+      } else if(res.data.user.role === 'admin'){
         nav('/admin')
       } 
     }catch(error){
-      console.error("Login failed:", error.response?.data || error.message)
+      console.error("Login failed:", error.res?.data || error.message)
     }
   }
   

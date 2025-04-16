@@ -43,8 +43,14 @@ router.get('/hash-password', async (req, res)=>{
 
 router.get('/req-data',(req,res)=>{
     try{
-        const users = db.prepare('select * from users').all();
-        res.json({users:users});   
+        const users = db.prepare(`select
+            fullname,
+            email,
+            contact,
+            dateAdded
+            from users`
+        ).all();
+        res.json({users});   
     }catch(err){
         console.error(err);
         res.status(500).json({error: 'Failed to fetch users'})
