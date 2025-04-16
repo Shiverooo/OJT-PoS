@@ -80,6 +80,11 @@
   background-color: #f9f9f9;
 }
 
+.supplier-form-row input:focus {
+  border-color: #28a745;
+  outline: none;
+}
+
 /* Submit Button */
 .btn-submit-supplier {
   background-color: #41ab5d;
