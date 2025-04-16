@@ -254,8 +254,7 @@ const UserManagement: React.FC = () => {
                     <td>{user.contact}</td>
                     <td>{user.email}</td>
                     <td>{formatDate(user.dateAdded)}</td>{" "}
-                    {/* Display formatted date */}
-                    <td>...</td>
+                    <td>Edit</td>
                   </tr>
                 ))
               ) : (
