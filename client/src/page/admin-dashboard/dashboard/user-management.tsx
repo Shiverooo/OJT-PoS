@@ -6,16 +6,17 @@ import searchIcon from "../../../assets/images/search-icon.svg";
 import ascendingIcon from "../../../assets/images/ascending-icon.svg";
 import descendingIcon from "../../../assets/images/descending-icon.svg";
 import deleteIcon from "../../../assets/images/delete-icon.svg";
+import editIcon from "../../../assets/images/user-edit-icon.svg";
 
 interface User {
   fullName: string;
   email: string;
   contact: string;
-  dateAdded: string; // Ensure the date is stored as string in the format "yyyy-mm-dd"
+  dateAdded: string;
 }
 
 const UserManagement: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]); // Removed hardcoded users
+  const [users, setUsers] = useState<User[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [sortOrderFullName, setSortOrderFullName] = useState<"asc" | "desc">(
@@ -254,7 +255,16 @@ const UserManagement: React.FC = () => {
                     <td>{user.contact}</td>
                     <td>{user.email}</td>
                     <td>{formatDate(user.dateAdded)}</td>{" "}
-                    <td>Edit</td>
+                    <td>
+                        <button className="edit-button">
+                          <img
+                            src={editIcon}
+                            alt="Edit Icon"
+                            className="edit-icon"
+                          />
+                          <span>Edit</span>
+                        </button>
+                    </td>
                   </tr>
                 ))
               ) : (

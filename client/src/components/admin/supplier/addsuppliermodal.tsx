@@ -102,8 +102,12 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
               type="text"
               placeholder="Enter supplier name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^[a-zA-Z\s]*$/.test(value)) {
+                  setName(value);
+                }
+              }}
             />
           </div>
 

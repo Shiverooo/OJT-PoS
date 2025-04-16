@@ -91,8 +91,12 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
               type="text"
               placeholder="Enter full name"
               value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              required
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^[a-zA-Z\s]*$/.test(value)) {
+                  setFullName(value);
+                }
+              }}
             />
           </div>
 

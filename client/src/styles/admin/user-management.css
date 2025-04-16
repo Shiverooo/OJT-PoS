@@ -319,3 +319,33 @@ th button {
   font-weight: normal;
   cursor: text;
 }
+
+.edit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 15px;
+  border: 1px solid #41ab5d;
+  border-radius: 6px;
+  background-color: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: #41ab5d;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #41ab5d;
+  color: white;
+}
+
+.edit-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  margin-top: -7px;
+}
+
+.edit-button:hover .edit-icon {
+  filter: brightness(0) invert(1);
+}
