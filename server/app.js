@@ -10,7 +10,7 @@ loadMiddleware(app);
 app.use(express.json());
 
 /*For debugging*/
-app.use('/getusers', getUserDB)
+app.use('/users', getUserDB)
 
 app.get('/', (req,res)=>{
     res.redirect('/getusers')
