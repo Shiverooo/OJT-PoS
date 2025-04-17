@@ -21,10 +21,11 @@ exports.authLogin = (req, res) =>{
 exports.reqData = (req,res)=>{
    try{ 
        const users = db.prepare(`select
-           fullname,
+           first_name,
+           last_name,
            email,
            contact,
-           dateAdded
+           created_at
            from users`
        ).all();
        res.json({users});   

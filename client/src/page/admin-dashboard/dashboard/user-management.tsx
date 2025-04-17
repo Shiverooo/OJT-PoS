@@ -167,8 +167,8 @@ const UserManagement: React.FC = () => {
 
   const filteredUsers = users.filter(
     (user) =>
-      user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -373,8 +373,8 @@ const UserManagement: React.FC = () => {
                         onChange={() => handleCheckboxChange(index)}
                       />
                     </td>
-                    <td>{user.firstName}</td>
-                    <td>{user.lastName}</td>
+                    <td>{user.first_name}</td>
+                    <td>{user.last_name}</td>
                     <td>{user.contact}</td>
                     <td>{user.email}</td>
                     <td>{formatDate(user.created_at)}</td>
