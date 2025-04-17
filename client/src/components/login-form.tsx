@@ -25,6 +25,8 @@ function LoginForm() {
         password,
       })
       console.log("Login: success", res.data);
+      console.log(res);
+      localStorage.setItem('token', res.data.token);
       if(res.data.user.role === 'cashier'){
         nav('/cashier');
       } else if(res.data.user.role === 'admin'){

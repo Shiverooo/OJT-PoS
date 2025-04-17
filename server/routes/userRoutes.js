@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/sqliteModel.js');
 const bcrypt = require('bcrypt');
+const userController = require('../controllers/userController.js');
 
 router.get('/',(req, res, next) =>{
     try{
@@ -25,12 +26,7 @@ router.get('/',(req, res, next) =>{
     }
 })
 
-router.post('/auth/login', (req, res)=>{
-    const {email, password} = req.body;
-    const user = db.prepare('select email, password_hash, role from users where email = ? and password_hash = ?').get(email, password);
-    if(!user) return res.status(404).json({message:'User not found'});
-    res.status(200).json({ message: 'Login successful', user });
-})
+router.post('/auth/login', userController.authLogin);
 
 router.get('/hash-password', async (req, res)=>{
     const saltRounds = 2;
@@ -41,20 +37,6 @@ router.get('/hash-password', async (req, res)=>{
     }    
 })
 
-router.get('/req-data',(req,res)=>{
-    try{
-        const users = db.prepare(`select
-            fullname,
-            email,
-            contact,
-            dateAdded
-            from users`
-        ).all();
-        res.json({users});   
-    }catch(err){
-        console.error(err);
-        res.status(500).json({error: 'Failed to fetch users'})
-    }   
-})
+router.get('/req-data', userController.reqData);
 
 module.exports = router;

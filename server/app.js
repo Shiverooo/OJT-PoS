@@ -1,5 +1,5 @@
 const express = require('express');
-// const db = require('better-sqlite3')('./database/database.db', {verbose: console.log});
+require('dotenv').config();
 const getUserDB = require('./routes/userRoutes.js');
 const app = express();
 const loadMiddleware = require('./middleware/middleware.js');
