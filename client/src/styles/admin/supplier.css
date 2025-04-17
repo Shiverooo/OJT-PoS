@@ -59,10 +59,7 @@
 
 /* Header buttons */
 .supplier-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .supplier-header h3 {
@@ -162,4 +159,10 @@
   border-bottom: 1px solid #ddd;
   font-size: 14px;
   color: #48505e;
+}
+
+@media (max-width: 1366px) {
+  .supplier-section {
+    height: 485px;
+  }
 }

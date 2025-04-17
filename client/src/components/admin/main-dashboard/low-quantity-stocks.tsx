@@ -14,7 +14,7 @@ interface Props {
 const LowStockList: React.FC<Props> = ({ items }) => {
   // Filter low stock items (just in case something was passed in)
   const lowStockItems = items.filter(
-    (item) => item.quantity > 0 && item.quantity < 15
+    (item) => item.quantity > 0 && item.quantity < 5
   );
 
   // You can optionally just set this to [] if you always want to force it empty

@@ -112,9 +112,6 @@
 
 /* Header buttons */
 .products-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 15px;
 }
 
@@ -237,22 +234,30 @@
 
 @media (max-width: 1366px) {
   .search-prod-management{
-    width: 270px;
+    width: 320px;
   }
   .search-bar-management{
-    height: 40px;
+    height: 58px;
   }
-  
-  .prod-search-input{
-    font-size: 14px;
+
+  .prod-inventory-summary {
+    padding: 10px;
+  }
+
+  .value {
+    font-size: 30px;
   }
 
   .products-section{
     height: 55vh;  
   }
+
+  .products-header {
+    margin-bottom: 2px;
+  }
   
   .table-wrapper{
-    overflow-y: scroll;
+    overflow-y: hidden;
   }
 }
 /* Table Wrapper */

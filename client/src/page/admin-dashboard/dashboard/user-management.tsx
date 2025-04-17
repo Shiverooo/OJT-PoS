@@ -10,20 +10,21 @@ import editIcon from "../../../assets/images/user-edit-icon.svg";
 import axios from "axios";
 
 interface User {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   contact: string;
   dateAdded: string;
 }
 const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const getUserProfile = async() =>{
+  const getUserProfile = async () => {
     const resUser = await axios.get('/users/req-data');
     setUsers(resUser.data.users);
   }
-  useEffect(()=>{
+  useEffect(() => {
     getUserProfile();
-  },[])
+  }, [])
   // const initialUsers = [
   //   {
   //     fullName: "Jerson Mamangun",
@@ -50,20 +51,35 @@ const UserManagement: React.FC = () => {
   //     dateAdded: "08/12/22",
   //   },
   // ];
-  
+
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState<boolean>(false);
-  const [sortOrderFullName, setSortOrderFullName] = useState<"asc" | "desc">(
-    "asc"
-  );
+  const [sortOrderFirstName, setSortOrderFirstName] = useState<"asc" | "desc">("asc");
+  const [sortOrderLastName, setSortOrderLastName] = useState<"asc" | "desc">("asc");
   const [sortOrderEmail, setSortOrderEmail] = useState<"asc" | "desc">("asc");
   const [sortOrderDate, setSortOrderDate] = useState<"asc" | "desc">("asc");
-  const [searchTerm, setSearchTerm] = useState<string>("");
 
+  const [sortOrderTime, setSortOrderTime] = useState<"asc" | "desc">("asc");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [showAddUserModal, setShowAddUserModal] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize: number = 10;
+  const [pageSize, setPageSize] = useState<number>(10);
+
+  useEffect(() => {
+    const updatePageSize = () => {
+      if (window.innerWidth <= 1366) {
+        setPageSize(7);
+      } else {
+        setPageSize(10);
+      }
+    };
+
+    updatePageSize();
+
+    window.addEventListener("resize", updatePageSize);
+    return () => window.removeEventListener("resize", updatePageSize);
+  }, []);
 
   const handleSelectAll = (): void => {
     if (selectAll) {
@@ -82,15 +98,26 @@ const UserManagement: React.FC = () => {
     }
   };
 
-  const handleSortByFullName = (): void => {
-    const newOrder = sortOrderFullName === "asc" ? "desc" : "asc";
+  const handleSortByFirstName = (): void => {
+    const newOrder = sortOrderFirstName === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) =>
       newOrder === "asc"
-        ? a.fullName.localeCompare(b.fullName)
-        : b.fullName.localeCompare(a.fullName)
+        ? a.firstName.localeCompare(b.firstName)
+        : b.firstName.localeCompare(a.firstName)
     );
     setUsers(sorted);
-    setSortOrderFullName(newOrder);
+    setSortOrderFirstName(newOrder);
+  };
+
+  const handleSortByLastName = (): void => {
+    const newOrder = sortOrderLastName === "asc" ? "desc" : "asc";
+    const sorted = [...users].sort((a, b) =>
+      newOrder === "asc"
+        ? a.lastName.localeCompare(b.lastName)
+        : b.lastName.localeCompare(a.lastName)
+    );
+    setUsers(sorted);
+    setSortOrderLastName(newOrder);
   };
 
   const handleSortByEmail = (): void => {
@@ -107,10 +134,8 @@ const UserManagement: React.FC = () => {
   const handleSortByDateAdded = (): void => {
     const newOrder = sortOrderDate === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) => {
-      const [yearA, monthA, dayA] = a.dateAdded.split("-").map(Number);
-      const [yearB, monthB, dayB] = b.dateAdded.split("-").map(Number);
-      const dateA = new Date(yearA, monthA - 1, dayA);
-      const dateB = new Date(yearB, monthB - 1, dayB);
+      const dateA = new Date(a.dateAdded);
+      const dateB = new Date(b.dateAdded);
       return newOrder === "asc"
         ? dateA.getTime() - dateB.getTime()
         : dateB.getTime() - dateA.getTime();
@@ -119,14 +144,31 @@ const UserManagement: React.FC = () => {
     setSortOrderDate(newOrder);
   };
 
-  const formatDate = (date: string): string => {
-    const [year, month, day] = date.split("-");
-    return `${month}/${day}/${year}`;
+  // Sort by time
+  const handleSortByTimeAdded = (): void => {
+    const newOrder = sortOrderTime === "asc" ? "desc" : "asc";
+    const sorted = [...users].sort((a, b) => {
+      const timeA = new Date(a.dateAdded).getTime();
+      const timeB = new Date(b.dateAdded).getTime();
+      return newOrder === "asc" ? timeA - timeB : timeB - timeA;
+    });
+    setUsers(sorted);
+    setSortOrderTime(newOrder);
   };
+
+  const formatDate = (date: string): string => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
 
   const filteredUsers = users.filter(
     (user) =>
-      user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -183,6 +225,9 @@ const UserManagement: React.FC = () => {
       </div>
 
       <div className="user-management-section">
+        <div className="user-header">
+          <h3>Users</h3>
+        </div>
         <div className="user-table">
           <table>
             <thead>
@@ -197,15 +242,35 @@ const UserManagement: React.FC = () => {
                 </th>
                 <th>
                   <div className="th-sort-wrapper">
-                    Full Name
+                    First Name
                     <button
-                      onClick={handleSortByFullName}
+                      onClick={handleSortByFirstName}
                       className="sort-button-name"
-                      title="Sort by Full Name"
+                      title="Sort by First Name"
                     >
                       <img
                         src={
-                          sortOrderFullName === "asc"
+                          sortOrderFirstName === "asc"
+                            ? ascendingIcon
+                            : descendingIcon
+                        }
+                        alt="Sort"
+                        className="sort-icon"
+                      />
+                    </button>
+                  </div>
+                </th>
+                <th>
+                  <div className="th-sort-wrapper">
+                    Last Name
+                    <button
+                      onClick={handleSortByLastName}
+                      className="sort-button-name"
+                      title="Sort by Last Name"
+                    >
+                      <img
+                        src={
+                          sortOrderLastName === "asc"
                             ? ascendingIcon
                             : descendingIcon
                         }
@@ -256,6 +321,29 @@ const UserManagement: React.FC = () => {
                     </button>
                   </div>
                 </th>
+
+                {/* Time Added */}
+                <th>
+                  <div className="th-sort-wrapper">
+                    Time
+                    <button
+                      onClick={handleSortByTimeAdded}
+                      className="sort-button-date"
+                      title="Sort by Time Added"
+                    >
+                      <img
+                        src={
+                          sortOrderTime === "asc"
+                            ? ascendingIcon
+                            : descendingIcon
+                        }
+                        alt="Sort"
+                        className="sort-icon"
+                      />
+                    </button>
+                  </div>
+                </th>
+
                 <th>
                   <div className="delete-section">
                     <button
@@ -285,25 +373,39 @@ const UserManagement: React.FC = () => {
                         onChange={() => handleCheckboxChange(index)}
                       />
                     </td>
-                    <td>{user.fullName}</td>
+                    <td>{user.firstName}</td>
+                    <td>{user.lastName}</td>
                     <td>{user.contact}</td>
                     <td>{user.email}</td>
-                    <td>{formatDate(user.dateAdded)}</td>{" "}
+                    <td>{formatDate(user.dateAdded)}</td>
+
+                    {/* Time cell */}
                     <td>
-                        <button className="edit-button">
-                          <img
-                            src={editIcon}
-                            alt="Edit Icon"
-                            className="edit-icon"
-                          />
-                          <span>Edit</span>
-                        </button>
+                      {user.dateAdded.includes("T") ? (
+                        new Date(user.dateAdded).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      ) : (
+                        "-"
+                      )}
+                    </td>
+
+                    <td>
+                      <button className="edit-button">
+                        <img
+                          src={editIcon}
+                          alt="Edit Icon"
+                          className="edit-icon"
+                        />
+                        <span>Edit</span>
+                      </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr className="no-users-row">
-                  <td colSpan={6} style={{ textAlign: "center" }}>
+                  <td colSpan={8} style={{ textAlign: "center" }}>
                     No users found.
                   </td>
                 </tr>
