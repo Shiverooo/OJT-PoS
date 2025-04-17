@@ -18,13 +18,13 @@ interface User {
 }
 const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const getUserProfile = async() =>{
+  const getUserProfile = async () => {
     const resUser = await axios.get('/users/req-data');
     setUsers(resUser.data.users);
   }
-  useEffect(()=>{
+  useEffect(() => {
     getUserProfile();
-  },[])
+  }, [])
   // const initialUsers = [
   //   {
   //     fullName: "Jerson Mamangun",
@@ -51,7 +51,7 @@ const UserManagement: React.FC = () => {
   //     dateAdded: "08/12/22",
   //   },
   // ];
-  
+
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [sortOrderFirstName, setSortOrderFirstName] = useState<"asc" | "desc">("asc");
@@ -322,7 +322,7 @@ const UserManagement: React.FC = () => {
                   </div>
                 </th>
 
-                {/* ✅ NEW: Time Added header */}
+                {/* Time Added */}
                 <th>
                   <div className="th-sort-wrapper">
                     Time
