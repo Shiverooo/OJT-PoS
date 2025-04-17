@@ -10,11 +10,11 @@ import editIcon from "../../../assets/images/user-edit-icon.svg";
 import axios from "axios";
 
 interface User {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   contact: string;
-  dateAdded: string;
+  created_at: string;
 }
 const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -102,8 +102,8 @@ const UserManagement: React.FC = () => {
     const newOrder = sortOrderFirstName === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) =>
       newOrder === "asc"
-        ? a.firstName.localeCompare(b.firstName)
-        : b.firstName.localeCompare(a.firstName)
+        ? a.firstName.localeCompare(b.first_name)
+        : b.firstName.localeCompare(a.first_name)
     );
     setUsers(sorted);
     setSortOrderFirstName(newOrder);
@@ -113,8 +113,8 @@ const UserManagement: React.FC = () => {
     const newOrder = sortOrderLastName === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) =>
       newOrder === "asc"
-        ? a.lastName.localeCompare(b.lastName)
-        : b.lastName.localeCompare(a.lastName)
+        ? a.lastName.localeCompare(b.last_name)
+        : b.lastName.localeCompare(a.last_name)
     );
     setUsers(sorted);
     setSortOrderLastName(newOrder);
@@ -134,8 +134,8 @@ const UserManagement: React.FC = () => {
   const handleSortByDateAdded = (): void => {
     const newOrder = sortOrderDate === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) => {
-      const dateA = new Date(a.dateAdded);
-      const dateB = new Date(b.dateAdded);
+      const dateA = new Date(a.created_at);
+      const dateB = new Date(b.created_at);
       return newOrder === "asc"
         ? dateA.getTime() - dateB.getTime()
         : dateB.getTime() - dateA.getTime();
@@ -148,8 +148,8 @@ const UserManagement: React.FC = () => {
   const handleSortByTimeAdded = (): void => {
     const newOrder = sortOrderTime === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) => {
-      const timeA = new Date(a.dateAdded).getTime();
-      const timeB = new Date(b.dateAdded).getTime();
+      const timeA = new Date(a.created_at).getTime();
+      const timeB = new Date(b.created_at).getTime();
       return newOrder === "asc" ? timeA - timeB : timeB - timeA;
     });
     setUsers(sorted);
@@ -377,12 +377,12 @@ const UserManagement: React.FC = () => {
                     <td>{user.lastName}</td>
                     <td>{user.contact}</td>
                     <td>{user.email}</td>
-                    <td>{formatDate(user.dateAdded)}</td>
+                    <td>{formatDate(user.created_at)}</td>
 
                     {/* Time cell */}
                     <td>
-                      {user.dateAdded.includes("T") ? (
-                        new Date(user.dateAdded).toLocaleTimeString([], {
+                      {user.created_at.includes("T") ? (
+                        new Date(user.created_at).toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
                         })
