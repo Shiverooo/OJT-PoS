@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../../styles/admin/supplier.css";
-import SupplierSearch from "../../../components/admin/supplier/supplier-search.tsx";  
-import SupplierSection from "../../../components/admin/supplier/supplier-section.tsx";  
+import SupplierSearch from "../../../components/admin/supplier/supplier-search.tsx";
+import SupplierSection from "../../../components/admin/supplier/supplier-section.tsx";
 
 const Supplier: React.FC = () => {
   const [suppliers, setSuppliers] = useState<any[]>([]);
@@ -9,15 +9,12 @@ const Supplier: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const itemsPerPage = 5;
-
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
   const handleNextPage = () => {
-    const totalPages = Math.ceil(filteredSuppliers.length / itemsPerPage);
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    setCurrentPage((prev) => prev + 1);
   };
 
   const handleAddSupplier = (newSupplier: any) => {
@@ -42,7 +39,7 @@ const Supplier: React.FC = () => {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         setCurrentPage={setCurrentPage}
-        setShowModal={setShowModal} 
+        setShowModal={setShowModal}
       />
 
       <SupplierSection

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../styles/admin/product-management.css";
 import ProductSection from "../../../components/admin/product-management/product-section.tsx";
 import SearchBar from "../../../components/admin/product-management/search-bar.tsx";
@@ -18,7 +18,22 @@ function ProductManagement() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const productsPerPage = 8;
+  const [productsPerPage, setProductsPerPage] = useState<number>(() => {
+    return window.innerWidth <= 1366 ? 6 : 8;
+  });
+
+  useEffect(() => {
+    const updateProductsPerPage = () => {
+      if (window.innerWidth <= 1366) {
+        setProductsPerPage(6);
+      } else {
+        setProductsPerPage(8);
+      }
+    };
+
+    window.addEventListener("resize", updateProductsPerPage);
+    return () => window.removeEventListener("resize", updateProductsPerPage);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -30,9 +45,9 @@ function ProductManagement() {
     return isNaN(priceNumber)
       ? price
       : new Intl.NumberFormat("en-PH", {
-          style: "currency",
-          currency: "PHP",
-        }).format(priceNumber);
+        style: "currency",
+        currency: "PHP",
+      }).format(priceNumber);
   };
 
   const getStatusClass = (quantity: number): string => {
@@ -71,20 +86,17 @@ function ProductManagement() {
 
   return (
     <div className="management-container">
-      {/* Search Bar Component with setShowModal */}
       <SearchBar
         searchQuery={searchQuery}
         handleInputChange={handleInputChange}
         setShowModal={setShowModal}
       />
 
-      {/* Inventory Summary Component */}
       <InventorySummary
         totalProducts={productList.length}
         outOfStockCount={outOfStockCount}
       />
 
-      {/* Product Section Component */}
       <ProductSection
         searchQuery={searchQuery}
         handleInputChange={handleInputChange}

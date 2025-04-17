@@ -15,6 +15,15 @@ const ProductSection = ({
   outOfStockCount,
   handleAddProduct,
 }) => {
+  // Format date from YYYY-MM-DD to MM-DD-YYYY
+  const formatDate = (isoDate: string): string => {
+    const date = new Date(isoDate);
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const dd = String(date.getDate()).padStart(2, "0");
+    const yyyy = date.getFullYear();
+    return `${mm}-${dd}-${yyyy}`;
+  };
+
   return (
     <div className="products-section">
       <div className="products-header">
@@ -47,7 +56,7 @@ const ProductSection = ({
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
-                  <td>{product.date}</td>
+                  <td>{formatDate(product.date)}</td>
                   <td>
                     <span
                       className={`status ${getStatusClass(product.quantity)}`}

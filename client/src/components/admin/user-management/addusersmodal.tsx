@@ -8,7 +8,8 @@ interface AddUsersModalProps {
 }
 
 interface User {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   contact: string;
   email: string;
   password: string;
@@ -20,7 +21,8 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
   onClose,
   onAddUser,
 }) => {
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +41,8 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
   }, [isOpen, onClose]);
 
   const resetForm = () => {
-    setFullName("");
+    setFirstName("");
+    setLastName("");
     setContact("");
     setEmail("");
     setPassword("");
@@ -49,12 +52,13 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!fullName || !contact || !email || !password || !dateAdded) {
+    if (!firstName || !lastName || !contact || !email || !password || !dateAdded) {
       return;
     }
 
     const newUser: User = {
-      fullName,
+      firstName,
+      lastName,
       contact,
       email,
       password,
@@ -86,17 +90,34 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
         <div className="between-line"></div>
         <form className="user-form" onSubmit={handleSubmit}>
           <div className="user-form-row">
-            <label>Name:</label>
+            <label>First Name:</label>
             <input
               type="text"
-              placeholder="Enter full name"
-              value={fullName}
+              placeholder="Enter first name"
+              value={firstName}
               onChange={(e) => {
                 const value = e.target.value;
                 if (/^[a-zA-Z\s]*$/.test(value)) {
-                  setFullName(value);
+                  setFirstName(value);
                 }
               }}
+              required
+            />
+          </div>
+
+          <div className="user-form-row">
+            <label>Last Name:</label>
+            <input
+              type="text"
+              placeholder="Enter last name"
+              value={lastName}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^[a-zA-Z\s]*$/.test(value)) {
+                  setLastName(value);
+                }
+              }}
+              required
             />
           </div>
 

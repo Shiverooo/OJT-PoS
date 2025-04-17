@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../../../styles/admin/addproductmodal.css";
 
 interface AddProductModalProps {
-  isOpen: boolean; 
-  onClose: () => void; 
-  onAddProduct: (product: any) => void; 
+  isOpen: boolean;
+  onClose: () => void;
+  onAddProduct: (product: any) => void;
 }
 
 // AddProductModal component definition
@@ -14,21 +14,21 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
   onAddProduct,
 }) => {
   // Declare state variables for each form field
-  const [image, setImage] = useState<string | null>(null); 
-  const [category, setCategory] = useState(""); 
-  const [price, setPrice] = useState(""); 
-  const [quantity, setQuantity] = useState(""); 
-  const [barcode, setBarcode] = useState(""); 
-  const [dateAdded, setDateAdded] = useState(""); 
-  const [productName, setProductName] = useState(""); 
-  const [supplier, setSupplier] = useState(""); 
+  const [image, setImage] = useState<string | null>(null);
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [barcode, setBarcode] = useState("");
+  const [dateAdded, setDateAdded] = useState("");
+  const [productName, setProductName] = useState("");
+  const [supplier, setSupplier] = useState("");
 
   // Effect hook to handle the Escape key press to close the modal
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        resetForm(); 
-        onClose(); 
+        resetForm();
+        onClose();
       }
     };
 
@@ -38,31 +38,31 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
 
   // Function to reset the form fields
   const resetForm = () => {
-    setImage(null); 
-    setCategory(""); 
-    setPrice(""); 
+    setImage(null);
+    setCategory("");
+    setPrice("");
     setQuantity("");
     setBarcode("");
-    setDateAdded(""); 
-    setProductName(""); 
-    setSupplier(""); 
+    setDateAdded("");
+    setProductName("");
+    setSupplier("");
   };
 
   // Handle image file upload
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; 
+    const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result as string); 
+        setImage(reader.result as string);
       };
-      reader.readAsDataURL(file); 
+      reader.readAsDataURL(file);
     }
   };
 
   // Handle form submission
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault(); 
+    event.preventDefault();
     // If any required field is empty, prevent submission
     if (
       !image ||
@@ -74,7 +74,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
       !barcode ||
       !dateAdded
     ) {
-      return; 
+      return;
     }
     // Pass the product details to the parent component for adding
     onAddProduct({
@@ -83,7 +83,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
       price,
       quantity: parseInt(quantity),
       date: dateAdded,
-      image, 
+      image,
     });
 
     // Save products to localStorage
@@ -99,8 +99,8 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
     });
     localStorage.setItem("products", JSON.stringify(products));
 
-    resetForm(); 
-    onClose(); 
+    resetForm();
+    onClose();
   };
 
   // Get today's date to set as the minimum value for the date field
@@ -117,8 +117,8 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
         <button
           className="add-close-button"
           onClick={() => {
-            resetForm(); 
-            onClose(); 
+            resetForm();
+            onClose();
           }}
         >
           &times;
@@ -129,9 +129,9 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
         <div className="image-upload">
           <div className="image-box">
             {image ? (
-              <img src={image} alt="Preview" className="uploaded-image" /> 
+              <img src={image} alt="Preview" className="uploaded-image" />
             ) : (
-              <p>No image selected</p> 
+              <p>No image selected</p>
             )}
           </div>
           <label className="browse" htmlFor="file-upload">
@@ -141,8 +141,8 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             id="file-upload"
             type="file"
             accept="image/*"
-            onChange={handleImageUpload} 
-            style={{ display: "none" }} 
+            onChange={handleImageUpload}
+            style={{ display: "none" }}
           />
         </div>
 
@@ -157,7 +157,13 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
               type="text"
               placeholder="Enter barcode"
               value={barcode}
-              onChange={(e) => setBarcode(e.target.value)}
+              onChange={(e) => {
+                const input = e.target.value;
+                // Allow only numbers and spaces
+                if (/^[0-9\s]*$/.test(input)) {
+                  setBarcode(input);
+                }
+              }}
               required
             />
           </div>
@@ -201,8 +207,8 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
               <option>Printers and Ink</option>
               <option>Monitors</option>
               <option>Storage</option>
-              <option>Other Accessories</option>
               <option>Gaming Devices</option>
+              <option>Other Accessories</option>
             </select>
           </div>
 
@@ -216,7 +222,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
               onChange={(e) =>
                 /^\d*\.?\d{0,2}$/.test(e.target.value) &&
                 setPrice(e.target.value)
-              } 
+              }
               required
             />
           </div>
@@ -230,7 +236,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
               value={quantity}
               onChange={(e) =>
                 /^\d*$/.test(e.target.value) && setQuantity(e.target.value)
-              } 
+              }
               required
             />
           </div>
@@ -242,7 +248,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
               type="date"
               value={dateAdded}
               onChange={(e) => setDateAdded(e.target.value)}
-              min={today} 
+              min={today}
               required
             />
           </div>

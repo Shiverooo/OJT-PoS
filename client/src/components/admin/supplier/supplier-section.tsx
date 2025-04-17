@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../../styles/admin/supplier.css";
 import AddSupplierModal from "../../../components/admin/supplier/addsuppliermodal.tsx";
 
@@ -25,10 +25,41 @@ const SupplierSection: React.FC<SupplierSectionProps> = ({
   showModal,
   setShowModal,
 }) => {
-  const itemsPerPage = 5;
-  const totalPages = Math.ceil(filteredSuppliers.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentSuppliers = filteredSuppliers.slice(startIndex, startIndex + itemsPerPage);
+  // State for productsPerPage based on screen width
+  const [productsPerPage, setProductsPerPage] = useState<number>(10);
+
+  // Update productsPerPage based on screen width using a media query
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1366) {
+        setProductsPerPage(9);
+      } else {
+        setProductsPerPage(10);
+      }
+    };
+
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const totalPages = Math.ceil(filteredSuppliers.length / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const currentSuppliers = filteredSuppliers.slice(startIndex, startIndex + productsPerPage);
+
+  const formatDate = (dateString: string) => {
+    const parts = dateString.split("-");
+    if (parts.length === 3) {
+      return `${parts[0]}-${parts[1]}-${parts[2]}`; 
+    }
+    return dateString;
+  };
 
   return (
     <div className="supplier-section">
@@ -63,7 +94,7 @@ const SupplierSection: React.FC<SupplierSectionProps> = ({
                   <td>{supplier.contactPerson}</td>
                   <td>{supplier.contactNumber}</td>
                   <td>{supplier.email}</td>
-                  <td>{supplier.dateAdded}</td>
+                  <td>{formatDate(supplier.dateAdded)}</td>
                 </tr>
               ))
             )}
