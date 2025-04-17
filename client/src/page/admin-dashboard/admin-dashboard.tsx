@@ -10,6 +10,7 @@ import salesIcon from "../../assets/images/sale-reports-icon.svg";
 import menuIcon from "../../assets/images/menu-icon.svg";
 import signOutIcon from "../../assets/images/sign-out.svg";
 
+
 function AdminDashboard() {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(

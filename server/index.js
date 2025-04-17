@@ -1,17 +1,6 @@
-const express = require('express');
-const db = require('better-sqlite3')('./database/database.db', {verbose: console.log});
-const app = express();
-const port = 3000;
-const users = db.prepare('select * from users').all();
+const app = require('./app');
+const PORT = process.env.PORT || 5000;
 
-app.get('/', (req,res)=>{
-    res.json({users:users})
-})
-
-app.get('/user', (req,res) =>{
-    res.send(users);
-})
-
-app.listen(port, ()=>{
-    console.log(`Viewing at port ${port}`);
-})
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

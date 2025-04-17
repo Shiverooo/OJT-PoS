@@ -19,6 +19,23 @@ BEGIN
     WHERE rowid = NEW.rowid;
 END;
 
+-- insert into users(
+-- first_name,
+-- last_name,
+-- email,
+-- phone_number,
+-- username,
+-- password_hash
+-- )
+-- values(
+-- 'Jerson',
+-- 'Mamangun',
+-- 'jeron.mamangun@gmail.com',
+-- '09123456789',
+-- 'Jeron',
+-- 'MyNewNameIsJeron'
+-- );
+
 insert into users(
 first_name,
 last_name,
@@ -28,12 +45,12 @@ username,
 password_hash
 )
 values(
-'Jerson',
-'Mamangun',
-'jeron.mamangun@gmail.com',
-'09123456789',
-'Jeron',
-'MyNewNameIsJeron'
+'Joshua Jeriel',
+'Falla',
+'joshuajeriel.falla@gmail.com',
+'09123556789',
+'Jeriel',
+'MyNameisJeriel'
 );
 
 SELECT * FROM users;
