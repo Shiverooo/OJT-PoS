@@ -1,10 +1,10 @@
 /* ========== USER MANAGEMENT CONTAINER ========== */
-.user-management-container {
+/* .user-management-container {
   height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* ========== HEADER: SEARCH & BUTTONS ========== */
 .user-management {
@@ -59,7 +59,6 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
   line-height: 1;
 }
 
@@ -141,7 +140,6 @@ th button {
 .sort-icon {
   width: 18px;
   height: 18px;
-  transition: transform 0.2s ease-in-out;
 }
 
 /* ========== TABLE BODY ========== */
@@ -182,7 +180,6 @@ th button {
   padding: 6px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
 }
 
 /* Disabled state for delete */
@@ -256,7 +253,6 @@ th button {
 .btn-cancel {
   background-color: #e0e0e0;
   color: #333;
-  transition: background-color 0.3s ease;
 }
 
 .btn-cancel:hover {
@@ -266,7 +262,6 @@ th button {
 .btn-confirm-delete {
   background-color: #e74c3c;
   color: white;
-  transition: background-color 0.3s ease;
 }
 
 .btn-confirm-delete:hover {
