@@ -25,7 +25,7 @@ exports.reqData = (req,res)=>{
            first_name,
            last_name,
            email,
-           contact,
+           phone_number,
            created_at
            from users`
        ).all();

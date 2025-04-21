@@ -375,7 +375,7 @@ const UserManagement: React.FC = () => {
                     </td>
                     <td>{user.first_name}</td>
                     <td>{user.last_name}</td>
-                    <td>{user.contact}</td>
+                    <td>{user.phone_number}</td>
                     <td>{user.email}</td>
                     <td>{formatDate(user.created_at)}</td>
 
