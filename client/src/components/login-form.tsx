@@ -61,16 +61,6 @@ function LoginForm() {
               </span>
           </div>
 
-          {/* Role Selection */}
-          <div className="role-selection">
-              <label htmlFor="cashier">Cashier
-                  <input type="radio" className="radio-bt" id="cashier" name="role" value="cashier" required />
-              </label>
-              <label htmlFor="admin">Admin
-                  <input type="radio" className="radio-btn" id="admin" name="role" value="admin" required />
-              </label>
-          </div>
-
           {/* Keep Me Logged In Toggle */}
           <div className="options">
               <label className="toggle-switch">

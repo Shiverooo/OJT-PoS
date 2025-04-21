@@ -1,0 +1,162 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.sales-report-wrapper {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Scrollbar Styling */
+.sales-report-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sales-report-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.sales-report-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.sales-report-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.sales-report-container {
+  display: grid;
+  grid-template-areas: "sales-chart best-category";
+  grid-template-columns: 55% 45%;
+  margin-right: 20px;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Best Selling Category */
+.best-category {
+  grid-area: best-category;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  height: 52.5vh;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d0d3d9;
+  overflow-y: auto;
+}
+
+.best-category h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2e2e2e;
+}
+
+.best-category table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  table-layout: fixed;
+}
+
+.best-category th,
+.best-category td {
+  font-size: 14px;
+  padding: 10px 2px;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+  color: #6b6b6b;
+}
+
+/* Best Selling Product */
+.best-selling-product {
+  grid-area: best-product;
+  margin-top: -25px;
+  padding: 20px;
+}
+
+.best-product {
+  position: relative;
+  background: white;
+  padding: 15px;
+  padding-bottom: 70px;
+  border-radius: 10px;
+  height: 70vh;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d0d3d9;
+}
+
+.best-product h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2e2e2e;
+}
+
+.best-product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: fixed;
+}
+
+.best-product-table th,
+.best-product-table td {
+  font-size: 14px;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eaeaea;
+  color: #2e2e2e;
+}
+
+.best-product-table th {
+  color: #6b6b6b;
+}
+
+.best-product-table td.increase {
+  color: green;
+  /* text-align: right; */
+}
+
+/* Pagination */
+.sale-pagination {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+  background-color: #fff;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  z-index: 1;
+}
+
+.sale-pagination button {
+  width: 100px;
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.sale-pagination button:hover {
+  background-color: #41ab5d;
+}
+
+.sale-pagination span {
+  font-size: 14px;
+  color: #292929;
+  align-self: center;
+  padding: 0 10px;
+}
+
+.sale-pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

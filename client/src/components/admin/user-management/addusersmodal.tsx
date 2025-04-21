@@ -10,10 +10,10 @@ interface AddUsersModalProps {
 interface User {
   firstName: string;
   lastName: string;
+  username: string;
   contact: string;
   email: string;
   password: string;
-  dateAdded: string;
 }
 
 const AddUsersModal: React.FC<AddUsersModalProps> = ({
@@ -23,10 +23,10 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
 }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState(""); 
   const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [dateAdded, setDateAdded] = useState("");
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -43,34 +43,32 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
   const resetForm = () => {
     setFirstName("");
     setLastName("");
+    setUsername(""); // Reset username state
     setContact("");
     setEmail("");
     setPassword("");
-    setDateAdded("");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !contact || !email || !password || !dateAdded) {
+    if (!firstName || !lastName || !username || !contact || !email || !password) {
       return;
     }
 
     const newUser: User = {
       firstName,
       lastName,
+      username, // Include username in the new user object
       contact,
       email,
       password,
-      dateAdded,
     };
 
     onAddUser(newUser);
     resetForm();
     onClose();
   };
-
-  const today = new Date().toISOString().split("T")[0];
 
   if (!isOpen) return null;
 
@@ -121,6 +119,18 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
             />
           </div>
 
+          {/* New username field */}
+          <div className="user-form-row">
+            <label>Username:</label>
+            <input
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+
           <div className="user-form-row">
             <label>Contact Number:</label>
             <input
@@ -156,17 +166,6 @@ const AddUsersModal: React.FC<AddUsersModalProps> = ({
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="user-form-row">
-            <label>Date Added:</label>
-            <input
-              type="date"
-              value={dateAdded}
-              onChange={(e) => setDateAdded(e.target.value)}
-              min={today}
               required
             />
           </div>

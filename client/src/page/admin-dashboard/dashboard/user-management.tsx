@@ -14,55 +14,41 @@ interface User {
   last_name: string;
   email: string;
   contact: string;
+  username: string; // Added username field
   created_at: string;
 }
+
 const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
+
   const getUserProfile = async () => {
-    const resUser = await axios.get('/users/req-data');
+    const resUser = await axios.get("/users/req-data");
     setUsers(resUser.data.users);
-  }
+  };
+
   useEffect(() => {
     getUserProfile();
-  }, [])
-  // const initialUsers = [
-  //   {
-  //     fullName: "Jerson Mamangun",
-  //     email: "jerson@gmail.com",
-  //     contact: "0991650344",
-  //     dateAdded: "11/12/22",
-  //   },
-  //   {
-  //     fullName: "Jeriel Falla",
-  //     email: "jeriel@gmail.com",
-  //     contact: "09975509103",
-  //     dateAdded: "12/12/22",
-  //   },
-  //   {
-  //     fullName: "John Philip Barnchia",
-  //     email: "jeypee@gmail.com",
-  //     contact: "09935815603",
-  //     dateAdded: "05/12/22",
-  //   },
-  //   {
-  //     fullName: "Matthew Cabanban",
-  //     email: "matthew@gmail.com",
-  //     contact: "09152345766",
-  //     dateAdded: "08/12/22",
-  //   },
-  // ];
+  }, []);
 
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState<boolean>(false);
-  const [sortOrderFirstName, setSortOrderFirstName] = useState<"asc" | "desc">("asc");
-  const [sortOrderLastName, setSortOrderLastName] = useState<"asc" | "desc">("asc");
+  const [sortOrderFirstName, setSortOrderFirstName] = useState<"asc" | "desc">(
+    "asc"
+  );
+  const [sortOrderLastName, setSortOrderLastName] = useState<"asc" | "desc">(
+    "asc"
+  );
+  const [sortOrderUsername, setSortOrderUsername] = useState<"asc" | "desc">(
+    "asc"
+  ); // Added username sorting state
   const [sortOrderEmail, setSortOrderEmail] = useState<"asc" | "desc">("asc");
   const [sortOrderDate, setSortOrderDate] = useState<"asc" | "desc">("asc");
 
-  const [sortOrderTime, setSortOrderTime] = useState<"asc" | "desc">("asc");
   const [searchTerm, setSearchTerm] = useState<string>("");
+
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [showAddUserModal, setShowAddUserModal] = useState<boolean>(false);
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
 
@@ -98,28 +84,43 @@ const UserManagement: React.FC = () => {
     }
   };
 
+  // SORTING FIRST NAME
   const handleSortByFirstName = (): void => {
     const newOrder = sortOrderFirstName === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) =>
       newOrder === "asc"
-        ? a.firstName.localeCompare(b.first_name)
-        : b.firstName.localeCompare(a.first_name)
+        ? a.first_name.localeCompare(b.first_name)
+        : b.first_name.localeCompare(a.first_name)
     );
     setUsers(sorted);
     setSortOrderFirstName(newOrder);
   };
 
+  // SORTING LAST NAME
   const handleSortByLastName = (): void => {
     const newOrder = sortOrderLastName === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) =>
       newOrder === "asc"
-        ? a.lastName.localeCompare(b.last_name)
-        : b.lastName.localeCompare(a.last_name)
+        ? a.last_name.localeCompare(b.last_name)
+        : b.last_name.localeCompare(a.last_name)
     );
     setUsers(sorted);
     setSortOrderLastName(newOrder);
   };
 
+  // SORTING USERNAME
+  const handleSortByUsername = (): void => {
+    const newOrder = sortOrderUsername === "asc" ? "desc" : "asc";
+    const sorted = [...users].sort((a, b) =>
+      newOrder === "asc"
+        ? a.username.localeCompare(b.username)
+        : b.username.localeCompare(a.username)
+    );
+    setUsers(sorted);
+    setSortOrderUsername(newOrder);
+  };
+
+  // SORTING EMAIL
   const handleSortByEmail = (): void => {
     const newOrder = sortOrderEmail === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) =>
@@ -131,6 +132,7 @@ const UserManagement: React.FC = () => {
     setSortOrderEmail(newOrder);
   };
 
+  // SORTING DATE ADDED
   const handleSortByDateAdded = (): void => {
     const newOrder = sortOrderDate === "asc" ? "desc" : "asc";
     const sorted = [...users].sort((a, b) => {
@@ -144,18 +146,6 @@ const UserManagement: React.FC = () => {
     setSortOrderDate(newOrder);
   };
 
-  // Sort by time
-  const handleSortByTimeAdded = (): void => {
-    const newOrder = sortOrderTime === "asc" ? "desc" : "asc";
-    const sorted = [...users].sort((a, b) => {
-      const timeA = new Date(a.created_at).getTime();
-      const timeB = new Date(b.created_at).getTime();
-      return newOrder === "asc" ? timeA - timeB : timeB - timeA;
-    });
-    setUsers(sorted);
-    setSortOrderTime(newOrder);
-  };
-
   const formatDate = (date: string): string => {
     const d = new Date(date);
     const year = d.getFullYear();
@@ -164,12 +154,12 @@ const UserManagement: React.FC = () => {
     return `${year}-${month}-${day}`;
   };
 
-
   const filteredUsers = users.filter(
     (user) =>
-      user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+      user.first_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.last_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.username?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const totalPages = Math.ceil(filteredUsers.length / pageSize);
@@ -280,6 +270,26 @@ const UserManagement: React.FC = () => {
                     </button>
                   </div>
                 </th>
+                <th>
+                  <div className="th-sort-wrapper">
+                    Username
+                    <button
+                      onClick={handleSortByUsername}
+                      className="sort-button-username"
+                      title="Sort by Username"
+                    >
+                      <img
+                        src={
+                          sortOrderUsername === "asc"
+                            ? ascendingIcon
+                            : descendingIcon
+                        }
+                        alt="Sort"
+                        className="sort-icon"
+                      />
+                    </button>
+                  </div>
+                </th>
                 <th>Contact number</th>
                 <th>
                   <div className="th-sort-wrapper">
@@ -321,29 +331,6 @@ const UserManagement: React.FC = () => {
                     </button>
                   </div>
                 </th>
-
-                {/* Time Added */}
-                <th>
-                  <div className="th-sort-wrapper">
-                    Time
-                    <button
-                      onClick={handleSortByTimeAdded}
-                      className="sort-button-date"
-                      title="Sort by Time Added"
-                    >
-                      <img
-                        src={
-                          sortOrderTime === "asc"
-                            ? ascendingIcon
-                            : descendingIcon
-                        }
-                        alt="Sort"
-                        className="sort-icon"
-                      />
-                    </button>
-                  </div>
-                </th>
-
                 <th>
                   <div className="delete-section">
                     <button
@@ -375,22 +362,10 @@ const UserManagement: React.FC = () => {
                     </td>
                     <td>{user.first_name}</td>
                     <td>{user.last_name}</td>
+                    <td>{user.username}</td>
                     <td>{user.contact}</td>
                     <td>{user.email}</td>
                     <td>{formatDate(user.created_at)}</td>
-
-                    {/* Time cell */}
-                    <td>
-                      {user.created_at.includes("T") ? (
-                        new Date(user.created_at).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })
-                      ) : (
-                        "-"
-                      )}
-                    </td>
-
                     <td>
                       <button className="edit-button">
                         <img
@@ -412,46 +387,53 @@ const UserManagement: React.FC = () => {
               )}
             </tbody>
           </table>
+          <div className="user-pagination">
+            <button onClick={handlePrevPage} disabled={currentPage === 1}>
+              Previous
+            </button>
+            <span>
+              Page {totalPages === 0 ? 1 : currentPage} of{" "}
+              {totalPages === 0 ? 1 : totalPages}
+            </span>
+            <button
+              onClick={handleNextPage}
+              disabled={
+                currentPage >= totalPages || filteredUsers.length <= pageSize
+              }
+            >
+              Next
+            </button>
+          </div>
         </div>
-        <div className="user-pagination">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>
-            Page {totalPages === 0 ? 1 : currentPage} of{" "}
-            {totalPages === 0 ? 1 : totalPages}
-          </span>
-          <button
-            onClick={handleNextPage}
-            disabled={
-              currentPage >= totalPages || filteredUsers.length <= pageSize
-            }
-          >
-            Next
-          </button>
-        </div>
+
+        {/* Delete Modal */}
+        {showConfirmModal && (
+          <DeleteModal
+            onCancel={() => setShowConfirmModal(false)}
+            onConfirm={handleDeleteSelected}
+            selectedCount={selectedUsers.length}
+          />
+        )}
+
+        {/* Add User Modal */}
+        {showAddUserModal && (
+          <AddUsersModal
+            isOpen={showAddUserModal}
+            onClose={() => setShowAddUserModal(false)}
+            onAddUser={(newUser) => {
+              const transformedUser = {
+                first_name: newUser.firstName,
+                last_name: newUser.lastName,
+                username: newUser.username,
+                contact: newUser.contact,
+                email: newUser.email,
+              };
+              setUsers((prev) => [...prev, transformedUser]);
+              setShowAddUserModal(false);
+            }}
+          />
+        )}
       </div>
-
-      {/* Delete Modal */}
-      {showConfirmModal && (
-        <DeleteModal
-          onCancel={() => setShowConfirmModal(false)}
-          onConfirm={handleDeleteSelected}
-          selectedCount={selectedUsers.length}
-        />
-      )}
-
-      {/* Add User Modal */}
-      {showAddUserModal && (
-        <AddUsersModal
-          isOpen={showAddUserModal}
-          onClose={() => setShowAddUserModal(false)}
-          onAddUser={(newUser: User) => {
-            setUsers((prev) => [...prev, newUser]);
-            setShowAddUserModal(false);
-          }}
-        />
-      )}
     </div>
   );
 };
