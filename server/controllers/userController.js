@@ -24,6 +24,7 @@ exports.reqData = (req,res)=>{
        const users = db.prepare(`select
            first_name,
            last_name,
+           username,
            email,
            phone_number,
            created_at
