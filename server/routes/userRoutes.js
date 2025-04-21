@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models/sqliteModel.js');
-const bcrypt = require('bcrypt');
 const userController = require('../controllers/userController.js');
 
 router.get('/',(req, res, next) =>{
@@ -28,15 +27,8 @@ router.get('/',(req, res, next) =>{
 
 router.post('/auth/login', userController.authLogin);
 
-router.get('/hash-password', async (req, res)=>{
-    const saltRounds = 2;
-    const userPassword = db.prepare(`select password_hash from users`);
-    for(const user of userPassword.iterate()){
-        const hashedPassword = await bcrypt.hash(user.password_hash, saltRounds);
-        res.send(`${hashedPassword}<br>`)
-    }    
-})
-
+router.post('/create-users', userController.createUsers);
+    
 router.get('/req-data', userController.reqData);
 
 module.exports = router;
