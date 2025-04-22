@@ -34,6 +34,7 @@ function TopSellingTable() {
           ))}
         </tbody>
       </table>
+      <p className="no-top-selling">No top selling product available.</p>
     </div>
   );
 }
