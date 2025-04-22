@@ -76,7 +76,7 @@ const SupplierSection: React.FC<SupplierSectionProps> = ({
               <th>Contact Person</th>
               <th>Contact Number</th>
               <th>Email</th>
-              <th>Date Added</th>
+              <th>Date&Time Added</th>
             </tr>
           </thead>
           <tbody>

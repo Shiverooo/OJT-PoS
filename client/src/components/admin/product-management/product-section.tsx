@@ -44,7 +44,7 @@ const ProductSection = ({
               <th>Products</th>
               <th>Price</th>
               <th>Quantity</th>
-              <th>Date Added</th>
+              <th>Date&Time Added</th>
               <th>Status</th>
             </tr>
           </thead>
