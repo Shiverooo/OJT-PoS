@@ -5,12 +5,13 @@ body {
   padding: 0;
 }
 
+/* Wrapper for the entire sales report section */
 .sales-report-wrapper {
   max-height: 90vh;
   overflow-y: auto;
 }
 
-/* Scrollbar Styling */
+/* Custom Scrollbar Styling for the main wrapper */
 .sales-report-wrapper::-webkit-scrollbar {
   width: 8px;
 }
@@ -27,6 +28,7 @@ body {
   background: #555;
 }
 
+/* Grid layout for chart and best category side-by-side */
 .sales-report-container {
   display: grid;
   grid-template-areas: "sales-chart best-category";
@@ -36,47 +38,107 @@ body {
   padding: 20px;
 }
 
-/* Best Selling Category */
+/* Best Selling Category Section */
 .best-category {
   grid-area: best-category;
-  background: white;
+  background: #ffffff;
   padding: 20px;
   border-radius: 10px;
   height: 52.5vh;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid #d0d3d9;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .best-category h2 {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
   color: #2e2e2e;
+  margin-bottom: 16px;
 }
 
-.best-category table {
+/* Container for table (header + scrollable body) */
+.sales-table-wrapper {
+  width: 100%;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Table header (fixed part) */
+.sales-table-header {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
   table-layout: fixed;
 }
 
-.best-category th,
-.best-category td {
+.sales-table-header th {
   font-size: 14px;
-  padding: 10px 2px;
-  vertical-align: middle;
-  border-bottom: 1px solid #ddd;
+  text-align: left;
+  padding: 10px 8px;
   color: #6b6b6b;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Best Selling Product */
+/* Scrollable body area for table rows */
+.table-body-wrapper {
+  overflow-y: auto;
+  flex: 1;
+  max-height: calc(52.5vh - 82px);
+}
+
+/* Table body styling */
+.sales-table-body {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.sales-table-body td {
+  font-size: 14px;
+  padding: 12px;
+  text-align: left;
+  color: #555555;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.sales-table-body td.increased-by {
+  color: green;
+}
+
+.sales-table-body tr:hover {
+  background-color: #ebe8e8;
+  transition: background 0.2s ease;
+}
+
+/* Scrollbar for table body */
+.table-body-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.table-body-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.table-body-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.table-body-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Best Selling Product Section */
 .best-selling-product {
   grid-area: best-product;
   margin-top: -25px;
   padding: 20px;
 }
 
+/* Container for product table and pagination */
 .best-product {
   position: relative;
   background: white;
@@ -84,7 +146,7 @@ body {
   padding-bottom: 70px;
   border-radius: 10px;
   height: 70vh;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid #d0d3d9;
 }
 
@@ -94,6 +156,7 @@ body {
   color: #2e2e2e;
 }
 
+/* Table for best-selling products */
 .best-product-table {
   width: 100%;
   border-collapse: collapse;
@@ -106,8 +169,17 @@ body {
   font-size: 14px;
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #ddd;
   color: #2e2e2e;
+}
+
+.best-product-table tbody tr {
+  cursor: pointer;
+}
+
+.best-product-table tbody tr:hover {
+  background-color: #ebe8e8;
+  transition: background 0.2s ease;
 }
 
 .best-product-table th {
@@ -116,10 +188,9 @@ body {
 
 .best-product-table td.increase {
   color: green;
-  /* text-align: right; */
 }
 
-/* Pagination */
+/* Pagination Styling */
 .sale-pagination {
   display: flex;
   justify-content: space-between;
@@ -133,6 +204,7 @@ body {
   z-index: 1;
 }
 
+/* Pagination buttons */
 .sale-pagination button {
   width: 100px;
   padding: 5px 10px;

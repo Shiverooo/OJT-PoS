@@ -164,6 +164,7 @@ th button {
   height: 16px;
   display: block;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 /* ========== DELETE BUTTON (Top Right) ========== */
