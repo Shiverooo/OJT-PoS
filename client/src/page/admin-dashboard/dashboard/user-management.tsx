@@ -313,7 +313,7 @@ const UserManagement: React.FC = () => {
                 </th>
                 <th>
                   <div className="th-sort-wrapper">
-                    Date Added
+                    Date&Time Added
                     <button
                       onClick={handleSortByDateAdded}
                       className="sort-button-date"
