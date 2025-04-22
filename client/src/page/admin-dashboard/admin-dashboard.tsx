@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "../../styles/admin/admin-dashboard.css";
 import logo from "../../assets/images/infinitum.png";
 import dashboardIcon from "../../assets/images/dashboard-icon.svg";
@@ -9,10 +9,12 @@ import userIcon from "../../assets/images/user-management-icon.svg";
 import salesIcon from "../../assets/images/sale-reports-icon.svg";
 import menuIcon from "../../assets/images/menu-icon.svg";
 import signOutIcon from "../../assets/images/sign-out.svg";
-
+import useFetchUser from '../../hooks/useFetchUser.js';;
 
 function AdminDashboard() {
   const location = useLocation();
+  const nav = useNavigate();
+  const {loading, user} = useFetchUser();
   const [sidebarOpen, setSidebarOpen] = useState(
     localStorage.getItem("sidebarOpen") === "true"
   );
@@ -32,6 +34,11 @@ function AdminDashboard() {
     headerTitle = "Sale Reports";
   }
 
+  const handleSignOut = () =>{
+    localStorage.clear()
+    nav('/')
+  }
+
   useEffect(() => {
     document.title = `Infinitum Admin | ${headerTitle}`;
   }, [headerTitle]);
@@ -44,6 +51,13 @@ function AdminDashboard() {
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
+
+  if (loading) return <div>Loading ...</div>
+
+    if(!user){
+        nav('/');
+        return null;
+    }
 
   return (
     <div className="admin-dashboard">
@@ -129,12 +143,10 @@ function AdminDashboard() {
           </ul>
         </nav>
         <footer className="sidebar-footer">
-          <Link to="/">
-            <button className="admin-sign-out">
+            <button className="admin-sign-out" onClick={handleSignOut}>
               <img src={signOutIcon} alt="Sign Out Icon" />
               Sign Out
             </button>
-          </Link>
           <p>
             Copyright © 2023 Infinitum
             <br />
