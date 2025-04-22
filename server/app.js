@@ -4,9 +4,9 @@ const getUserDB = require('./routes/userRoutes.js');
 const app = express();
 const loadMiddleware = require('./middleware/middleware.js');
 
+loadMiddleware(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-loadMiddleware(app);
 
 /*For debugging*/
 app.use('/users', getUserDB)

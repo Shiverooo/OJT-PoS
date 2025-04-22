@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from '../../components/cashier/sidebar.tsx';
 import Receipt from '../../components/cashier/receipt.tsx';
 import SearchContainer from '../../components/cashier/searchbar.tsx';
@@ -7,15 +7,18 @@ import menuIcon from "../../assets/images/menu-icon.svg";
 import barcodeIcon from "../../assets/images/barcode-icon.svg";
 import { SearchProvider } from '../../components/cashier/search-context.tsx';
 import '../../styles/cashier/cashier-dashboard.css';
+import useFetchUser from '../../hooks/useFetchUser.js';;
 
 function CashierDashboard() {
+    const {user, loading} = useFetchUser();
+    const nav = useNavigate();    
     const location = useLocation();
     const isSalesHistoryPage = location.pathname === "/cashier/sales-history";
     const isInventoryPage = location.pathname === "/cashier/inventory";
     const isReceiptPage = location.pathname === "/cashier";
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+       
     const toggleSidebar = () => {
         setIsSidebarOpen(prevState => !prevState);
     };
@@ -34,6 +37,13 @@ function CashierDashboard() {
     }, [isSidebarOpen]);
 
     const cashierDashboardClass = `main-section ${isReceiptPage ? "less-view" : ""}`;
+    
+    if (loading) return <div>Loading ...</div>
+
+    if(!user){
+        nav('/');
+        return null;
+    }
 
     return (
         <SearchProvider>

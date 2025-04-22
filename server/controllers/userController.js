@@ -1,6 +1,7 @@
 const db = require('../models/sqliteModel.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { console } = require('inspector');
 const SECRET_KEY = process.env.JWT_SECRET;
 
 exports.authLogin = (req, res) =>{
@@ -10,13 +11,13 @@ exports.authLogin = (req, res) =>{
    if(!user && !validPassword) return res.status(404).json({message:'User not found'});
    
    const token = jwt.sign({
-      id: user.id,
+      id: user.id,                  
       email: user.email,
       role: user.role   
    }, 
-   SECRET_KEY,{expiresIn:'1h'})
-   
-   res.status(200).json({ message: 'Login successful', user });
+   SECRET_KEY,
+   {expiresIn:'1h'})
+   res.json({message: 'Login Succesful', token, user});
 }
 
 exports.reqData = (req,res)=>{
@@ -62,3 +63,4 @@ exports.createUsers = async (req,res) =>{
         res.status(500).json({error: 'User registration failed'}) 
     }
 }
+

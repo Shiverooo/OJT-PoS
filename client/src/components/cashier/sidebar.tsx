@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../styles/cashier/sidebar.css"; // Import styles
 import cartIcon from "../../assets/images/cart.svg";
 import receiptIcon from "../../assets/images/receipt.svg";
@@ -13,7 +13,11 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
-
+  const nav = useNavigate()
+  const handleSignOut = () =>{
+    localStorage.clear();
+    nav('/');
+  }
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <ul>
@@ -38,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       </ul>
 
       <Link to="/">
-        <button className="sign-out">
+        <button className="sign-out" onClick={handleSignOut}>
           <img src={signOutIcon} alt="Sign Out Icon" />
           Sign Out
         </button>

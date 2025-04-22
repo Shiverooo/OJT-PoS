@@ -3,6 +3,8 @@ const router = express.Router();
 const db = require('../models/sqliteModel.js');
 const userController = require('../controllers/userController.js');
 
+const {verifyToken} = require('../middleware/authMiddleware.js');
+
 router.get('/',(req, res, next) =>{
     try{
         db.prepare(`
@@ -26,6 +28,10 @@ router.get('/',(req, res, next) =>{
 })
 
 router.post('/auth/login', userController.authLogin);
+
+router.get('/auth-user', verifyToken, (req, res)=>{
+    res.json({message:'Welcome Back!', user: req.user});
+})
 
 router.post('/create-users', userController.createUsers);
     
