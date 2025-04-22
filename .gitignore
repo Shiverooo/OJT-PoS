@@ -18,9 +18,10 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
-/database/database.db
-/database/database.db-wal
-/database/database.db-shm
+
+database.db
+database.db-shm
+database.db-wal
 
 npm-debug.log*
 yarn-debug.log*
