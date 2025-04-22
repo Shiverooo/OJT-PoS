@@ -55,7 +55,6 @@ function AdminMainDashboard() {
         <SalesPurchaseChart data={salesPurchaseData} />
         <InventoryMainSummary
           quantityInHand={inventorySummary.quantityInHand}
-          toBeReceived={inventorySummary.toBeReceived}
         />
         <ProductSummary
           suppliers={productSummary.suppliers}
