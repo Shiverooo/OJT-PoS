@@ -1,8 +1,7 @@
 import React from "react";
 import boxIcon from "../../../assets/images/box-box.svg";
-import locationIcon from "../../../assets/images/location.svg";
 
-function InventoryMainSummary({ quantityInHand, toBeReceived }) {
+function InventoryMainSummary({ quantityInHand}) {
   return (
     <div className="inventory-summary summary-card">
       <h3>Inventory Summary</h3>

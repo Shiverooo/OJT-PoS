@@ -10,14 +10,14 @@ function AdminMainDashboard() {
   // 🔹 States for low stock items from localStorage
   const [lowStockItems, setLowStockItems] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
-  const [currentProducts, setCurrentProducts] = useState([]); // Store products
-  const [showModal, setShowModal] = useState(false); // For the add product modal
+  const [currentProducts, setCurrentProducts] = useState([]); 
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
     const lowStock = storedProducts.filter((item) => item.quantity < 15);
     setLowStockItems(lowStock);
-    setCurrentProducts(storedProducts); // Set the products from localStorage
+    setCurrentProducts(storedProducts); 
   }, []);
 
   // Calculate total quantity in hand
@@ -42,8 +42,7 @@ function AdminMainDashboard() {
 
   const inventorySummary = {
     quantityInHand: totalQuantityInHand,
-    toBeReceived: 200,
-  }; // Pass calculated total
+  }; 
 
   const productSummary = { suppliers: suppliers.length, categories: 6 };
 
@@ -55,7 +54,6 @@ function AdminMainDashboard() {
         <SalesPurchaseChart data={salesPurchaseData} />
         <InventoryMainSummary
           quantityInHand={inventorySummary.quantityInHand}
-          toBeReceived={inventorySummary.toBeReceived}
         />
         <ProductSummary
           suppliers={productSummary.suppliers}
