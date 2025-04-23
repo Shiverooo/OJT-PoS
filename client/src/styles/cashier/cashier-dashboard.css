@@ -1,4 +1,4 @@
-/* Disable vertical scrolling */
+/* Base Layout & Body */
 body {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ body {
   width: 100%;
 }
 
-/* Main Section Adjustments */
+/* Main Section */
 .main-section {
   width: 100vw;
   display: flex;
@@ -23,6 +23,7 @@ body {
   width: 65vw;
 }
 
+/* Header */
 .header-left {
   display: flex;
   font-size: 16px;
@@ -47,7 +48,6 @@ body {
   align-items: center;
 }
 
-/* Barcode icon */
 #barcode-icon {
   padding: auto;
   width: 45px;
@@ -94,6 +94,7 @@ body {
   margin-right: 5px;
 }
 
+/* Product Section */
 .product-container {
   display: flex;
   flex-direction: column;
@@ -118,17 +119,15 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Styling the scrollbar */
+/* Scrollbar Styles */
 .products-grid::-webkit-scrollbar {
   width: 5px;
 }
 
-/* Styling the scrollbar track */
 .products-grid::-webkit-scrollbar-track {
   background: #f4f4f4;
 }
 
-/* Styling the scrollbar thumb */
 .products-grid::-webkit-scrollbar-thumb {
   background-color: #888;
   border-radius: 10px;
@@ -156,7 +155,6 @@ body {
   position: relative;
 }
 
-/* Product Image */
 .product-card img {
   width: 150px;
   height: auto;
@@ -177,7 +175,7 @@ body {
   color: #333333;
 }
 
-/* Navigation List */
+/* Navigation */
 .nav-list {
   list-style: none;
   display: flex;
@@ -192,7 +190,6 @@ body {
   /* top: 1vh; */
 }
 
-/* Navigation Items */
 .nav-item {
   display: flex;
   align-items: center;
@@ -207,18 +204,16 @@ body {
   padding: 10px 15px;
 }
 
-/* Active Navigation Item */
 .nav-item.active {
-  color: var(--primary-color);;
+  color: var(--primary-color);
   border-top: 3px solid #6a9135;
 }
 
-/* Hover Effect */
 .nav-item:hover {
   color: #56792a;
 }
 
-/* 📱 Responsive Design */
+/* Responsive Design */
 @media (max-width: 1024px) {
   .cashier-container {
     flex-direction: column;
