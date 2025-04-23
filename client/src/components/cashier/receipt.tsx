@@ -1,29 +1,34 @@
 import React, { useState } from "react";
-import '../../styles/cashier/receipt.css'
+import "../../styles/cashier/receipt.css";
 import { useLocation } from "react-router-dom";
 import CashIcon from "../../assets/images/cash.svg";
+import { useSelectedProducts } from "../../components/cashier/selected-products-context.tsx";
 
 function Receipt() {
   const location = useLocation();
   const isReceiptPage = location.pathname === "/cashier";
   const today = new Date().toLocaleDateString("en-US");
+
   const [receiptItems] = useState([
     { name: "Red Dragon Mouse", quantity: 1, price: 100 },
     { name: "RAPOO Keyboard", quantity: 1, price: 150 },
     { name: "Seagate HDD", quantity: 1, price: 200 },
     { name: "MSI Monitor", quantity: 1, price: 1000 },
   ]);
+
   const [cashReceived, setCashReceived] = useState(0);
   const [change, setChange] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
+
+  const { selectedItems } = useSelectedProducts();
 
   const totalAmount = receiptItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
-  const handleNumberClick = (value) => {
-    setCashReceived((prev) => parseInt(prev || 0) + value);
+  const handleNumberClick = (value: number) => {
+    setCashReceived((prev) => parseInt(prev || "0") + value);
   };
 
   const handlePay = () => {
@@ -37,17 +42,18 @@ function Receipt() {
     setCashReceived(0);
     setChange(0);
   };
-  if (!isReceiptPage) {
-    return null; 
-  }
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
     if (value === "" || !isNaN(value)) {
       setCashReceived(value === "" ? 0 : Number(value));
     }
   };
+
+  if (!isReceiptPage) {
+    return null;
+  }
 
   return (
     <div className="receipt">
@@ -58,31 +64,49 @@ function Receipt() {
 
       <div className="receipt-section">
         <div className="table-section">
-          <table className="receipt-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {receiptItems.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>{item.quantity}</td>
-                  <td>₱{item.price}</td>
-                  <td>₱{item.quantity * item.price}</td>
+          <div className="table-wrapper">
+            <table className="receipt-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Amount</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+            </table>
+
+            <div className="table-receipt-wrapper">
+              <table className="receipt-table">
+                <tbody>
+                  {selectedItems.length > 0
+                    ? selectedItems.map((item, index) => (
+                        <tr key={index}>
+                          <td>{item.name}</td>
+                          <td>{item.quantity}</td>
+                          <td>—</td>
+                          <td>—</td>
+                        </tr>
+                      ))
+                    : receiptItems.map((item, index) => (
+                        <tr key={index}>
+                          <td>{item.name}</td>
+                          <td>{item.quantity}</td>
+                          <td>₱{item.price}</td>
+                          <td>₱{item.quantity * item.price}</td>
+                        </tr>
+                      ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+
         <div className="receipt-total">
           <strong>Total</strong>
           <strong>₱{totalAmount}</strong>
         </div>
+
         <div className="cash-input">
           <label>Cash Received: </label>
           <input
@@ -91,6 +115,7 @@ function Receipt() {
             onChange={(e) => setCashReceived(Number(e.target.value))}
           />
         </div>
+
         <div className="receipt-actions">
           <button className="edit-btn">EDIT</button>
           <button className="pay-btn" onClick={handlePay}>
@@ -105,7 +130,10 @@ function Receipt() {
             <div className="popup-header">
               <div className="popup-left">Receipt</div>
               <div className="popup-right">
-                <button className="receipt-close-button" onClick={handleClosePopup}>
+                <button
+                  className="receipt-close-button"
+                  onClick={handleClosePopup}
+                >
                   Close
                 </button>
               </div>
@@ -122,16 +150,26 @@ function Receipt() {
                     </tr>
                   </thead>
                   <tbody>
-                    {receiptItems.map((item, index) => (
-                      <tr key={index}>
-                        <td className="item-name">{item.name}</td>
-                        <td>{item.quantity}</td>
-                        <td>₱{item.price}</td>
-                        <td>₱{item.quantity * item.price}</td>
-                      </tr>
-                    ))}
+                    {selectedItems.length > 0
+                      ? selectedItems.map((item, index) => (
+                          <tr key={index}>
+                            <td className="item-name">{item.name}</td>
+                            <td>{item.quantity}</td>
+                            <td>—</td>
+                            <td>—</td>
+                          </tr>
+                        ))
+                      : receiptItems.map((item, index) => (
+                          <tr key={index}>
+                            <td className="item-name">{item.name}</td>
+                            <td>{item.quantity}</td>
+                            <td>₱{item.price}</td>
+                            <td>₱{item.quantity * item.price}</td>
+                          </tr>
+                        ))}
                   </tbody>
                 </table>
+
                 <div className="popup-total">
                   <strong>Total</strong>
                   <strong>₱{totalAmount}</strong>
@@ -156,14 +194,13 @@ function Receipt() {
                         type="text"
                         value={cashReceived}
                         onChange={handleInputChange}
-                        readOnly={false}
                         className="cash-received-input"
                       />
                     </div>
                     <button onClick={handleClosePopup} className="pay-button">
                       Pay
                     </button>
-                    <div class="underline"></div>
+                    <div className="underline"></div>
                   </div>
 
                   <div className="number-buttons-grid">
@@ -192,4 +229,4 @@ function Receipt() {
   );
 }
 
-export default Receipt; 
+export default Receipt;
