@@ -15,7 +15,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
   const nav = useNavigate()
   const handleSignOut = () =>{
-    localStorage.clear();
+    localStorage.removeItem('token');
     nav('/');
   }
   return (

@@ -9,12 +9,13 @@ import userIcon from "../../assets/images/user-management-icon.svg";
 import salesIcon from "../../assets/images/sale-reports-icon.svg";
 import menuIcon from "../../assets/images/menu-icon.svg";
 import signOutIcon from "../../assets/images/sign-out.svg";
+import useCheckRole from "../../hooks/useCheckRole.js";
 import useFetchUser from '../../hooks/useFetchUser.js';;
 
 function AdminDashboard() {
   const location = useLocation();
   const nav = useNavigate();
-  const {loading, user} = useFetchUser();
+  const {loading, user, userRole} = useFetchUser();
   const [sidebarOpen, setSidebarOpen] = useState(
     localStorage.getItem("sidebarOpen") === "true"
   );
@@ -52,12 +53,16 @@ function AdminDashboard() {
     setSidebarOpen((prev) => !prev);
   };
 
+  useCheckRole(userRole);
+
   if (loading) return <div>Loading ...</div>
 
-    if(!user){
-        nav('/');
-        return null;
-    }
+  if(!user){
+      nav('/');
+      return null;
+  }
+     
+
 
   return (
     <div className="admin-dashboard">

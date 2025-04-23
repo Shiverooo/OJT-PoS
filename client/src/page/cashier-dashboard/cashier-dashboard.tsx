@@ -7,10 +7,11 @@ import menuIcon from "../../assets/images/menu-icon.svg";
 import barcodeIcon from "../../assets/images/barcode-icon.svg";
 import { SearchProvider } from '../../components/cashier/search-context.tsx';
 import '../../styles/cashier/cashier-dashboard.css';
-import useFetchUser from '../../hooks/useFetchUser.js';;
+import useCheckRole from '../../hooks/useCheckRole.js';
+import useFetchUser from '../../hooks/useFetchUser.js';
 
 function CashierDashboard() {
-    const {user, loading} = useFetchUser();
+    const {user, loading, userRole} = useFetchUser();
     const nav = useNavigate();    
     const location = useLocation();
     const isSalesHistoryPage = location.pathname === "/cashier/sales-history";
@@ -38,13 +39,15 @@ function CashierDashboard() {
 
     const cashierDashboardClass = `main-section ${isReceiptPage ? "less-view" : ""}`;
     
+    useCheckRole(userRole);
+
     if (loading) return <div>Loading ...</div>
 
     if(!user){
         nav('/');
         return null;
     }
-
+    
     return (
         <SearchProvider>
             <div className="cashier-container">

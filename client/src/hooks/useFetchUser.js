@@ -20,9 +20,7 @@ function useFetchUser() {
       })
       .then(res => {
         setUser(res.data.user);
-        console.log(user);
         setUserRole(res.data.role || res.data.user?.role || "");
-        console.log(userRole);
         setloading(false);
       })
       .catch(() => {
