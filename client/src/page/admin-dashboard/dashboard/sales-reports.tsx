@@ -70,7 +70,7 @@ function SalesReport() {
       <div className="sales-report-container">
         {/* Sales and Purchase Chart */}
         <div className="sales-chart-container">
-          <SalesPurchaseChart data={salesPurchaseData} />
+        <SalesPurchaseChart data={salesPurchaseData} height={315} />
         </div>
 
         {/* Best Selling Category Section */}

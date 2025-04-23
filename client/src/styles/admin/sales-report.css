@@ -33,7 +33,7 @@ body {
   display: grid;
   grid-template-areas: "sales-chart best-category";
   grid-template-columns: 55% 45%;
-  margin-right: 20px;
+  align-items: stretch;
   gap: 20px;
   padding: 20px;
 }
@@ -44,11 +44,13 @@ body {
   background: #ffffff;
   padding: 20px;
   border-radius: 10px;
-  height: 52.5vh;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid #d0d3d9;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box; 
+  margin-right: 20px;
+  height: 406px;
 }
 
 .best-category h2 {
