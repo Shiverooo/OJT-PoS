@@ -9,13 +9,14 @@ import userIcon from "../../assets/images/user-management-icon.svg";
 import salesIcon from "../../assets/images/sale-reports-icon.svg";
 import menuIcon from "../../assets/images/menu-icon.svg";
 import signOutIcon from "../../assets/images/sign-out.svg";
-import useCheckRole from "../../hooks/useCheckRole.js";
-import useFetchUser from '../../hooks/useFetchUser.js';;
+import CheckRole  from "../../components/check-role.tsx";
+import useFetchUser from '../../hooks/useFetchUser.js';
+
 
 function AdminDashboard() {
   const location = useLocation();
   const nav = useNavigate();
-  const {loading, user, userRole} = useFetchUser();
+  const {loading, user} = useFetchUser();
   const [sidebarOpen, setSidebarOpen] = useState(
     localStorage.getItem("sidebarOpen") === "true"
   );
@@ -53,7 +54,6 @@ function AdminDashboard() {
     setSidebarOpen((prev) => !prev);
   };
 
-  useCheckRole(userRole);
 
   if (loading) return <div>Loading ...</div>
 
@@ -61,12 +61,11 @@ function AdminDashboard() {
       nav('/');
       return null;
   }
-     
-
 
   return (
+    <CheckRole>
     <div className="admin-dashboard">
-      {/* Sidebar */}
+     {/* Sidebar */}
       <div className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-header">
           <img src={logo} alt="Infinitum Technologies" className="logo" />
@@ -178,7 +177,8 @@ function AdminDashboard() {
         <Outlet />
       </div>
     </div>
-  );
+    </CheckRole>
+      );
 }
 
 export default AdminDashboard;

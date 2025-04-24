@@ -39,8 +39,6 @@ function CashierDashboard() {
 
     const cashierDashboardClass = `main-section ${isReceiptPage ? "less-view" : ""}`;
     
-    useCheckRole(userRole);
-
     if (loading) return <div>Loading ...</div>
 
     if(!user){
