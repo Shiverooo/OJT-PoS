@@ -7,15 +7,17 @@ export const useSelectedProducts = () => useContext(SelectedProductsContext);
 export const SelectedProductsProvider = ({ children }) => {
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const addProduct = (name) => {
+  const addProduct = (product) => {
     setSelectedItems((prev) => {
-      const exists = prev.find((item) => item.name === name);
+      const exists = prev.find((item) => item.name === product.name);
       if (exists) {
         return prev.map((item) =>
-          item.name === name ? { ...item, quantity: item.quantity + 1 } : item
+          item.name === product.name
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
       } else {
-        return [...prev, { name, quantity: 1 }];
+        return [...prev, { ...product, quantity: 1 }];
       }
     });
   };

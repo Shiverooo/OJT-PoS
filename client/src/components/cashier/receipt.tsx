@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/cashier/receipt.css";
 import { useLocation } from "react-router-dom";
 import CashIcon from "../../assets/images/cash.svg";
@@ -9,26 +9,19 @@ function Receipt() {
   const isReceiptPage = location.pathname === "/cashier";
   const today = new Date().toLocaleDateString("en-US");
 
-  const [receiptItems] = useState([
-    { name: "Red Dragon Mouse", quantity: 1, price: 100 },
-    { name: "RAPOO Keyboard", quantity: 1, price: 150 },
-    { name: "Seagate HDD", quantity: 1, price: 200 },
-    { name: "MSI Monitor", quantity: 1, price: 1000 },
-  ]);
-
   const [cashReceived, setCashReceived] = useState(0);
   const [change, setChange] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
-
   const { selectedItems } = useSelectedProducts();
+  const [cashInput, setCashInput] = useState("0");
 
-  const totalAmount = receiptItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+  const totalAmount = selectedItems.reduce(
+    (sum, item) => sum + (item.price || 0) * item.quantity,
     0
   );
 
   const handleNumberClick = (value: number) => {
-    setCashReceived((prev) => parseInt(prev || "0") + value);
+    setCashReceived((prev) => parseInt(prev.toString() || "0") + value);
   };
 
   const handlePay = () => {
@@ -38,22 +31,49 @@ function Receipt() {
   };
 
   const handleClosePopup = () => {
-    setShowPopup(false);
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
     setCashReceived(0);
+    setCashInput("0");
     setChange(0);
+
+    setShowPopup(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const rawValue = e.target.value.replace(/,/g, "");
 
-    if (value === "" || !isNaN(value)) {
-      setCashReceived(value === "" ? 0 : Number(value));
+    if (rawValue === "" || /^\d+$/.test(rawValue)) {
+      const numericValue = rawValue === "" ? 0 : Number(rawValue);
+      setCashReceived(numericValue);
+      setCashInput(
+        numericValue.toLocaleString(undefined, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        })
+      );
     }
   };
 
-  if (!isReceiptPage) {
-    return null;
-  }
+  // Close popup when ESC key is pressed
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleClosePopup();
+      }
+    };
+
+    if (showPopup) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showPopup]);
+
+  if (!isReceiptPage) return null;
 
   return (
     <div className="receipt">
@@ -79,23 +99,25 @@ function Receipt() {
             <div className="table-receipt-wrapper">
               <table className="receipt-table">
                 <tbody>
-                  {selectedItems.length > 0
-                    ? selectedItems.map((item, index) => (
-                        <tr key={index}>
-                          <td>{item.name}</td>
-                          <td>{item.quantity}</td>
-                          <td>—</td>
-                          <td>—</td>
-                        </tr>
-                      ))
-                    : receiptItems.map((item, index) => (
-                        <tr key={index}>
-                          <td>{item.name}</td>
-                          <td>{item.quantity}</td>
-                          <td>₱{item.price}</td>
-                          <td>₱{item.quantity * item.price}</td>
-                        </tr>
-                      ))}
+                  {selectedItems.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.name}</td>
+                      <td>{item.quantity}</td>
+                      <td>
+                        ₱
+                        {(item.price || 0).toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                        })}
+                      </td>
+                      <td>
+                        ₱
+                        {(item.quantity * (item.price || 0)).toLocaleString(
+                          undefined,
+                          { minimumFractionDigits: 2 }
+                        )}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -104,7 +126,12 @@ function Receipt() {
 
         <div className="receipt-total">
           <strong>Total</strong>
-          <strong>₱{totalAmount}</strong>
+          <strong>
+            ₱
+            {totalAmount.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+            })}
+          </strong>
         </div>
 
         <div className="cash-input">
@@ -138,6 +165,7 @@ function Receipt() {
                 </button>
               </div>
             </div>
+
             <div className="popup-body">
               <div className="receipt-container">
                 <table className="popup-receipt-table">
@@ -149,35 +177,43 @@ function Receipt() {
                       <th>Amount</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {selectedItems.length > 0
-                      ? selectedItems.map((item, index) => (
-                          <tr key={index}>
-                            <td className="item-name">{item.name}</td>
-                            <td>{item.quantity}</td>
-                            <td>—</td>
-                            <td>—</td>
-                          </tr>
-                        ))
-                      : receiptItems.map((item, index) => (
-                          <tr key={index}>
-                            <td className="item-name">{item.name}</td>
-                            <td>{item.quantity}</td>
-                            <td>₱{item.price}</td>
-                            <td>₱{item.quantity * item.price}</td>
-                          </tr>
-                        ))}
-                  </tbody>
                 </table>
-
-                <div className="popup-total">
-                  <strong>Total</strong>
-                  <strong>₱{totalAmount}</strong>
+                <div className="popup-tbody-scroll">
+                  <table className="popup-receipt-table">
+                    <tbody>
+                      {selectedItems.map((item, index) => (
+                        <tr key={index}>
+                          <td className="item-name">{item.name}</td>
+                          <td>{item.quantity}</td>
+                          <td>
+                            ₱
+                            {(item.price || 0).toLocaleString(undefined, {
+                              minimumFractionDigits: 2,
+                            })}
+                          </td>
+                          <td>
+                            ₱
+                            {(item.quantity * (item.price || 0)).toLocaleString(
+                              undefined,
+                              {
+                                minimumFractionDigits: 2,
+                              }
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
 
               <div className="payment-section">
-                <h1>₱{totalAmount}</h1>
+                <h1>
+                  ₱
+                  {totalAmount.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                  })}
+                </h1>
                 <p>Total amount due</p>
 
                 <div className="cash-input-container">
@@ -192,7 +228,7 @@ function Receipt() {
                       <span className="currency-symbol">₱</span>
                       <input
                         type="text"
-                        value={cashReceived}
+                        value={cashInput}
                         onChange={handleInputChange}
                         className="cash-received-input"
                       />
@@ -218,7 +254,15 @@ function Receipt() {
 
                 <div className="change-section">
                   <p>Change</p>
-                  <h2>₱{change}</h2>
+                  <h2>
+                    ₱
+                    {(cashReceived - totalAmount > 0
+                      ? cashReceived - totalAmount
+                      : 0
+                    ).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                    })}
+                  </h2>
                 </div>
               </div>
             </div>

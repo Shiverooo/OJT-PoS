@@ -2,199 +2,236 @@ import React, { useState, useEffect, useContext } from "react";
 import { SearchContext } from "../../../components/cashier/search-context.tsx";
 import { useSelectedProducts } from "../../../components/cashier/selected-products-context.tsx";
 import "../../../styles/cashier/cashier-dashboard.css";
+import computerImage from "../../../assets/images/computer.jpg";
 
 function SalesScreen() {
   const products = [
     // Laptops and Desktops
     {
       name: "Dell Inspiron Laptop",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Laptops and Desktops",
+      price: 30000,
     },
     {
       name: "HP Pavilion Desktop",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Laptops and Desktops",
+      price: 35000,
     },
     {
       name: "Lenovo ThinkPad",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Laptops and Desktops",
+      price: 40000,
     },
     {
       name: "Apple MacBook Pro",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Laptops and Desktops",
+      price: 90000,
     },
     {
       name: "Microsoft Surface Laptop",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Laptops and Desktops",
+      price: 75000,
     },
     {
       name: "Acer Aspire Series",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Laptops and Desktops",
+      price: 28000,
     },
 
     // Printers and Ink
     {
       name: "Canon PIXMA Inkjet Printer",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Printers and Ink",
+      price: 5000,
     },
     {
       name: "HP DeskJet 2700",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Printers and Ink",
+      price: 4500,
     },
     {
       name: "Epson EcoTank L3150",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Printers and Ink",
+      price: 8500,
     },
     {
       name: "Brother HL-L2350DW",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Printers and Ink",
+      price: 7000,
     },
     {
       name: "Samsung Xpress SL-M2020",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Printers and Ink",
+      price: 6500,
     },
     {
       name: "Lexmark MB2236adw",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Printers and Ink",
+      price: 8000,
     },
 
     // Monitors
     {
       name: 'Samsung 27" Curved Monitor',
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Monitors",
+      price: 12000,
     },
     {
       name: "LG UltraGear Gaming Monitor",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Monitors",
+      price: 18000,
     },
     {
       name: "Dell UltraSharp U2723QE",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Monitors",
+      price: 22000,
     },
     {
       name: "ASUS ProArt Display",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Monitors",
+      price: 24000,
     },
     {
       name: "Acer Nitro XV272U",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Monitors",
+      price: 17000,
     },
     {
       name: "ViewSonic VA2456-MHD",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Monitors",
+      price: 10000,
     },
 
     // Storage
     {
       name: "Seagate 2TB External Drive",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Storage",
+      price: 4000,
     },
     {
       name: "WD My Passport 1TB",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Storage",
+      price: 3500,
     },
     {
       name: "Samsung T7 SSD 1TB",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Storage",
+      price: 6000,
     },
     {
       name: "SanDisk Ultra Flair 128GB",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Storage",
+      price: 1200,
     },
     {
       name: "Kingston A400 SSD 480GB",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Storage",
+      price: 2500,
     },
     {
       name: "Crucial P3 Plus NVMe 1TB",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Storage",
+      price: 5200,
     },
 
     // Gaming Devices
     {
       name: "Razer Viper Gaming Mouse",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Gaming Devices",
+      price: 3000,
     },
     {
       name: "Logitech G Pro Keyboard",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Gaming Devices",
+      price: 4500,
     },
     {
       name: "Xbox Series X Controller",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Gaming Devices",
+      price: 5000,
     },
     {
       name: "PlayStation DualSense",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Gaming Devices",
+      price: 4800,
     },
     {
       name: "SteelSeries Arctis 7",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Gaming Devices",
+      price: 7000,
     },
     {
       name: "Elgato Stream Deck Mini",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Gaming Devices",
+      price: 6000,
     },
 
     // Other Accessories
     {
       name: "Logitech Wireless Keyboard",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Other Accessories",
+      price: 1500,
     },
     {
       name: "Anker USB-C Hub",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Other Accessories",
+      price: 1800,
     },
     {
       name: "Ugreen HDMI Cable",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Other Accessories",
+      price: 600,
     },
     {
       name: "TP-Link USB WiFi Adapter",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Other Accessories",
+      price: 900,
     },
     {
       name: "Baseus Phone Stand",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Other Accessories",
+      price: 750,
     },
     {
       name: "ORICO USB Docking Station",
-      image: require("../../../assets/images/computer.jpg"),
+      image: computerImage,
       category: "Other Accessories",
+      price: 2000,
     },
   ];
 
@@ -229,7 +266,7 @@ function SalesScreen() {
             <div
               className="product-card"
               key={index}
-              onClick={() => addProduct(product.name)}
+              onClick={() => addProduct(product)} 
             >
               <img src={product.image} alt={product.name} />
               <div className="product-name">{product.name}</div>
