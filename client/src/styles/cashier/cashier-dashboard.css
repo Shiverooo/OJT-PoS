@@ -130,7 +130,6 @@ body {
 
 .products-grid::-webkit-scrollbar-thumb {
   background-color: #888;
-  border-radius: 10px;
 }
 
 .products-grid::-webkit-scrollbar-thumb:hover {
