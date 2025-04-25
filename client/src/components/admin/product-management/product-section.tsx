@@ -1,3 +1,5 @@
+// Product Section Component
+
 import React from "react";
 import AddProductModal from "../../../components/admin/product-management/AddProductModal.tsx";
 
@@ -14,6 +16,7 @@ const ProductSection = ({
   setShowModal,
   handleAddProduct,
 }) => {
+  // Format the date to MM-DD-YYYY
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
     const mm = String(date.getMonth() + 1).padStart(2, "0");
@@ -25,15 +28,17 @@ const ProductSection = ({
   return (
     <div className="products-section">
       <div className="products-header">
-        <h3>Products</h3>
+        <h3>Product List</h3>
       </div>
 
+      {/* Modal for adding a new product */}
       <AddProductModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onAddProduct={handleAddProduct}
       />
 
+      {/* Table displaying the product data */}
       <div className="table-wrapper">
         <table className="product-table">
           <thead>
@@ -79,6 +84,7 @@ const ProductSection = ({
         </table>
       </div>
 
+      {/* Pagination controls */}
       <div className="pagination">
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
           Previous

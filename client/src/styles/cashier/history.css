@@ -1,12 +1,14 @@
+/* Container for History Receipt Wrapper */
 .history-receipt-wrapper {
   display: flex;
   justify-content: space-between;
   width: 100%;
   height: 100vh;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
+/* Main History Container */
 .history-container {
   border: 1px solid #dcdcdc;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -17,30 +19,31 @@
   max-height: calc(100vh - 40px);
   padding-bottom: 30px;
   -webkit-overflow-scrolling: touch;
-  transition: margin-left 0.3s ease; 
+  transition: margin-left 0.3s ease;
 }
 
-/* Custom scrollbar */
+/* Custom Scrollbar */
 .history-container::-webkit-scrollbar {
   width: 5px;
 }
 
 .history-container::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.4);  
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .history-container::-webkit-scrollbar-track {
-  background-color: transparent; 
+  background-color: transparent;
 }
 
+/* Search and Date Section */
 .search-date-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   position: sticky;
-  top: 0; 
+  top: 0;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .search-bar {
@@ -69,6 +72,7 @@
   margin-left: -10px;
 }
 
+/* Current Date Section */
 .current-date {
   margin-top: 10px;
   font-size: 18px;
@@ -77,6 +81,7 @@
   border-bottom: 1px solid #dcdcdc;
 }
 
+/* Sales Summary Section */
 .sales-summary-container {
   display: flex;
   justify-content: space-between;
@@ -123,7 +128,7 @@
   color: #7d7d7d;
 }
 
-/* Receipt box */
+/* Receipt Box Section */
 .receipt-box {
   color: #292929;
   border: 1px solid #dcdcdc;
@@ -135,10 +140,11 @@
   margin-right: 20px;
   padding: 40px;
   background-color: #fff;
-  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5), 1px 1px 3px rgba(0, 0, 0, 0.08); 
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5), 1px 1px 3px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
 
+/* Receipt Total Amount */
 .receipt-total-amount h1 {
   margin: 0;
   font-size: 40px;
@@ -155,6 +161,7 @@
   border-bottom: 1px solid #dcdcdc;
 }
 
+/* Receipt Item List */
 .receipt-items-list {
   margin-top: 25px;
 }
@@ -180,6 +187,7 @@
   font-size: 18px;
 }
 
+/* Receipt Summary Section */
 .receipt-summary-total {
   display: flex;
   justify-content: space-between;
@@ -190,6 +198,7 @@
   font-size: 16px;
 }
 
+/* Receipt Payment Type */
 .receipt-payment-type {
   text-align: left;
   font-size: 16px;
@@ -200,7 +209,8 @@
   border-bottom: 1px solid #dcdcdc;
 }
 
-.receipt-footer { 
+/* Receipt Footer */
+.receipt-footer {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;

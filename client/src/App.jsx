@@ -18,7 +18,7 @@ import NoPage from "./page/no-page.tsx";
 import "./App.css";
 
 // 👇 Import the context
-import { SelectedProductsProvider } from "./components/cashier/selected-products-context.tsx";
+import { SelectedProductsProvider } from "./components/cashier/sale-screen/selected-products-context.tsx";
 
 function App() {
   return (

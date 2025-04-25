@@ -1,4 +1,4 @@
-/* Receipt */
+/* Receipt Container */
 .receipt {
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   height: 100vh;
 }
 
-/* Header */
+/* Header Styling */
 .header-right {
   display: flex;
   font-size: 16px;
@@ -21,7 +21,7 @@
   flex-shrink: 0;
 }
 
-/* Receipt Text */
+/* Receipt Text Styling */
 .receipt-text {
   margin-right: auto;
   padding-left: 15px;
@@ -32,7 +32,7 @@
   padding-right: 15px;
 }
 
-/* Receipt Section */
+/* Receipt Section Styling */
 .receipt-section {
   background-color: white;
   padding: 20px;
@@ -44,6 +44,7 @@
   flex-grow: 1;
 }
 
+/* Background Image in Receipt Section */
 .receipt-section::before {
   content: "";
   position: absolute;
@@ -57,7 +58,7 @@
   z-index: 0;
 }
 
-/* Receipt Table */
+/* Receipt Table Styling */
 .receipt-table {
   width: 100%;
   table-layout: fixed;
@@ -72,13 +73,14 @@
   position: relative;
 }
 
+/* Scrollable Table Wrapper */
 .table-receipt-wrapper {
   max-height: 450px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-/* Scrollbar Styling */
+/* Custom Scrollbar for Table */
 .table-receipt-wrapper::-webkit-scrollbar {
   width: 6px;
 }
@@ -95,12 +97,7 @@
   background: #555;
 }
 
-.table-body-wrapper .receipt-table,
-.table-wrapper > .receipt-table {
-  width: 100%;
-  table-layout: fixed;
-}
-
+/* Table Styling */
 .receipt-table th,
 .receipt-table td {
   border-bottom: 1px solid #ddd;
@@ -118,7 +115,7 @@
   font-size: 15px;
 }
 
-/* Receipt Total */
+/* Receipt Total Styling */
 .receipt-total {
   display: flex;
   font-size: 25px;
@@ -133,7 +130,7 @@
   margin-right: 6%;
 }
 
-/* Receipt Actions */
+/* Receipt Actions (Buttons) */
 .receipt-actions {
   display: flex;
   justify-content: space-between;
@@ -173,7 +170,7 @@
   background-color: #6a9135;
 }
 
-/* Pop-up Pay Button */
+/* Popup Overlay for Pay Button */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -187,6 +184,7 @@
   z-index: 10;
 }
 
+/* Popup Content Styling */
 .popup-content {
   background: white;
   height: 625px;
@@ -196,6 +194,7 @@
   flex-direction: column;
 }
 
+/* Popup Header Styling */
 .popup-header {
   display: flex;
   align-items: center;
@@ -203,6 +202,7 @@
   height: 46px;
 }
 
+/* Popup Left Section */
 .popup-left {
   width: 45%;
   display: flex;
@@ -211,6 +211,7 @@
   font-size: 18px;
 }
 
+/* Popup Right Section with Close Button */
 .popup-right {
   display: flex;
   justify-content: flex-end;
@@ -241,6 +242,7 @@
   height: 100%;
 }
 
+/* Receipt Container in Popup */
 .receipt-container {
   width: 48.5%;
   padding: 15px;
@@ -277,13 +279,14 @@
   text-align: center;
 }
 
-/* Scrollable tbody wrapper */
+/* Scrollable Popup Table Body */
 .popup-tbody-scroll {
-  max-height: 500px; 
+  max-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
+/* Custom Scrollbar for Popup Table */
 .popup-tbody-scroll::-webkit-scrollbar {
   width: 4px;
 }
@@ -296,21 +299,7 @@
   background: #f1f1f1;
 }
 
-/* Popup Total */
-/* .popup-total {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #292929;
-}
-
-.popup-total strong {
-  margin-right: 210px;
-} */
-
-/* Payment Section */
+/* Payment Section Styling */
 .payment-section {
   width: 60%;
   padding-top: 50px;
@@ -329,6 +318,7 @@
   margin-bottom: 20px;
 }
 
+/* Cash Input Section */
 .cash-input-container {
   margin-bottom: 20px;
 }
@@ -339,7 +329,7 @@
   margin: 50px 0 0 20px;
 }
 
-/* Cash Row */
+/* Cash Row Styling */
 .cash-row {
   display: flex;
   align-items: center;
@@ -347,6 +337,7 @@
   gap: 20px;
 }
 
+/* Cash Box Styling */
 .cash-box {
   display: flex;
   align-items: center;
@@ -387,6 +378,7 @@
   margin-right: 20px;
 }
 
+/* Pay Button Styling */
 .pay-button {
   padding: 10px 25px;
   margin-top: -10px;
@@ -405,7 +397,7 @@
   color: white;
 }
 
-/* Number Buttons */
+/* Number Buttons Styling */
 .number-buttons-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -449,6 +441,7 @@
   color: #2f4f2f;
 }
 
+/* Hide Cash Input for Change Section */
 .cash-input {
   display: none;
 }

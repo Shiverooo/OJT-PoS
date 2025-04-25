@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import Sidebar from '../../components/cashier/sidebar.tsx';
-import Receipt from '../../components/cashier/receipt.tsx';
-import SearchContainer from '../../components/cashier/searchbar.tsx';
+import Sidebar from '../../components/cashier/sale-screen/sidebar.tsx';
+import Receipt from '../../components/cashier/sale-screen/receipt.tsx';
+import SearchContainer from '../../components/cashier/sale-screen/searchbar.tsx';
 import menuIcon from "../../assets/images/menu-icon.svg";
 import barcodeIcon from "../../assets/images/barcode-icon.svg";
-import { SearchProvider } from '../../components/cashier/search-context.tsx';
+import { SearchProvider } from '../../components/cashier/sale-screen/search-context.tsx';
 import '../../styles/cashier/cashier-dashboard.css';
 import useCheckRole from '../../hooks/useCheckRole.js';
 import useFetchUser from '../../hooks/useFetchUser.js';
