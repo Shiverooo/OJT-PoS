@@ -3,39 +3,44 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function useFetchUser() {
-  const [user, setUser] = useState(null);
-  const [loading, setloading] = useState(true);
-  const [userRole, setUserRole] = useState("");
+  const [user, setUser] = useState(null);         // State to store user data
+  const [loading, setloading] = useState(true);   // State to track loading status
+  const [userRole, setUserRole] = useState("");   // State to store the user's role (e.g., admin, cashier)
   
-  const nav = useNavigate();   
-  
-  useEffect(() => { 
-    console.log('Mounted')
-    const token = localStorage.getItem('token');
+  const nav = useNavigate();   // Hook to programmatically navigate
+
+  useEffect(() => {
+    console.log('Mounted');  // Log when component is mounted
+
+    const token = localStorage.getItem('token');  // Get the token from localStorage
+
     if (token) {
+      // If token exists, fetch user data from the server
       axios.get('/users/auth-user', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+        headers: { Authorization: `Bearer ${token}` }  // Attach token to the request header
       })
       .then(res => {
+        // On success, update user data and role
         setUser(res.data.user);
         setUserRole(res.data.role || res.data.user?.role || "");
-        setloading(false);
+        setloading(false);  // Set loading to false when data is fetched
       })
       .catch(() => {
+        // On error, stop loading and navigate to login page
         setloading(false);
-        nav('/');
+        nav('/');  // Redirect to login page
       });
     } else {
+      // If no token, stop loading and redirect to login page
       setloading(false);
-      nav('/');
+      nav('/');  // Redirect to login page
     }
 
-    return ()=>{
-      console.log('Unmounted');
+    // Cleanup function when component is unmounted
+    return () => {
+      console.log('Unmounted');  // Log when component is unmounted
     };
-  }, [nav]);
+  }, [nav]);  // Dependency array to run effect when `nav` changes
 
   // useEffect(()=>{
   //   if (user) console.log('User updated:', user);

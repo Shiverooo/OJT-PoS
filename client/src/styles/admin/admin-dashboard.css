@@ -1,8 +1,10 @@
+/* Admin Dashboard Container */
 .admin-dashboard {
   display: flex;
   position: relative;
 }
 
+/* Sidebar Styling */
 .admin-sidebar {
   width: 310px;
   height: 100vh;
@@ -13,26 +15,29 @@
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   position: fixed;
-  left: -310px; 
+  left: -310px;
   top: 0;
-  transition: left 0.3s ease; 
+  transition: left 0.3s ease;
 }
 
+/* Open Sidebar */
 .admin-sidebar.open {
   left: 0;
 }
 
+/* Sidebar Header */
 .sidebar-header {
   text-align: center;
   margin-bottom: 20px;
-  
 }
 
+/* Sidebar Logo */
 .logo {
   width: 250px;
   height: auto;
 }
 
+/* Navigation Links */
 .nav-links {
   width: 100%;
   padding: 0;
@@ -46,6 +51,7 @@
   width: 100%;
 }
 
+/* Sidebar Item */
 .admin-item {
   display: flex;
   align-items: center;
@@ -60,28 +66,31 @@
   border-radius: 10px;
 }
 
+/* Sidebar Item Hover */
 .admin-item:hover {
-  background-color: #41AB5D;
+  background-color: #41ab5d;
   color: white;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Active Sidebar Item */
 .admin-item.active {
   background-color: #ddd;
-  /* font-weight: bold; */
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Active Item Hover Effect */
 .admin-item.active:hover {
-  background-color: #ddd; 
-  color: inherit; 
+  background-color: #ddd;
+  color: inherit;
 }
 
-/* Prevent icon color change on active items */
+/* Prevent Icon Color Change on Active */
 .admin-item:not(.active):hover .nav-icon {
   filter: invert(100%) brightness(100%) contrast(100%);
 }
 
+/* Navigation Icon */
 .nav-icon {
   width: 25px;
   height: 25px;
@@ -90,6 +99,7 @@
   transition: filter 0.3s ease;
 }
 
+/* Sidebar Footer */
 .sidebar-footer {
   font-size: 14px;
   text-align: center;
@@ -97,6 +107,7 @@
   margin-top: auto;
 }
 
+/* Sign Out Button */
 .admin-sign-out {
   margin-bottom: 20px;
   margin-left: 10px;
@@ -114,35 +125,40 @@
   transition: transform 0.3s ease;
 }
 
+/* Sign Out Button Hover */
 .admin-sign-out:hover {
-  transform: scale(1.03); 
-  color: black; 
+  transform: scale(1.03);
+  color: black;
 }
 
+/* Sign Out Icon */
 .admin-sign-out img {
-    width: 20px; 
-    height: 20px;
-    margin-right: 10px;
-    filter: invert(1) sepia(0) saturate(0) hue-rotate(0deg) brightness(100%)
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  filter: invert(1) sepia(0) saturate(0) hue-rotate(0deg) brightness(100%)
     contrast(100%);
 }
 
+/* Sign Out Icon Hover */
 .admin-sign-out:hover img {
   filter: invert(0) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.6)
     contrast(100%);
 }
 
-/* Content area */
+/* Content Area */
 .admin-content {
   flex-grow: 1;
   margin-left: 0;
-  transition: margin-left 0.3s ease; 
+  transition: margin-left 0.3s ease;
 }
 
+/* Content Area when Sidebar is Open */
 .admin-content.sidebar-open {
-  margin-left: 310px; 
+  margin-left: 310px;
 }
 
+/* Header */
 .header {
   display: flex;
   align-items: center;
@@ -151,6 +167,7 @@
   padding: 15px;
 }
 
+/* Header Title */
 .header-title {
   display: flex;
   align-items: center;

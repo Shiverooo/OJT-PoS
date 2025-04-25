@@ -4,7 +4,7 @@ import SalesPurchaseChart from "../../../components/admin/main-dashboard/sales-p
 import BestSellingCategory from "../../../components/admin/sale-reports/best-selling-category.tsx";
 import BestSellingProduct from "../../../components/admin/sale-reports/best-selling-product.tsx";
 
-// Sample data for sales and purchases
+// Sample data for sales and purchases over months
 const salesPurchaseData = [
   { month: "Jan", purchase: 1000, sales: 2000 },
   { month: "Feb", purchase: 2000, sales: 3000 },
@@ -42,24 +42,24 @@ const productData = [
 ];
 
 function SalesReport() {
-  // Track the current page for pagination
+  // 🔹 State to track the current page for pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 9;
+  const pageSize = 9; // Number of products to display per page
 
-  // Calculate total number of pages
+  // Calculate total number of pages based on product data and page size
   const totalPages = Math.ceil(productData.length / pageSize);
 
-  // Go to previous page
+  // Navigate to the previous page
   const handlePrevPage = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 1));
+    setCurrentPage((prev) => Math.max(prev - 1, 1)); // Ensure we don't go below page 1
   };
 
-  // Go to next page
+  // Navigate to the next page
   const handleNextPage = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages)); 
   };
 
-  // Slice data based on current page
+  // Slice the product data based on the current page for pagination
   const paginatedData = productData.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
@@ -70,7 +70,8 @@ function SalesReport() {
       <div className="sales-report-container">
         {/* Sales and Purchase Chart */}
         <div className="sales-chart-container">
-        <SalesPurchaseChart data={salesPurchaseData} height={315} />
+          <SalesPurchaseChart data={salesPurchaseData} height={315} />{" "}
+          {/* Chart displaying sales/purchase data */}
         </div>
 
         {/* Best Selling Category Section */}
@@ -79,11 +80,11 @@ function SalesReport() {
 
       {/* Best Selling Product Table with Pagination */}
       <BestSellingProduct
-        paginatedData={paginatedData}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPrevPage={handlePrevPage}
-        onNextPage={handleNextPage}
+        paginatedData={paginatedData} 
+        currentPage={currentPage} 
+        totalPages={totalPages} 
+        onPrevPage={handlePrevPage} 
+        onNextPage={handleNextPage} 
       />
     </div>
   );

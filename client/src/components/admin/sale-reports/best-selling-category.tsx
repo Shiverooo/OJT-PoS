@@ -1,3 +1,5 @@
+// Best Selling Category Section Component
+
 import React from "react";
 
 function BestSellingCategory() {
@@ -6,7 +8,7 @@ function BestSellingCategory() {
       <div className="best-category">
         <h2>Best Selling Category</h2>
         <div className="sales-table-wrapper">
-          {/* Table Header */}
+          {/* Table Header with column titles */}
           <table className="sales-table-header">
             <colgroup>
               <col style={{ width: "30%" }} />
@@ -22,7 +24,7 @@ function BestSellingCategory() {
             </thead>
           </table>
 
-          {/* Table Body */}
+          {/* Table Body where category data is displayed */}
           <div className="table-body-wrapper">
             <table className="sales-table-body">
               <colgroup>
@@ -31,7 +33,7 @@ function BestSellingCategory() {
                 <col style={{ width: "30%" }} />
               </colgroup>
               <tbody>
-                {/* Category rows */}
+                {/* Rows for each product category with turnover and increase data */}
                 <tr>
                   <td>Peripherals</td>
                   <td>₱52,000</td>

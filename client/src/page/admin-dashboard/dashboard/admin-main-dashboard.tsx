@@ -7,31 +7,33 @@ import ProductSummary from "../../../components/admin/main-dashboard/product-sum
 import "../../../styles/admin/admin-main-dashboard.css";
 
 function AdminMainDashboard() {
-  // 🔹 States for low stock items from localStorage
-  const [lowStockItems, setLowStockItems] = useState([]);
-  const [suppliers, setSuppliers] = useState([]);
-  const [currentProducts, setCurrentProducts] = useState([]); 
-  const [showModal, setShowModal] = useState(false);
+  // 🔹 States for storing low stock items and other relevant data
+  const [lowStockItems, setLowStockItems] = useState([]); // Low stock items
+  const [suppliers, setSuppliers] = useState([]); // Suppliers (currently empty)
+  const [currentProducts, setCurrentProducts] = useState([]); // Current products from localStorage
+  const [showModal, setShowModal] = useState(false); // State for controlling modal visibility
 
+  // Fetch products from localStorage and filter low stock items on component mount
   useEffect(() => {
-    const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
-    const lowStock = storedProducts.filter((item) => item.quantity < 15);
-    setLowStockItems(lowStock);
-    setCurrentProducts(storedProducts); 
+    const storedProducts = JSON.parse(localStorage.getItem("products") || "[]"); // Get products from localStorage
+    const lowStock = storedProducts.filter((item) => item.quantity < 15); // Filter low stock items
+    setLowStockItems(lowStock); // Set low stock items state
+    setCurrentProducts(storedProducts); // Set current products state
   }, []);
 
-  // Calculate total quantity in hand
+  // Calculate the total quantity of products in hand
   const totalQuantityInHand = currentProducts.reduce(
     (total, product) => total + product.quantity,
     0
   );
 
-  // Sample static data
+  // Sample data for top-selling products
   const topSellingProducts = [
     { name: "Red Dragon Mouse", sold: 40, remaining: 10, price: "$100" },
     { name: "RAPOO Keyboard", sold: 30, remaining: 12, price: "$150" },
   ];
 
+  // Sample data for sales and purchase charts (static data)
   const salesPurchaseData = [
     { month: "Jan", purchase: 1000, sales: 2000 },
     { month: "Feb", purchase: 2000, sales: 3000 },
@@ -40,21 +42,32 @@ function AdminMainDashboard() {
     { month: "May", purchase: 5000, sales: 4000 },
   ];
 
+  // Inventory summary, showing total quantity in hand
   const inventorySummary = {
-    quantityInHand: totalQuantityInHand,
-  }; 
+    quantityInHand: totalQuantityInHand, // Total stock quantity
+  };
 
-  const productSummary = { suppliers: suppliers.length, categories: 6 };
+  // Product summary (static data for now, but can be expanded to include more details)
+  const productSummary = { suppliers: suppliers.length, categories: 6 }; // Number of suppliers and categories
 
   return (
     <div className="admin-main-dashboard-wrapper">
       <div className="admin-main-dashboard">
+        {/* Top Selling Products Table */}
         <TopSellingTable products={topSellingProducts} />
+
+        {/* Low Stock Items List */}
         <LowStockList items={lowStockItems} />
+
+        {/* Sales and Purchase Chart */}
         <SalesPurchaseChart data={salesPurchaseData} />
+
+        {/* Inventory Summary */}
         <InventoryMainSummary
           quantityInHand={inventorySummary.quantityInHand}
         />
+
+        {/* Product Summary (Suppliers and Categories) */}
         <ProductSummary
           suppliers={productSummary.suppliers}
           categories={productSummary.categories}

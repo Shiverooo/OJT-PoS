@@ -1,12 +1,9 @@
+// Add Supplier Modal Component
+
 import React, { useState, useEffect } from "react";
 import "../../../styles/admin/addsuppliermodal.css";
 
-interface AddSupplierModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onAddSupplier: (supplier: Supplier) => void;
-}
-
+// Interface for Supplier data structure
 interface Supplier {
   name: string;
   location: string;
@@ -16,11 +13,19 @@ interface Supplier {
   dateAdded: string;
 }
 
+// Interface for the AddSupplierModal props
+interface AddSupplierModalProps {
+  isOpen: boolean; // Controls modal visibility
+  onClose: () => void; // Function to close the modal
+  onAddSupplier: (supplier: Supplier) => void; // Function to handle adding a supplier
+}
+
 const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
   isOpen,
   onClose,
   onAddSupplier,
 }) => {
+  // State hooks for form fields
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [contactPerson, setContactPerson] = useState("");
@@ -28,9 +33,11 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
   const [email, setEmail] = useState("");
   const [dateAdded, setDateAdded] = useState("");
 
+  // Handle closing the modal with Escape key
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        (document.activeElement as HTMLElement)?.blur();
         resetForm();
         onClose();
       }
@@ -40,6 +47,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
+  // Reset the form fields
   const resetForm = () => {
     setName("");
     setLocation("");
@@ -49,9 +57,11 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
     setDateAdded("");
   };
 
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validate required fields
     if (
       !name ||
       !location ||
@@ -63,6 +73,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
       return;
     }
 
+    // Create new supplier object
     const newSupplier: Supplier = {
       name,
       location,
@@ -72,18 +83,22 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
       dateAdded,
     };
 
+    // Pass the new supplier to the parent component and reset form
     onAddSupplier(newSupplier);
     resetForm();
     onClose();
   };
 
+  // Set today's date to limit the "Date Added" field
   const today = new Date().toISOString().split("T")[0];
 
+  // Don't render if modal is closed
   if (!isOpen) return null;
 
   return (
     <div className="supplier-modal-overlay">
       <div className="supplier-modal-content">
+        {/* Close button */}
         <button
           className="close-button"
           onClick={() => {
@@ -95,7 +110,10 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
         </button>
         <h2>New Supplier</h2>
         <div className="between-line"></div>
+
+        {/* Supplier form */}
         <form className="supplier-form" onSubmit={handleSubmit}>
+          {/* Name input field */}
           <div className="supplier-form-row">
             <label>Name:</label>
             <input
@@ -111,6 +129,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
             />
           </div>
 
+          {/* Location input field */}
           <div className="supplier-form-row">
             <label>Location:</label>
             <input
@@ -122,6 +141,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
             />
           </div>
 
+          {/* Contact person input field */}
           <div className="supplier-form-row">
             <label>Contact Person:</label>
             <input
@@ -138,6 +158,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
             />
           </div>
 
+          {/* Contact number input field */}
           <div className="supplier-form-row">
             <label>Contact Number:</label>
             <input
@@ -155,6 +176,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
             />
           </div>
 
+          {/* Email input field */}
           <div className="supplier-form-row">
             <label>Email:</label>
             <input
@@ -167,6 +189,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
             />
           </div>
 
+          {/* Date Added input field */}
           <div className="supplier-form-row">
             <label>Date Added:</label>
             <input
@@ -178,6 +201,7 @@ const AddSupplierModal: React.FC<AddSupplierModalProps> = ({
             />
           </div>
 
+          {/* Submit button */}
           <button type="submit" className="btn-submit-supplier">
             Add Supplier
           </button>

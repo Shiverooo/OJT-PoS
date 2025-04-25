@@ -3,10 +3,12 @@ import "../../../styles/cashier/inventory.css";
 import searchIcon from "../../../assets/images/search-icon.svg";
 
 function Inventory() {
+  // Set the page title when component mounts
   useEffect(() => {
     document.title = "Infinitum PoS | Inventory";
   }, []);
 
+  // Sample data for inventory items
   const sampleData = [
     {
       barcode: "0419284775889",
@@ -80,9 +82,11 @@ function Inventory() {
     },
   ];
 
+  // State to handle search by name and barcode
   const [nameSearch, setNameSearch] = useState("");
   const [barcodeSearch, setBarcodeSearch] = useState("");
 
+  // Filter data based on search criteria
   const filteredData = sampleData.filter((item) => {
     const matchesName = nameSearch
       ? item.name.toLowerCase().includes(nameSearch.toLowerCase())
@@ -95,6 +99,7 @@ function Inventory() {
 
   return (
     <div className="inventory-container">
+      {/* Search Bar for name and barcode */}
       <div className="search-bar-container">
         <div className="search-box">
           <img src={searchIcon} alt="Search Icon" className="search-icon" />
@@ -118,6 +123,7 @@ function Inventory() {
         </div>
       </div>
 
+      {/* Table Header */}
       <div className="table-header">
         <div className="header-item">BARCODE</div>
         <div className="header-item">NAME</div>
@@ -129,6 +135,7 @@ function Inventory() {
         <div className="header-item">STATUS</div>
       </div>
 
+      {/* Table Body with filtered items */}
       <div className="table-body">
         {filteredData.map((item, index) => (
           <div className="table-row" key={index}>

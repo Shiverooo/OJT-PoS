@@ -14,7 +14,7 @@ interface User {
   last_name: string;
   email: string;
   contact: string;
-  username: string; // Added username field
+  username: string; 
   created_at: string;
 }
 

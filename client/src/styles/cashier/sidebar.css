@@ -1,3 +1,4 @@
+/* Sidebar container */
 .sidebar {
   position: fixed;
   top: 0;
@@ -10,10 +11,12 @@
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
+/* Sidebar open state */
 .sidebar.open {
   left: 0;
 }
 
+/* Sidebar list styling */
 .sidebar ul {
   list-style: none;
   padding: 10px 0;
@@ -21,7 +24,7 @@
   border-top: 1px solid #d9d9d9;
 }
 
-/* Style for all li */
+/* Sidebar list item styling */
 .sidebar ul li {
   padding: 15px 20px;
   color: var(--primary-color);
@@ -37,6 +40,7 @@
   margin: 10px auto;
 }
 
+/* Sidebar list item icon styling */
 .sidebar ul li img {
   width: 25px;
   height: 25px;
@@ -46,50 +50,44 @@
     brightness(91%) contrast(84%);
 }
 
+/* Icon hover effect */
 .sidebar ul li:hover img {
   filter: invert(1) brightness(100%);
 }
 
-/* Hover effect */
+/* List item hover effect */
 .sidebar ul li:hover {
   background-color: #41ab5d;
   color: white;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* First list item custom styling */
 .sidebar ul li:first-child {
   position: relative;
   margin-top: 0;
   padding: 15px 20px;
 }
 
+/* Active list item styling */
 .sidebar ul li.active {
-  background-color: #d3d3d3; 
-  /* font-weight: bold; */
-  color: #292929; 
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); 
-  transform: translateY(1px); 
+  background-color: #d3d3d3;
+  color: #292929;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px);
 }
 
+/* Active item icon color change */
 .sidebar ul li.active img {
-  filter: brightness(0.4); 
+  filter: brightness(0.4);
 }
 
-/* .sidebar ul li:first-child::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 110%;
-  height: 1px;
-  background-color: #d9d9d9;
-} */
-
+/* Non-last list item margin */
 .sidebar ul li:not(:last-child) {
   margin-bottom: 5px;
 }
 
-/* Style for the Sign Out button */
+/* Sign-out button container */
 .sign-out {
   position: absolute;
   bottom: 20px;
@@ -108,35 +106,39 @@
   transition: transform 0.3s ease;
 }
 
-/* Scaling effect on hover */
+/* Sign-out button hover effect */
 .sign-out:hover {
-  transform: scale(1.03); 
-  color: black; 
+  transform: scale(1.03);
+  color: black;
 }
 
+/* Sign-out button icon styling */
 .sign-out img {
-  width: 20px; 
+  width: 20px;
   height: 20px;
   margin-right: 10px;
   filter: invert(1) sepia(0) saturate(0) hue-rotate(0deg) brightness(100%)
     contrast(100%);
 }
 
+/* Sign-out button icon hover effect */
 .sign-out:hover img {
   filter: invert(0) sepia(0) saturate(0) hue-rotate(0deg) brightness(0.6)
     contrast(100%);
 }
 
-/* Menu Icon Color Change */
+/* Menu icon color change when open */
 #menu-icon.menu-icon-open {
   filter: invert(41%) sepia(92%) saturate(633%) hue-rotate(58deg)
     brightness(92%) contrast(88%);
 }
 
+/* Menu icon default color */
 #menu-icon.menu-icon-closed {
   filter: invert(1);
 }
 
+/* Non-last list item margin (redundant but maintained) */
 .sidebar ul li:not(:last-child) {
   margin-bottom: 5px;
 }

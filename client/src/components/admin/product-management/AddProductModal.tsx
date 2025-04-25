@@ -1,3 +1,5 @@
+// Add Product Modal Component
+
 import React, { useState, useEffect } from "react";
 import "../../../styles/admin/addproductmodal.css";
 
@@ -13,7 +15,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
   onClose,
   onAddProduct,
 }) => {
-  // Declare state variables for each form field
+  // Declare state variables for form fields
   const [image, setImage] = useState<string | null>(null);
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
@@ -23,10 +25,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
   const [productName, setProductName] = useState("");
   const [supplier, setSupplier] = useState("");
 
-  // Effect hook to handle the Escape key press to close the modal
+  // Effect hook to handle Escape key press and close modal
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        (document.activeElement as HTMLElement)?.blur();
         resetForm();
         onClose();
       }
@@ -36,7 +39,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Function to reset the form fields
+  // Function to reset form fields
   const resetForm = () => {
     setImage(null);
     setCategory("");
@@ -48,7 +51,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
     setSupplier("");
   };
 
-  // Handle image file upload
+  // Handle image upload
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -63,7 +66,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
   // Handle form submission
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // If any required field is empty, prevent submission
+    // Prevent submission if any required field is empty
     if (
       !image ||
       !productName ||
@@ -76,7 +79,8 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
     ) {
       return;
     }
-    // Pass the product details to the parent component for adding
+
+    // Pass product data to parent for adding
     onAddProduct({
       barcode,
       name: productName,
@@ -86,7 +90,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
       image,
     });
 
-    // Save products to localStorage
+    // Save product to localStorage
     const storedProducts = localStorage.getItem("products");
     let products = storedProducts ? JSON.parse(storedProducts) : [];
     products.push({
@@ -103,17 +107,16 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
     onClose();
   };
 
-  // Get today's date to set as the minimum value for the date field
+  // Get today's date for date input's minimum value
   const today = new Date().toISOString().split("T")[0];
 
-  // If the modal is not open, don't render anything
+  // Return nothing if modal is not open
   if (!isOpen) return null;
 
-  // Render the modal
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        {/* Close button to reset form and close the modal */}
+        {/* Close Button */}
         <button
           className="add-close-button"
           onClick={() => {
@@ -123,9 +126,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
         >
           &times;
         </button>
+
+        {/* Modal Title */}
         <h2>New Product</h2>
 
-        {/* Image upload section */}
+        {/* Image Upload Section */}
         <div className="image-upload">
           <div className="image-box">
             {image ? (
@@ -148,9 +153,9 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
 
         <div className="between-line"></div>
 
-        {/* Product form */}
+        {/* Product Form */}
         <form className="product-form" onSubmit={handleSubmit}>
-          {/* Barcode input */}
+          {/* Barcode Input */}
           <div className="form-row">
             <label>Barcode:</label>
             <input
@@ -168,7 +173,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             />
           </div>
 
-          {/* Product name input */}
+          {/* Product Name Input */}
           <div className="form-row">
             <label>Product Name:</label>
             <input
@@ -180,7 +185,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             />
           </div>
 
-          {/* Supplier input */}
+          {/* Supplier Input */}
           <div className="form-row">
             <label>Supplier:</label>
             <input
@@ -192,7 +197,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             />
           </div>
 
-          {/* Category dropdown */}
+          {/* Category Dropdown */}
           <div className="form-row">
             <label>Category:</label>
             <select
@@ -212,7 +217,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             </select>
           </div>
 
-          {/* Price input */}
+          {/* Price Input */}
           <div className="form-row">
             <label>Price:</label>
             <input
@@ -227,7 +232,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             />
           </div>
 
-          {/* Quantity input */}
+          {/* Quantity Input */}
           <div className="form-row">
             <label>Quantity:</label>
             <input
@@ -241,7 +246,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             />
           </div>
 
-          {/* Date added input */}
+          {/* Date Added Input */}
           <div className="form-row">
             <label>Date Added:</label>
             <input
@@ -253,7 +258,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
             />
           </div>
 
-          {/* Submit button */}
+          {/* Submit Button */}
           <button type="submit" className="add-product-btn">
             Add Product
           </button>

@@ -1,3 +1,5 @@
+// Best Selling Product Section Component
+
 import React from "react";
 
 // Define the structure for a product
@@ -12,11 +14,11 @@ interface Product {
 
 // Define props for the BestSellingProduct component
 interface BestSellingProductProps {
-  paginatedData: Product[];
-  currentPage: number;
-  totalPages: number;
-  onPrevPage: () => void;
-  onNextPage: () => void;
+  paginatedData: Product[]; // Paginated product data
+  currentPage: number; // Current page number
+  totalPages: number; // Total number of pages
+  onPrevPage: () => void; // Function to go to previous page
+  onNextPage: () => void; // Function to go to next page
 }
 
 const BestSellingProduct: React.FC<BestSellingProductProps> = ({
@@ -31,7 +33,7 @@ const BestSellingProduct: React.FC<BestSellingProductProps> = ({
       <div className="best-product">
         <h2>Best Selling Product</h2>
 
-        {/* Product table */}
+        {/* Product table displaying paginated product data */}
         <table className="best-product-table">
           <colgroup>
             <col style={{ width: "15%" }} />
@@ -52,7 +54,7 @@ const BestSellingProduct: React.FC<BestSellingProductProps> = ({
             </tr>
           </thead>
           <tbody>
-            {/* Display paginated product data */}
+            {/* Map over paginatedData and display product information */}
             {paginatedData.map((item, index) => (
               <tr key={index}>
                 <td>{item.product}</td>
@@ -68,12 +70,14 @@ const BestSellingProduct: React.FC<BestSellingProductProps> = ({
 
         {/* Pagination controls */}
         <div className="sale-pagination">
+          {/* Button for navigating to the previous page */}
           <button onClick={onPrevPage} disabled={currentPage === 1}>
             Previous
           </button>
           <span>
             Page {totalPages === 0 ? 1 : currentPage} of {totalPages || 1}
           </span>
+          {/* Button for navigating to the next page */}
           <button onClick={onNextPage} disabled={currentPage >= totalPages}>
             Next
           </button>

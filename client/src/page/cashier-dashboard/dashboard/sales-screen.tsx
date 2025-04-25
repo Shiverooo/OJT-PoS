@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { SearchContext } from "../../../components/cashier/search-context.tsx";
-import { useSelectedProducts } from "../../../components/cashier/selected-products-context.tsx";
+import { SearchContext } from "../../../components/cashier/sale-screen/search-context.tsx";
+import { useSelectedProducts } from "../../../components/cashier/sale-screen/selected-products-context.tsx";
 import "../../../styles/cashier/cashier-dashboard.css";
 import computerImage from "../../../assets/images/computer.jpg";
 
@@ -235,6 +235,7 @@ function SalesScreen() {
     },
   ];
 
+  // List of categories for the navigation bar
   const navItems = [
     "Laptops and Desktops",
     "Printers and Ink",
@@ -244,45 +245,57 @@ function SalesScreen() {
     "Other Accessories",
   ];
 
+  // State to track the active category (index)
   const [active, setActive] = useState(0);
+
+  // Pull the search query from the context
   const { query } = useContext(SearchContext);
+
+  // Function to add selected product to the cart
   const { addProduct } = useSelectedProducts();
 
+  // Filter products based on the selected category and search query
   const filteredProducts = products.filter(
     (product) =>
       product.name.toLowerCase().includes(query.toLowerCase()) &&
       product.category === navItems[active]
   );
 
+  // Set the document title when the component mounts
   useEffect(() => {
     document.title = "Infinitum PoS | Sale Screen";
   }, []);
 
   return (
     <div className="cashier-container">
+      {/* Products Grid Section */}
       <div className="product-container">
         <div className="products-grid">
+          {/* Map through filtered products and display each product */}
           {filteredProducts.map((product, index) => (
             <div
               className="product-card"
-              key={index}
-              onClick={() => addProduct(product)} 
+              key={index} // Consider using unique product ID instead of index
+              onClick={() => addProduct(product)} // Add product to the cart
             >
               <img src={product.image} alt={product.name} />
               <div className="product-name">{product.name}</div>
             </div>
           ))}
+          {/* Display message when no products match the filter */}
           {filteredProducts.length === 0 && <p>No products found.</p>}
         </div>
 
+        {/* Navigation Category Bar */}
         <div className="nav-category">
           <nav className="navbar">
             <ul className="nav-list">
+              {/* Loop through categories and render navigation items */}
               {navItems.map((item, index) => (
                 <li
                   key={index}
-                  className={`nav-item ${active === index ? "active" : ""}`}
-                  onClick={() => setActive(index)}
+                  className={`nav-item ${active === index ? "active" : ""}`} // Apply 'active' class to the selected category
+                  onClick={() => setActive(index)} // Set active category when clicked
                 >
                   {item}
                 </li>
