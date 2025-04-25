@@ -4,41 +4,14 @@ const bcrypt = require('bcrypt');
 const { console } = require('inspector');
 const SECRET_KEY = process.env.JWT_SECRET;
 
-exports.authLogin = (req, res) =>{
-   const {email, password} = req.body;
-   const user = db.prepare('select id, email, password_hash, role from users where email = ?').get(email);
-   const validPassword = bcrypt.compareSync(password, user.password_hash);
-   if(!user && !validPassword) return res.status(404).json({message:'User not found'});
-   
-   const token = jwt.sign({
-      id: user.id,                  
-      email: user.email,
-      role: user.role   
-   }, 
-   SECRET_KEY,
-   {expiresIn:'1h'})
-   res.json({message: 'Login Succesful', token, user});
-}
+const generateUserID = () => {
+    const year = new Date().getFullYear();
+    const randomNum = Math.floor(Math.random() * 10000); // 0–999
+    const padded = String(randomNum).padStart(4, '0');  // 3 digits: 001, 045, 999
+    return `ITI-${year}-${padded}`;
+}   
 
-exports.reqData = (req,res)=>{
-   try{ 
-       const users = db.prepare(`select
-           first_name,
-           last_name,
-           username,
-           email,
-           phone_number,
-           created_at
-           from users`
-       ).all();
-       res.json({users});   
-   }catch(err){
-       console.error(err);
-       res.status(500).json({error: 'Failed to fetch users'})
-   }   
-}
-
-exports.createUsers = async (req,res) =>{
+exports.createUsers = async (req,res) => {
     console.log("Received body:", req.body)
     const {first_name, last_name, username, phone_number, email, password} = req.body;
     try{
@@ -46,6 +19,7 @@ exports.createUsers = async (req,res) =>{
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         const insertUser = db.prepare(`
             insert into users (
+                user_id,
                 first_name,
                 last_name,
                 username,
@@ -53,14 +27,74 @@ exports.createUsers = async (req,res) =>{
                 email,
                 password_hash
             ) values(
-                ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?
             )
         `);
-        insertUser.run(first_name, last_name, username, phone_number, email, hashedPassword);
+        insertUser.run(generateUserID(), first_name, last_name, username, phone_number, email, hashedPassword);
         res.status(201).json({message:'User registered successfully'});
     }catch(err){
         console.error(err);
         res.status(500).json({error: 'User registration failed'}) 
     }
 }
+
+exports.authLogin = (req, res) => {
+   const {email, password} = req.body;
+   const user = db.prepare('select user_id, email, password_hash, role from users where email = ?').get(email);
+   const validPassword = bcrypt.compareSync(password, user.password_hash);
+   if(!user && !validPassword) return res.status(404).json({message:'User not found'});
+   
+   const token = jwt.sign({
+      id: user.id,
+      email: user.email,
+      role: user.role
+   }, 
+   SECRET_KEY,
+   {expiresIn:'1h'})
+   res.json({message: 'Login Succesful', token, user});
+}
+
+exports.activeUser = (req, res) => {
+    const {id} = req.query;
+    try{
+        const activeUser = db.prepare(`
+            select
+                username,
+                email
+            from users
+            where id = ?
+        `).get(id)
+        
+        if (!activeUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        
+        res.json({activeUser})
+
+    }catch(err){
+        console.error(err);
+        res.status(500).json({error: 'Failed to fetch user_id'})
+    }
+}
+
+exports.reqData = (req,res) => {
+   try{ 
+       const users = db.prepare(`
+        select
+           first_name,
+           last_name,
+           username,
+           email,
+           phone_number,
+           created_at
+           from users
+        `).all();
+       res.json({users});   
+   }catch(err){
+       console.error(err);
+       res.status(500).json({error: 'Failed to fetch users'})
+   }   
+}
+
+
 

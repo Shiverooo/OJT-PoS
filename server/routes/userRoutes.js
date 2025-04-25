@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/sqliteModel.js');
 const userController = require('../controllers/userController.js');
-
 const {verifyToken} = require('../middleware/authMiddleware.js');
+
+
 
 router.get('/',(req, res, next) =>{
     try{
         db.prepare(`
             create table if not exists users(
-                id integer primary key autoincrement,
+                user_id varchar(36) primary key,
                 first_name VARCHAR(100) NOT NULL,
                 last_name VARCHAR(100) NOT NULL,
                 email VARCHAR(255) UNIQUE NOT NULL,
@@ -27,14 +28,16 @@ router.get('/',(req, res, next) =>{
     }
 })
 
+router.post('/create-users', userController.createUsers);
+
 router.post('/auth/login', userController.authLogin);
 
 router.get('/auth-user', verifyToken, (req, res)=>{
     res.json({message:'Welcome Back!', user: req.user});
 })
 
-router.post('/create-users', userController.createUsers);
-    
+router.get('/active-user', userController.activeUser);
+
 router.get('/req-data', userController.reqData);
 
 module.exports = router;
