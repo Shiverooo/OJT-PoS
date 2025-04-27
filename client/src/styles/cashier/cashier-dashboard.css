@@ -262,6 +262,12 @@ body {
   }
 }
 
+@media (max-width: 1366px) {
+  .nav-list {
+    top: -2vh;
+  }
+}
+
 @media (max-width: 480px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);

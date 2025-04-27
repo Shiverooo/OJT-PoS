@@ -24,23 +24,40 @@ const Popup: React.FC<PopupProps> = ({
   handleClosePopup,
   handleInputChange,
 }) => {
+  const hasItems = selectedItems.length > 0;
+
   // Handle Enter key to trigger Pay action
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      // Trigger the reset or Pay action when Enter is pressed
+    if (e.key === "Enter" && hasItems) {
       resetReceipt();
     }
   };
 
-  // Set up the event listener for the Enter key when the popup is open
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
-
-    // Cleanup the event listener when the component unmounts
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []); 
+  }, [hasItems]);
+
+  // Custom function to add value directly to cashInput and cashReceived
+  const handleCustomNumberClick = (value: number) => {
+    if (!hasItems) return; // Prevent clicking if no items
+
+    const newCash = cashReceived + value;
+
+    setCashReceived(newCash);
+
+    const fakeEvent = {
+      target: { value: newCash.toString() },
+    } as React.ChangeEvent<HTMLInputElement>;
+    handleInputChange(fakeEvent);
+  };
+
+  const handleInputIfAllowed = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!hasItems) return; // Prevent typing if no items
+    handleInputChange(e);
+  };
 
   return (
     <div className="popup-overlay">
@@ -114,22 +131,25 @@ const Popup: React.FC<PopupProps> = ({
                   <input
                     type="text"
                     value={cashInput}
-                    onChange={handleInputChange} // Handles input changes
+                    onChange={handleInputIfAllowed} // New restricted input handler
                     className="cash-received-input"
+                    disabled={!hasItems} // Disable typing if no items
                   />
                 </div>
-                <button onClick={resetReceipt} className="pay-button">
+                <button onClick={hasItems ? resetReceipt : undefined} className="pay-button" disabled={!hasItems}>
                   Pay
                 </button>
                 <div className="underline"></div>
               </div>
 
+              {/* Number Buttons Grid */}
               <div className="number-buttons-grid">
                 {[1, 5, 10, 20, 50, 100, 500, 1000].map((num) => (
                   <button
                     key={num}
-                    onClick={() => handleNumberClick(num)}
+                    onClick={() => handleCustomNumberClick(num)}
                     className="number-button"
+                    disabled={!hasItems} // Disable number buttons if no items
                   >
                     ₱{num}
                   </button>
