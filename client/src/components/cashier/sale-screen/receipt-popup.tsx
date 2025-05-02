@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import CashIcon from "../../../assets/images/cash.svg";
 
+const generateOrderId = () => {
+  const timestamp = new Date().getTime();
+  return `${timestamp.toString().slice(-4)}`;
+};
+
 type PopupProps = {
   selectedItems: any[];
   cashInput: string;
@@ -11,6 +16,7 @@ type PopupProps = {
   handleNumberClick: (value: number) => void;
   handleClosePopup: () => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  clearItems: () => void;
 };
 
 const Popup: React.FC<PopupProps> = ({
@@ -18,19 +24,54 @@ const Popup: React.FC<PopupProps> = ({
   cashInput,
   totalAmount,
   cashReceived,
-  resetReceipt,
+  resetReceipt: originalResetReceipt,
   setCashReceived,
   handleNumberClick,
   handleClosePopup,
   handleInputChange,
+  clearItems,
 }) => {
   const hasItems = selectedItems.length > 0;
 
-  // Handle Enter key to trigger Pay action
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Enter" && hasItems) {
-      resetReceipt();
+      handlePayment();
     }
+  };
+
+  const handlePayment = () => {
+    const now = new Date();
+    const sale = {
+      id: generateOrderId(),
+      amount: totalAmount,
+      orderNumber: `#4-${generateOrderId()}`,
+      date: now.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+      }),
+      time: now.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      }),
+      paymentType: "Cash",
+      items: selectedItems.map((item) => ({
+        name: item.name,
+        qty: item.quantity,
+        price: item.price,
+      })),
+    };
+
+    const existingSales = JSON.parse(localStorage.getItem("sales") || "[]");
+
+    existingSales.unshift(sale);
+
+    localStorage.setItem("sales", JSON.stringify(existingSales));
+
+    originalResetReceipt();
+    clearItems();
   };
 
   useEffect(() => {
@@ -40,12 +81,10 @@ const Popup: React.FC<PopupProps> = ({
     };
   }, [hasItems]);
 
-  // Custom function to add value directly to cashInput and cashReceived
   const handleCustomNumberClick = (value: number) => {
-    if (!hasItems) return; // Prevent clicking if no items
+    if (!hasItems) return;
 
     const newCash = cashReceived + value;
-
     setCashReceived(newCash);
 
     const fakeEvent = {
@@ -55,7 +94,7 @@ const Popup: React.FC<PopupProps> = ({
   };
 
   const handleInputIfAllowed = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!hasItems) return; // Prevent typing if no items
+    if (!hasItems) return;
     handleInputChange(e);
   };
 
@@ -72,7 +111,6 @@ const Popup: React.FC<PopupProps> = ({
         </div>
 
         <div className="popup-body">
-          {/* Popup Receipt Table */}
           <div className="receipt-container">
             <table className="popup-receipt-table">
               <thead>
@@ -111,7 +149,6 @@ const Popup: React.FC<PopupProps> = ({
             </div>
           </div>
 
-          {/* Payment Section */}
           <div className="payment-section">
             <h1>
               ₱
@@ -121,7 +158,6 @@ const Popup: React.FC<PopupProps> = ({
             </h1>
             <p>Total amount due</p>
 
-            {/* Cash Input with Buttons */}
             <div className="cash-input-container">
               <p>Cash Received</p>
               <div className="cash-row">
@@ -131,25 +167,28 @@ const Popup: React.FC<PopupProps> = ({
                   <input
                     type="text"
                     value={cashInput}
-                    onChange={handleInputIfAllowed} // New restricted input handler
+                    onChange={handleInputIfAllowed}
                     className="cash-received-input"
-                    disabled={!hasItems} // Disable typing if no items
+                    disabled={!hasItems}
                   />
                 </div>
-                <button onClick={hasItems ? resetReceipt : undefined} className="pay-button" disabled={!hasItems}>
+                <button
+                  onClick={hasItems ? handlePayment : undefined}
+                  className="pay-button"
+                  disabled={!hasItems}
+                >
                   Pay
                 </button>
                 <div className="underline"></div>
               </div>
 
-              {/* Number Buttons Grid */}
               <div className="number-buttons-grid">
                 {[1, 5, 10, 20, 50, 100, 500, 1000].map((num) => (
                   <button
                     key={num}
                     onClick={() => handleCustomNumberClick(num)}
                     className="number-button"
-                    disabled={!hasItems} // Disable number buttons if no items
+                    disabled={!hasItems}
                   >
                     ₱{num}
                   </button>

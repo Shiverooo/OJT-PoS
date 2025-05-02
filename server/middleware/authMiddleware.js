@@ -11,7 +11,13 @@ function verifyToken (req, res, next) {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded; 
+        req.user = {
+            id: decoded.id,
+            email: decoded.email,
+            role: decoded.role,
+            first_name: decoded.first_name,
+            last_name: decoded.last_name
+        }; 
         console.log(req.user);
         next();
     } catch (err) {

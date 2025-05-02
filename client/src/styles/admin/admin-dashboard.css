@@ -162,7 +162,7 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color: #3f5e3e;
   padding: 15px;
 }
@@ -171,6 +171,7 @@
 .header-title {
   display: flex;
   align-items: center;
+  margin: 0 20px;
 }
 
 .header-title h1 {
@@ -181,13 +182,24 @@
   margin: 0;
 }
 
+/* User Info */
+.user-info {
+  margin-left: auto;
+  padding-right: 20px;
+}
+
+.user-name {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+}
+
 /* Menu Icon */
 .menu-icon {
   width: 30px;
   height: 30px;
   cursor: pointer;
   margin-left: 10px;
-  margin-right: 20px;
   display: inline-block;
   filter: invert(100%) brightness(100%) contrast(100%);
 }

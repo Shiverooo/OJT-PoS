@@ -81,26 +81,30 @@ const AddProductModal: React.FC<AddProductModalProps> = ({
     }
 
     // Pass product data to parent for adding
-    onAddProduct({
+    const getProductStatus = (quantity: number) => {
+      if (quantity === 0) return "OUT-OF-STOCK";
+      if (quantity < 5) return "LOW";
+      return "IN-STOCK";
+    };
+
+    const newProduct = {
       barcode,
       name: productName,
+      category,
+      supplier,
       price,
       quantity: parseInt(quantity),
-      date: dateAdded,
+      dateAdded,
       image,
-    });
+      status: getProductStatus(parseInt(quantity))
+    };
+
+    onAddProduct(newProduct);
 
     // Save product to localStorage
     const storedProducts = localStorage.getItem("products");
     let products = storedProducts ? JSON.parse(storedProducts) : [];
-    products.push({
-      barcode,
-      name: productName,
-      price,
-      quantity: parseInt(quantity),
-      date: dateAdded,
-      image,
-    });
+    products.push(newProduct);
     localStorage.setItem("products", JSON.stringify(products));
 
     resetForm();

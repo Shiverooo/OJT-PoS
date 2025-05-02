@@ -177,6 +177,13 @@ function AdminDashboard() {
             <div className="header-title">
               <h1>{headerTitle}</h1>
             </div>
+            <div className="user-info">
+              {user && (
+                <span className="user-name">
+                  {user.first_name} {user.last_name}
+                </span>
+              )}
+            </div>
           </div>
           {/* Outlet for child routes */}
           <Outlet />

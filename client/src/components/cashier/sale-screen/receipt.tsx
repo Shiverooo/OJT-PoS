@@ -125,6 +125,7 @@ function Receipt() {
           handleNumberClick={handleNumberClick}
           handleClosePopup={handleClosePopup}
           handleInputChange={handleInputChange}
+          clearItems={clearItems}
         />
       )}
     </div>
