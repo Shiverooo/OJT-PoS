@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/cashier/inventory.css";
 import searchIcon from "../../../assets/images/search-icon.svg";
+import SearchBar from "../../../components/cashier/inventory/inventory-search.tsx";
+import TableHeader from "../../../components/cashier/inventory/inventory-header.tsx";
+import TableBody from "../../../components/cashier/inventory/inventory-table.tsx";
 
 // Define the type for inventory items
 interface InventoryItem {
@@ -11,7 +14,7 @@ interface InventoryItem {
   price: string;
   dateAdded: string;
   stocks: number;
-  status: "IN-STOCK" | "LOW" | "OUT-OF-STOCK"; // Only these three statuses are allowed
+  status: "IN-STOCK" | "LOW" | "OUT-OF-STOCK"; 
 }
 
 function Inventory() {
@@ -78,65 +81,14 @@ function Inventory() {
 
   return (
     <div className="inventory-container">
-      {/* Search Bar for name and barcode */}
-      <div className="search-bar-container">
-        <div className="search-box">
-          <img src={searchIcon} alt="Search Icon" className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search By Name"
-            className="search-input"
-            value={nameSearch}
-            onChange={(e) => setNameSearch(e.target.value)}
-          />
-        </div>
-        <div className="search-box">
-          <img src={searchIcon} alt="Search Icon" className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search By Barcode"
-            className="search-input"
-            value={barcodeSearch}
-            onChange={(e) => setBarcodeSearch(e.target.value)}
-          />
-        </div>
-      </div>
-
-      {/* Table Header */}
-      <div className="table-header">
-        <div className="header-item">BARCODE</div>
-        <div className="header-item">NAME</div>
-        <div className="header-item">CATEGORY</div>
-        <div className="header-item">SUPPLIER</div>
-        <div className="header-item">PRICE</div>
-        <div className="header-item">DATE ADDED</div>
-        <div className="header-item">STOCKS</div>
-        <div className="header-item">STATUS</div>
-      </div>
-
-      {/* Table Body with filtered items or No Items message */}
-      <div className="table-body">
-        {filteredData.length > 0 ? (
-          filteredData.map((item, index) => (
-            <div className="table-row" key={index}>
-              <div className="row-item">{item.barcode}</div>
-              <div className="row-item">{item.name}</div>
-              <div className="row-item">{item.category}</div>
-              <div className="row-item">{item.supplier}</div>
-              <div className="row-item">{item.price}</div>
-              <div className="row-item">{item.dateAdded}</div>
-              <div className="row-item">{item.stocks}</div>
-              <div className={`row-item status-${item.status.toLowerCase()}`}>
-                {item.status}
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="no-items-message">
-            <p>No product items available</p>
-          </div>
-        )}
-      </div>
+      <SearchBar
+        nameSearch={nameSearch}
+        barcodeSearch={barcodeSearch}
+        onNameSearchChange={setNameSearch}
+        onBarcodeSearchChange={setBarcodeSearch}
+      />
+      <TableHeader />
+      <TableBody items={filteredData} />
     </div>
   );
 }

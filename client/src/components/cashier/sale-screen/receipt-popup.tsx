@@ -57,6 +57,7 @@ const Popup: React.FC<PopupProps> = ({
         hour12: true,
       }),
       paymentType: "Cash",
+      change: cashReceived - totalAmount > 0 ? cashReceived - totalAmount : 0,
       items: selectedItems.map((item) => ({
         name: item.name,
         qty: item.quantity,

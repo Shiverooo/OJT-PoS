@@ -1,5 +1,4 @@
 // Sidebar Component
-
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../../styles/cashier/sidebar.css";
@@ -7,6 +6,7 @@ import cartIcon from "../../../assets/images/cart.svg";
 import receiptIcon from "../../../assets/images/receipt.svg";
 import boxIcon from "../../../assets/images/box.svg";
 import signOutIcon from "../../../assets/images/sign-out.svg";
+import useFetchUser from "../../../hooks/useFetchUser";
 
 // Sidebar Props Interface
 interface SidebarProps {
@@ -18,6 +18,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
   const nav = useNavigate();
+  const { user } = useFetchUser();
 
   // Handle sign out action
   const handleSignOut = () => {
@@ -28,6 +29,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   // Render sidebar
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
+      {isOpen && user && (
+        <div className="cashier-user-info">
+          <span className="user-name">{user.first_name} {user.last_name}</span>
+          <span className="user-email">{user.email}</span>
+        </div>
+      )}
       <ul>
         {/* Sales Screen Link */}
         <Link to="/cashier">

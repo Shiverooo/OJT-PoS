@@ -210,6 +210,21 @@
   border-bottom: 1px solid #dcdcdc;
 }
 
+.history-change-section {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  color: #4b4b4b;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.history-change {
+  color: #292929;
+  font-size: 18px;
+}
+
 /* Receipt Footer */
 .receipt-footer {
   display: flex;
