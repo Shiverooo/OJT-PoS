@@ -17,12 +17,10 @@ import SalesReport from "./page/admin-dashboard/dashboard/sales-reports.tsx";
 import NoPage from "./page/no-page.tsx";
 import "./App.css";
 
-// 👇 Import the context
-import { SelectedProductsProvider } from "./components/cashier/sale-screen/selected-products-context.tsx";
+// import { SelectedProductsProvider } from "./components/cashier/sale-screen/selected-products-context.tsx";
 
 function App() {
   return (
-    <SelectedProductsProvider>
       <Router>
         <Routes>
           <Route index element={<Login />} />
@@ -41,7 +39,6 @@ function App() {
           <Route path="*" element={<NoPage />} />
         </Routes>
       </Router>
-    </SelectedProductsProvider>
   );
 }
 
