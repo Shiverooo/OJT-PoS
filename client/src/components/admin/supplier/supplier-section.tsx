@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import "../../../styles/admin/supplier.css";
 import AddSupplierModal from "../../../components/admin/supplier/addsuppliermodal.tsx";
+import { color } from "chart.js/helpers";
 
 // Define the structure of the SupplierSection props
 interface SupplierSectionProps {
@@ -98,7 +99,7 @@ const SupplierSection: React.FC<SupplierSectionProps> = ({
             {/* If no suppliers are found, show a message */}
             {currentSuppliers.length === 0 ? (
               <tr>
-                <td colSpan={6} style={{ textAlign: "center" }}>
+                <td colSpan={6} style={{ textAlign: "center", color: "#7b7b7b" }}>
                   No suppliers found.
                 </td>
               </tr>

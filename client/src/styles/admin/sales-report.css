@@ -234,3 +234,15 @@ body {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.sales-table-body .no-hover-row:hover,
+.sales-table-body .no-hover-row td:hover {
+  background: none !important;
+  cursor: text !important;
+}
+
+.best-product-table .no-hover-row:hover,
+.best-product-table .no-hover-row td:hover {
+  background: none !important;
+  cursor: text !important;
+}

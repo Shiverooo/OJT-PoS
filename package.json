@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/Shiverooo/OJT-PoS#readme",
   "dependencies": {
-    "cors": "^2.8.5"
+    "chart.js": "^4.4.9",
+    "cors": "^2.8.5",
+    "react-chartjs-2": "^5.3.0"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

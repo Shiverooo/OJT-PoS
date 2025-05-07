@@ -238,14 +238,14 @@
 .no-sales-message {
   text-align: center;
   padding: 20px;
-  color: #666;
+  color: #7b7b7b;
   font-size: 16px;
   margin-top: 20px;
 }
 
 .empty-receipt-message {
   text-align: center;
-  color: #666;
+  color: #7b7b7b;
   font-style: italic;
 }
 

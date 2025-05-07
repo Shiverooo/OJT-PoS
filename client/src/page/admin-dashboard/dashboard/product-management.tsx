@@ -4,14 +4,15 @@ import ProductSection from "../../../components/admin/product-management/product
 import SearchBar from "../../../components/admin/product-management/search-bar.tsx";
 import InventorySummary from "../../../components/admin/product-management/InventorySummary.tsx";
 
-// Initial empty product list
-const initialProductData: Product[] = [];
+// Initial product list from localStorage or empty array
+const initialProductData: Product[] = JSON.parse(localStorage.getItem('products') || '[]');
 
 type Product = {
   name: string;
   barcode: string;
   price: string;
   quantity: number;
+  dateAdded: string;
 };
 
 function ProductManagement() {
@@ -23,6 +24,11 @@ function ProductManagement() {
   const [productsPerPage, setProductsPerPage] = useState<number>(() => {
     return window.innerWidth <= 1366 ? 6 : 8; // Set default number of products per page based on window width
   });
+
+  // Save products to localStorage whenever productList changes
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(productList));
+  }, [productList]);
 
   // Adjust the number of products per page on window resize
   useEffect(() => {
@@ -64,7 +70,11 @@ function ProductManagement() {
 
   // Add a new product to the product list
   const handleAddProduct = (newProduct: Product) => {
-    const updatedProducts = [...productList, newProduct]; // Add new product to the list
+    const productWithDate = {
+      ...newProduct,
+      dateAdded: new Date().toISOString().split('T')[0], // YYYY-MM-DD
+    };
+    const updatedProducts = [...productList, productWithDate]; // Add new product to the list
     setProductList(updatedProducts); // Update product list
     const newTotalPages = Math.ceil(updatedProducts.length / productsPerPage); // Recalculate total pages
     setCurrentPage(newTotalPages); // Update current page

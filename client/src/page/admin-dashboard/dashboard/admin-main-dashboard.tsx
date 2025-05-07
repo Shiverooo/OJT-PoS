@@ -35,11 +35,11 @@ function AdminMainDashboard() {
 
   // Sample data for sales and purchase charts (static data)
   const salesPurchaseData = [
-    { month: "Jan", purchase: 1000, sales: 2000 },
-    { month: "Feb", purchase: 2000, sales: 3000 },
-    { month: "Mar", purchase: 3000, sales: 1000 },
-    { month: "Apr", purchase: 4000, sales: 5000 },
-    { month: "May", purchase: 5000, sales: 4000 },
+    { month: "Jan", purchase: 55000, sales: 49000 },
+    { month: "Feb", purchase: 58000, sales: 52000 },
+    { month: "Mar", purchase: 47000, sales: 54000 },
+    { month: "Apr", purchase: 42000, sales: 44000 },
+    { month: "May", purchase: 35000, sales: 47000 },
   ];
 
   // Inventory summary, showing total quantity in hand

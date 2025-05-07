@@ -1,5 +1,4 @@
 // Best Selling Product Section Component
-
 import React from "react";
 
 // Define the structure for a product
@@ -16,9 +15,9 @@ interface Product {
 interface BestSellingProductProps {
   paginatedData: Product[]; // Paginated product data
   currentPage: number; // Current page number
-  totalPages: number; // Total number of pages
-  onPrevPage: () => void; // Function to go to previous page
-  onNextPage: () => void; // Function to go to next page
+  totalPages: number; 
+  onPrevPage: () => void; 
+  onNextPage: () => void; 
 }
 
 const BestSellingProduct: React.FC<BestSellingProductProps> = ({
@@ -46,7 +45,7 @@ const BestSellingProduct: React.FC<BestSellingProductProps> = ({
           <thead>
             <tr>
               <th>Product</th>
-              <th>Product ID</th>
+              <th>Barcode</th>
               <th>Category</th>
               <th>Remaining Quantity</th>
               <th>Turn Over</th>
@@ -55,16 +54,24 @@ const BestSellingProduct: React.FC<BestSellingProductProps> = ({
           </thead>
           <tbody>
             {/* Map over paginatedData and display product information */}
-            {paginatedData.map((item, index) => (
-              <tr key={index}>
-                <td>{item.product}</td>
-                <td>{item.id}</td>
-                <td>{item.category}</td>
-                <td>{item.quantity}</td>
-                <td>₱{item.turnover.toLocaleString()}</td>
-                <td className="increase">{item.increase}</td>
+            {paginatedData.length === 0 ? (
+              <tr className="no-hover-row">
+                <td colSpan={6} style={{ textAlign: 'center', color: '#7b7b7b', padding: '10px 0' }}>
+                  No product was purchased.
+                </td>
               </tr>
-            ))}
+            ) : (
+              paginatedData.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.product}</td>
+                  <td>{item.id}</td>
+                  <td>{item.category}</td>
+                  <td>{item.quantity}</td>
+                  <td>₱{item.turnover.toLocaleString()}</td>
+                  <td className="increase">{item.increase}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
 

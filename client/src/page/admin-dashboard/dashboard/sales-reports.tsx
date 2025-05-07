@@ -4,42 +4,17 @@ import SalesPurchaseChart from "../../../components/admin/main-dashboard/sales-p
 import BestSellingCategory from "../../../components/admin/sale-reports/best-selling-category.tsx";
 import BestSellingProduct from "../../../components/admin/sale-reports/best-selling-product.tsx";
 
-// Sample data for sales and purchases over months
+// Sample data for sales and purchases over months (12 months, realistic values)
 const salesPurchaseData = [
-  { month: "Jan", purchase: 1000, sales: 2000 },
-  { month: "Feb", purchase: 2000, sales: 3000 },
-  { month: "Mar", purchase: 3000, sales: 1000 },
-  { month: "Apr", purchase: 4000, sales: 5000 },
-  { month: "May", purchase: 5000, sales: 4000 },
+  { month: "Jan", purchase: 55000, sales: 49000 },
+  { month: "Feb", purchase: 58000, sales: 52000 },
+  { month: "Mar", purchase: 47000, sales: 54000 },
+  { month: "Apr", purchase: 42000, sales: 44000 },
+  { month: "May", purchase: 35000, sales: 47000 },
 ];
 
 // Sample data for best-selling products
-const productData = [
-  {
-    product: "Keyboard",
-    id: "P-1022",
-    category: "Peripherals",
-    quantity: 34,
-    turnover: 26000,
-    increase: "3.2%",
-  },
-  {
-    product: "Monitor",
-    id: "P-1009",
-    category: "Display",
-    quantity: 19,
-    turnover: 22000,
-    increase: "2%",
-  },
-  {
-    product: "RAM",
-    id: "P-1044",
-    category: "Memory",
-    quantity: 27,
-    turnover: 22000,
-    increase: "1.5%",
-  },
-];
+const productData = [];
 
 function SalesReport() {
   // 🔹 State to track the current page for pagination
@@ -70,7 +45,7 @@ function SalesReport() {
       <div className="sales-report-container">
         {/* Sales and Purchase Chart */}
         <div className="sales-chart-container">
-          <SalesPurchaseChart data={salesPurchaseData} height={315} />{" "}
+          <SalesPurchaseChart data={salesPurchaseData} height={315} />
           {/* Chart displaying sales/purchase data */}
         </div>
 

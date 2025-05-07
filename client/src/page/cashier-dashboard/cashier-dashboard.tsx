@@ -6,6 +6,7 @@ import SearchContainer from '../../components/cashier/sale-screen/searchbar.tsx'
 import menuIcon from "../../assets/images/menu-icon.svg";
 import barcodeIcon from "../../assets/images/barcode-icon.svg";
 import { SearchProvider } from '../../components/cashier/sale-screen/search-context.tsx';
+import { SelectedProductsProvider } from '../../components/cashier/sale-screen/selected-products-context.tsx';
 import '../../styles/cashier/cashier-dashboard.css';
 import useCheckRole from '../../hooks/useCheckRole.js';
 import useFetchUser from '../../hooks/useFetchUser.js';
@@ -47,39 +48,41 @@ function CashierDashboard() {
     }
     
     return (
-        <SearchProvider>
-            <div className="cashier-container">
-                <div className={cashierDashboardClass}>
-                    <div className="header-left">
-                        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-                        <img
-                            src={menuIcon}
-                            alt="Menu"
-                            className={`icon ${isSidebarOpen ? "menu-icon-open" : "menu-icon-closed"}`}
-                            id="menu-icon"
-                            onClick={toggleSidebar}
-                        />
-                        <span className="title">
-                            {isSalesHistoryPage ? "Sale History" : isInventoryPage ? "Inventory" : "Products"}
-                        </span>
+        <SelectedProductsProvider>
+            <SearchProvider>
+                <div className="cashier-container">
+                    <div className={cashierDashboardClass}>
+                        <div className="header-left">
+                            <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+                            <img
+                                src={menuIcon}
+                                alt="Menu"
+                                className={`icon ${isSidebarOpen ? "menu-icon-open" : "menu-icon-closed"}`}
+                                id="menu-icon"
+                                onClick={toggleSidebar}
+                            />
+                            <span className="title">
+                                {isSalesHistoryPage ? "Sale History" : isInventoryPage ? "Inventory" : "Products"}
+                            </span>
 
-                        {!(isSalesHistoryPage || isInventoryPage) && (
-                            <div className="header-icons">
-                                <img
-                                    src={barcodeIcon}
-                                    alt="Barcode"
-                                    className="icon"
-                                    id="barcode-icon"
-                                />
-                                <SearchContainer />
-                            </div>
-                        )}
+                            {!(isSalesHistoryPage || isInventoryPage) && (
+                                <div className="header-icons">
+                                    <img
+                                        src={barcodeIcon}
+                                        alt="Barcode"
+                                        className="icon"
+                                        id="barcode-icon"
+                                    />
+                                    <SearchContainer />
+                                </div>
+                            )}
+                        </div>
+                        <Outlet />
                     </div>
-                    <Outlet />
+                    <Receipt />
                 </div>
-                <Receipt />
-            </div>
-        </SearchProvider>
+            </SearchProvider>
+        </SelectedProductsProvider>
     );
 }
 

@@ -1,5 +1,4 @@
 // Product Section Component
-
 import React from "react";
 import AddProductModal from "../../../components/admin/product-management/AddProductModal.tsx";
 
@@ -16,13 +15,14 @@ const ProductSection = ({
   setShowModal,
   handleAddProduct,
 }) => {
-  // Format the date to MM-DD-YYYY
+  // Format the date to YYYY-MM-DD
   const formatDate = (isoDate) => {
+    if (!isoDate) return '';
     const date = new Date(isoDate);
+    const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, "0");
     const dd = String(date.getDate()).padStart(2, "0");
-    const yyyy = date.getFullYear();
-    return `${mm}-${dd}-${yyyy}`;
+    return `${yyyy}-${mm}-${dd}`;
   };
 
   return (
@@ -59,7 +59,7 @@ const ProductSection = ({
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
-                  <td>{formatDate(product.date)}</td>
+                  <td>{formatDate(product.dateAdded)}</td>
                   <td>
                     <span
                       className={`status ${getStatusClass(product.quantity)}`}
@@ -75,7 +75,7 @@ const ProductSection = ({
               ))
             ) : (
               <tr>
-                <td colSpan="6" style={{ textAlign: "center" }}>
+                <td colSpan="6" style={{ textAlign: "center", color: "#7b7b7b"}}>
                   No products found.
                 </td>
               </tr>

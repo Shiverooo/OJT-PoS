@@ -9,8 +9,33 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  CartesianGrid,
 } from "recharts";
 import calendarIcon from "../../../assets/images/calendar.svg";
+
+// Custom legend to use circle icons
+const renderLegend = (props) => {
+  const { payload } = props;
+  return (
+    <div style={{ display: "flex", justifyContent: "center", gap: 30, marginTop: 20 }}>
+      {payload.map((entry, index) => (
+        <div key={`item-${index}`} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              background: entry.color,
+              marginRight: 6,
+            }}
+          ></span>
+          <span style={{ color: "#666", fontSize: 15 }}>{entry.value}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 // Sales Purchase Chart component definition
 function SalesPurchaseChart({ data, height = 300 }) {
@@ -31,16 +56,35 @@ function SalesPurchaseChart({ data, height = 300 }) {
 
       {/* Responsive Container for BarChart */}
       <ResponsiveContainer width="100%" height={height}>
-        <BarChart data={data}>
+        <BarChart data={data} barCategoryGap={30} barGap={3}>
           {/* X and Y Axes, Tooltip, and Legend */}
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
+          <CartesianGrid vertical={false} stroke="#bdbdbd" strokeWidth={2} />
+          <XAxis dataKey="month" axisLine={false} tickLine={false} />
+          <YAxis
+            axisLine={false}
+            tickLine={false}
+            domain={[10000, 60000]}
+            tick={{ fontSize: 13 }}
+            tickFormatter={(value) => value.toLocaleString()}
+          />
+          <Tooltip formatter={(value) => value.toLocaleString()} />
+          <Legend content={renderLegend} verticalAlign="bottom" height={50} />
 
           {/* Sales and Purchase Bars */}
-          <Bar dataKey="purchase" fill="#6495ED" name="Purchase" />
-          <Bar dataKey="sales" fill="#32CD32" name="Sales" />
+          <Bar
+            dataKey="purchase"
+            fill="#5d9cff"
+            name="Purchase"
+            radius={[8, 8, 0, 0]}
+            barSize={28}
+          />
+          <Bar
+            dataKey="sales"
+            fill="#34c759"
+            name="Sales"
+            radius={[8, 8, 0, 0]}
+            barSize={28}
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>

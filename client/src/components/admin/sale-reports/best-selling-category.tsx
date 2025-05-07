@@ -33,21 +33,10 @@ function BestSellingCategory() {
                 <col style={{ width: "30%" }} />
               </colgroup>
               <tbody>
-                {/* Rows for each product category with turnover and increase data */}
-                <tr>
-                  <td>Peripherals</td>
-                  <td>₱52,000</td>
-                  <td className="increased-by">4%</td>
-                </tr>
-                <tr>
-                  <td>Display</td>
-                  <td>₱22,000</td>
-                  <td className="increased-by">2%</td>
-                </tr>
-                <tr>
-                  <td>Memory</td>
-                  <td>₱22,000</td>
-                  <td className="increased-by">1.5%</td>
+                <tr className="no-hover-row">
+                  <td colSpan={3} style={{ textAlign: 'center', color: '#7b7b7b', padding: '10px 0' }}>
+                    No purchase item available.
+                  </td>
                 </tr>
               </tbody>
             </table>
