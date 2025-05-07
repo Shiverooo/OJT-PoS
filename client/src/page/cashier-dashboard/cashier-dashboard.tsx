@@ -81,7 +81,7 @@ function CashierDashboard() {
                 </div>
                 <Receipt />
             </div>
-        </SearchProvider>
+            </SearchProvider>
         </SelectedProductsProvider>
     );
 }
