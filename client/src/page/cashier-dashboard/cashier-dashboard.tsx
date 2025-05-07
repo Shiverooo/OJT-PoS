@@ -6,6 +6,7 @@ import SearchContainer from '../../components/cashier/sale-screen/searchbar.tsx'
 import menuIcon from "../../assets/images/menu-icon.svg";
 import barcodeIcon from "../../assets/images/barcode-icon.svg";
 import { SearchProvider } from '../../components/cashier/sale-screen/search-context.tsx';
+import { SelectedProductsProvider } from '../../components/cashier/sale-screen/selected-products-context.tsx';
 import '../../styles/cashier/cashier-dashboard.css';
 import useCheckRole from '../../hooks/useCheckRole.js';
 import useFetchUser from '../../hooks/useFetchUser.js';
@@ -47,7 +48,8 @@ function CashierDashboard() {
     }
     
     return (
-        <SearchProvider>
+        <SelectedProductsProvider>
+            <SearchProvider>
             <div className="cashier-container">
                 <div className={cashierDashboardClass}>
                     <div className="header-left">
@@ -80,6 +82,7 @@ function CashierDashboard() {
                 <Receipt />
             </div>
         </SearchProvider>
+        </SelectedProductsProvider>
     );
 }
 
