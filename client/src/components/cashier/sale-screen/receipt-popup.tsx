@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import CashIcon from "../../../assets/images/cash.svg";
 
+const generateOrderId = () => {
+  const timestamp = new Date().getTime();
+  return `${timestamp.toString().slice(-4)}`;
+};
+
 type PopupProps = {
   selectedItems: any[];
   cashInput: string;
@@ -11,6 +16,7 @@ type PopupProps = {
   handleNumberClick: (value: number) => void;
   handleClosePopup: () => void;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  clearItems: () => void;
 };
 
 const Popup: React.FC<PopupProps> = ({
@@ -18,29 +24,80 @@ const Popup: React.FC<PopupProps> = ({
   cashInput,
   totalAmount,
   cashReceived,
-  resetReceipt,
+  resetReceipt: originalResetReceipt,
   setCashReceived,
   handleNumberClick,
   handleClosePopup,
   handleInputChange,
+  clearItems,
 }) => {
-  // Handle Enter key to trigger Pay action
+  const hasItems = selectedItems.length > 0;
+
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      // Trigger the reset or Pay action when Enter is pressed
-      resetReceipt();
+    if (e.key === "Enter" && hasItems) {
+      handlePayment();
     }
   };
 
-  // Set up the event listener for the Enter key when the popup is open
+  const handlePayment = () => {
+    const now = new Date();
+    const sale = {
+      id: generateOrderId(),
+      amount: totalAmount,
+      orderNumber: `#4-${generateOrderId()}`,
+      date: now.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+      }),
+      time: now.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      }),
+      paymentType: "Cash",
+      change: cashReceived - totalAmount > 0 ? cashReceived - totalAmount : 0,
+      items: selectedItems.map((item) => ({
+        name: item.name,
+        qty: item.quantity,
+        price: item.price,
+      })),
+    };
+
+    const existingSales = JSON.parse(localStorage.getItem("sales") || "[]");
+
+    existingSales.unshift(sale);
+
+    localStorage.setItem("sales", JSON.stringify(existingSales));
+
+    originalResetReceipt();
+    clearItems();
+  };
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
-
-    // Cleanup the event listener when the component unmounts
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []); 
+  }, [hasItems]);
+
+  const handleCustomNumberClick = (value: number) => {
+    if (!hasItems) return;
+
+    const newCash = cashReceived + value;
+    setCashReceived(newCash);
+
+    const fakeEvent = {
+      target: { value: newCash.toString() },
+    } as React.ChangeEvent<HTMLInputElement>;
+    handleInputChange(fakeEvent);
+  };
+
+  const handleInputIfAllowed = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!hasItems) return;
+    handleInputChange(e);
+  };
 
   return (
     <div className="popup-overlay">
@@ -55,7 +112,6 @@ const Popup: React.FC<PopupProps> = ({
         </div>
 
         <div className="popup-body">
-          {/* Popup Receipt Table */}
           <div className="receipt-container">
             <table className="popup-receipt-table">
               <thead>
@@ -94,7 +150,6 @@ const Popup: React.FC<PopupProps> = ({
             </div>
           </div>
 
-          {/* Payment Section */}
           <div className="payment-section">
             <h1>
               ₱
@@ -104,7 +159,6 @@ const Popup: React.FC<PopupProps> = ({
             </h1>
             <p>Total amount due</p>
 
-            {/* Cash Input with Buttons */}
             <div className="cash-input-container">
               <p>Cash Received</p>
               <div className="cash-row">
@@ -114,11 +168,16 @@ const Popup: React.FC<PopupProps> = ({
                   <input
                     type="text"
                     value={cashInput}
-                    onChange={handleInputChange} // Handles input changes
+                    onChange={handleInputIfAllowed}
                     className="cash-received-input"
+                    disabled={!hasItems}
                   />
                 </div>
-                <button onClick={resetReceipt} className="pay-button">
+                <button
+                  onClick={hasItems ? handlePayment : undefined}
+                  className="pay-button"
+                  disabled={!hasItems}
+                >
                   Pay
                 </button>
                 <div className="underline"></div>
@@ -128,8 +187,9 @@ const Popup: React.FC<PopupProps> = ({
                 {[1, 5, 10, 20, 50, 100, 500, 1000].map((num) => (
                   <button
                     key={num}
-                    onClick={() => handleNumberClick(num)}
+                    onClick={() => handleCustomNumberClick(num)}
                     className="number-button"
+                    disabled={!hasItems}
                   >
                     ₱{num}
                   </button>

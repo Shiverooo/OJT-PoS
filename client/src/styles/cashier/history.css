@@ -13,7 +13,7 @@
   border: 1px solid #dcdcdc;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.08);
   height: 100%;
-  width: 55%;
+  width: 35%;
   position: relative;
   overflow-y: auto;
   max-height: calc(100vh - 40px);
@@ -97,7 +97,8 @@
 }
 
 .sales-summary-container.active {
-  background-color: #d3d3d3;
+  background-color: #f0f8f0;
+  border-left: 4px solid #41ab5d;
 }
 
 .amount {
@@ -163,7 +164,7 @@
 
 /* Receipt Item List */
 .receipt-items-list {
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 .item-row {
@@ -178,7 +179,7 @@
 }
 
 .item-qty {
-  font-size: 14px;
+  font-size: 15px;
   color: #a0a0a0;
 }
 
@@ -209,6 +210,21 @@
   border-bottom: 1px solid #dcdcdc;
 }
 
+.history-change-section {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  color: #4b4b4b;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.history-change {
+  color: #292929;
+  font-size: 18px;
+}
+
 /* Receipt Footer */
 .receipt-footer {
   display: flex;
@@ -216,4 +232,24 @@
   margin-top: 15px;
   font-size: 16px;
   color: #888;
+}
+
+/* Add this to your existing CSS */
+.no-sales-message {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.empty-receipt-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.receipt-box {
+  display: flex;
+  flex-direction: column;
 }

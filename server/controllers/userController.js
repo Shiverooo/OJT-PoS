@@ -40,18 +40,38 @@ exports.createUsers = async (req,res) => {
 
 exports.authLogin = (req, res) => {
    const {email, password} = req.body;
-   const user = db.prepare('select user_id, email, password_hash, role from users where email = ?').get(email);
+   const user = db.prepare(`
+     SELECT user_id, email, password_hash, role, first_name, last_name 
+     FROM users 
+     WHERE email = ?
+   `).get(email);
+   
+   if(!user) return res.status(404).json({message:'User not found'});
+   
    const validPassword = bcrypt.compareSync(password, user.password_hash);
-   if(!user && !validPassword) return res.status(404).json({message:'User not found'});
+   if(!validPassword) return res.status(401).json({message:'Invalid password'});
    
    const token = jwt.sign({
-      id: user.id,
+      id: user.user_id,
       email: user.email,
-      role: user.role
+      role: user.role,
+      first_name: user.first_name,
+      last_name: user.last_name
    }, 
    SECRET_KEY,
    {expiresIn:'1h'})
-   res.json({message: 'Login Succesful', token, user});
+   
+   res.json({
+     message: 'Login Successful', 
+     token, 
+     user: {
+       id: user.user_id,
+       email: user.email,
+       role: user.role,
+       first_name: user.first_name,
+       last_name: user.last_name
+     }
+   });
 }
 
 exports.activeUser = (req, res) => {

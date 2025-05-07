@@ -2,8 +2,8 @@
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px;
-  width: 250px;
+  left: -275px;
+  width: 275px;
   height: 100%;
   background: white;
   transition: left 0.3s ease-in-out;
@@ -141,4 +141,34 @@
 /* Non-last list item margin (redundant but maintained) */
 .sidebar ul li:not(:last-child) {
   margin-bottom: 5px;
+}
+
+.cashier-user-info {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  transform: translate(0, -40%);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cashier-user-info span {
+  padding-left: 10px;
+}
+
+.cashier-user-info .user-name {
+  color: #292929;
+  font-size: 16px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cashier-user-info .user-email {
+  color: #666;
+  font-size: 12px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
