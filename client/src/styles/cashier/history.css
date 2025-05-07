@@ -213,16 +213,19 @@
 .history-change-section {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-weight: bold;
   font-size: 16px;
   color: #4b4b4b;
   margin-top: 10px;
-  margin-bottom: 10px;
+  padding: 20px 0 10px;
+  border-top: 1px solid #dcdcdc;
 }
 
 .history-change {
   color: #292929;
   font-size: 18px;
+  font-weight: 600;
 }
 
 /* Receipt Footer */
